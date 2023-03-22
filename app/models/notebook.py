@@ -6,7 +6,7 @@ class Notebook(db.Model):
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}
     id = db.Column(db.Integer, primary_key=True)
-    owner_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    owner_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
     name = db.Column(db.String)
     created_at = db.Column(db.DateTime, default=datetime.utcnow())
     owner = db.relationship('User', back_populates='notebooks')

@@ -8,8 +8,8 @@ class Note(db.Model):
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}
     id = db.Column(db.Integer, primary_key=True)
-    writer_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    notebook_id = db.Column(db.Integer, db.ForeignKey('notebooks.id'))
+    writer_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
+    notebook_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('notebooks.id')))
     title = db.Column(db.String)
     description = db.Column(db.String)
     created_at = db.Column(db.DateTime, default=datetime.utcnow())
