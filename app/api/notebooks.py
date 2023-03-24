@@ -19,9 +19,10 @@ def validation_errors_to_error_messages(validation_errors):
 @notebook_routes.route('/', methods=['GET'])
 @login_required
 def get_notebooks():
-   all_notebooks = Notebook.query.filter(Notebook.owner_id == current_user.id).all()
-   notebooks = [notebook.to_dict() for notebook in all_notebooks]
-   return jsonify({'Notebooks': notebooks})
+    all_notebooks = Notebook.query.filter(Notebook.owner_id == current_user.id).all()
+#    notebooks = [notebook.to_dict() for notebook in all_notebooks]
+#    return jsonify({'Notebooks': notebooks})
+    return [notebook.to_dict() for notebook in all_notebooks]
 
 # GET A SINGLE NOTEBOOK
 @notebook_routes.route('<int:id>', methods=["GET"])
