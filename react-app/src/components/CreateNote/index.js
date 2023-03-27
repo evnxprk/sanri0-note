@@ -38,7 +38,7 @@ export default function CreateNote() {
  const note = await dispatch(createNoteThunk(newNote)); // await the dispatch and get the new note object
  if (note) {
    closeModal();
-   history.push(`/notes/`);
+   history.push('/');
  }
   };
 
