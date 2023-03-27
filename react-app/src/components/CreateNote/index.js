@@ -11,7 +11,6 @@ export default function CreateNote() {
   const history = useHistory();
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user)
-  const [userId, setUserId] = useState(sessionUser.id)
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -32,13 +31,14 @@ export default function CreateNote() {
     e.preventDefault();
     const newNote = {
       title,
-      description
+      description,
+      writer_id: sessionUser.id,
     };
     
  const note = await dispatch(createNoteThunk(newNote)); // await the dispatch and get the new note object
  if (note) {
    closeModal();
-   history.push(`/notes/${note.id}`);
+   history.push(`/notes/`);
  }
   };
 
