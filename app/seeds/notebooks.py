@@ -17,7 +17,7 @@ def undo_notebooks():
     if environment == "production":
         db.session.execute(f"TRUNCATE table {SCHEMA}.notebooks RESTART IDENTITY CASCADE;")
     else:
-        db.session.execute(text("DELETE FROM notebook"))
+        db.session.execute(text("DELETE FROM notebooks"))
         
     db.session.commit()
 

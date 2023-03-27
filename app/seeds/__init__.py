@@ -15,13 +15,13 @@ seed_commands = AppGroup('seed')
 def seed():
     if environment == 'production':
         # Before seeding, truncate all tables prefixed with schema name
+        undo_users()
         undo_notebooks()
         undo_notes()
-        undo_users()
         # Add a truncate command here for every table that will be seeded.
+    seed_users()
     seed_notebooks()
     seed_notes()
-    seed_users()
 
     # Add other seed functions here
 

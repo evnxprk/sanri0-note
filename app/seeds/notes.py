@@ -19,7 +19,7 @@ def undo_notes():
     if environment == "production":
         db.session.execute(f"TRUNCATE table {SCHEMA}.notes RESTART IDENTITY CASCADE;")
     else:
-        db.session.execute(text("DELETE FROM note"))
+        db.session.execute(text("DELETE FROM notes"))
         
     db.session.commit()
 
