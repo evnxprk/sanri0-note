@@ -39,6 +39,20 @@ def upgrade():
     if environment == "production":
         op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
 
+    
+    op.create_table('notebooks',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('owner_id', sa.Integer(), nullable=True),
+    sa.Column('name', sa.String(), nullable=True),
+    sa.Column('created_at', sa.DateTime(), nullable=True),
+    sa.ForeignKeyConstraint(['owner_id'], ['users.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
+
+
+    if environment == "production":
+        op.execute(f"ALTER TABLE notebooks SET SCHEMA {SCHEMA};")
+
 
     op.create_table('notes',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -57,18 +71,6 @@ def upgrade():
         op.execute(f"ALTER TABLE notes SET SCHEMA {SCHEMA};")
 
 
-    op.create_table('notebooks',
-    sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('owner_id', sa.Integer(), nullable=True),
-    sa.Column('name', sa.String(), nullable=True),
-    sa.Column('created_at', sa.DateTime(), nullable=True),
-    sa.ForeignKeyConstraint(['owner_id'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('id')
-    )
-
-
-    if environment == "production":
-        op.execute(f"ALTER TABLE notebooks SET SCHEMA {SCHEMA};")
     # ### end Alembic commands ###
 
 
