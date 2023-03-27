@@ -17,12 +17,14 @@ def validation_errors_to_error_messages(validation_errors):
 
 # GET ALL NOTEBOOKS
 @notebook_routes.route('/', methods=['GET'])
-@login_required
+# @login_required
 def get_notebooks():
-    all_notebooks = Notebook.query.filter(Notebook.owner_id == current_user.id).all()
-#    notebooks = [notebook.to_dict() for notebook in all_notebooks]
-#    return jsonify({'Notebooks': notebooks})
+    print(current_user.id) 
+    all_notebooks = Notebook.query.filter(Notebook.owner_id == current_user.id)
     return [notebook.to_dict() for notebook in all_notebooks]
+    print('---notebooks---', notebooks)
+    # return jsonify({'notebooks': notebooks})
+
 
 # GET A SINGLE NOTEBOOK
 @notebook_routes.route('<int:id>', methods=["GET"])
@@ -31,22 +33,21 @@ def get_single(id):
     single_notebook = Notebook.query.get(id)
     if single_notebook is None:
         return jsonify({'errors': {' Notebook not found!'}}), 404
-    return jsonify({single_notebook.to_dict()})
+    return jsonify(single_notebook.to_dict())
 
 # CREATE A NOTEBOOK 
-@notebook_routes.route('/', methods=['POST'])
+@notebook_routes.route('', methods=['POST'])
 @login_required
-
 def create_notebook():
-    res = request.get_json()
+    data = request.get_json()
 
     form = NotebookForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
 
     if form.validate_on_submit():
         notebook = Notebook(
-            name=['name'],
-            owner_id = current_user.id
+            name=data['name'],
+            owner_id=current_user.id
         )
         db.session.add(notebook)
         db.session.commit()
@@ -56,22 +57,20 @@ def create_notebook():
 # EDIT A NOTEBOOK 
 @notebook_routes.route('<int:id>/edit', methods=['PUT'])
 @login_required
-
 def edit_notebook(id):
     data = Notebook.query.get(id)
 
     if data is None:
-        return jsonify ({'error': 'Notebook not found'}), 404
+        return jsonify({'error': 'Notebook not found'}), 404
 
     if data.owner_id != current_user.id:
-        return jsonify ({'error': 'Unauthorized'}), 401
+        return jsonify({'error': 'Unauthorized'}), 401
 
     form = NotebookForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
 
     if form.validate_on_submit():
         data.name = form.data['name']
-        
         db.session.commit()
         return data.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
@@ -79,7 +78,6 @@ def edit_notebook(id):
 # DELETE A NOTEBOOK
 @notebook_routes.route('<int:id>', methods=["DELETE"])
 @login_required
-
 def delete_notebook(id):
     data = Notebook.query.get(id)
 
@@ -91,5 +89,4 @@ def delete_notebook(id):
 
     db.session.delete(data)
     db.session.commit()
-    return jsonify ({"message": "Successfully deleted notebook"}), 200
-
+    return jsonify({"message": "Successfully deleted notebook"}), 200

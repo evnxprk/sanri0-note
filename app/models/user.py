@@ -11,7 +11,7 @@ class User(db.Model, UserMixin):
     last_name = db.Column(db.String)
     username = db.Column(db.String, unique=True)
     email = db.Column(db.String, unique=True)
-    password = db.Column(db.String)
+    hashed_password = db.Column(db.String)
     notes = db.relationship('Note', back_populates='writer')
     notebooks = db.relationship('Notebook', back_populates='owner')
     
