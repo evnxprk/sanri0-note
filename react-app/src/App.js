@@ -32,7 +32,7 @@ function App() {
             <Route exact path="/">
               <Notes />
           </Route>
-          <Route exact path='/new'>
+          <Route exact path='/notes/new'>
           <CreateNote />
           </Route>
           <Route exact path='/notes/:noteId'>
