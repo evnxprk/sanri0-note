@@ -106,23 +106,19 @@ export const editNoteThunk = (noteData, noteId) => async (dispatch) => {
     const data = await response.json();
     dispatch(updateNote(data));
     return data
-  } else {
-    const errorData = await response.json();
-    console.log("error in this response", errorData.errors);
-    return errorData;
-  }
+  } 
 };
 
 export const removeNoteThunk = (id) => async (dispatch) => {
-  const response = await fetch(`/api/notes/${id}`, {
+  const response = await fetch(`/api/notes/${id}/delete`, {
     method: "DELETE",
   });
 
   if (response.ok) {
     const data = await response.json();
     dispatch(deleteNote(data));
-  } else {
-    throw response;
+    console.log("this is data: ", data);
+    // return data
   }
 };
 

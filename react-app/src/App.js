@@ -10,10 +10,17 @@ import CreateNote from "./components/CreateNote";
 import EditNote from "./components/EditNote";
 import DeleteNote from "./components/DeleteNote";
 import Notebook from "./components/Notebooks";
+import EditNotebook from "./components/EditNotebook";
+import CreateNotebook from "./components/CreateNotebook";
+import DeleteNotebook from "./components/DeleteNotebook";
+import DashBoard from "./components/Dashboard";
+import SplashPage from "./components/SplashPage";
+import NoteDetails from "./components/NoteDetails";
 
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
+
   useEffect(() => {
     dispatch(authenticate()).then(() => setIsLoaded(true));
   }, [dispatch]);
@@ -23,26 +30,46 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
+          <Route exact path="/">
+            <SplashPage />
+          </Route>
+          <Route exact path="/dashboard">
+            <DashBoard />
+          </Route>
           <Route exact path="/login">
             <LoginFormPage />
           </Route>
           <Route exact path="/signup">
             <SignupFormPage />
-            </Route>
-            <Route exact path="/">
-              <Notes />
           </Route>
-          <Route exact path='/notes/new'>
-          <CreateNote />
+          <Route exact path="/notes">
+            <Notes />
           </Route>
-          <Route exact path='/notes/:noteId'>
-          <EditNote />
+          <Route exact path="/notes/new">
+            <CreateNote />
           </Route>
-          <Route exact path='/notes/:noteId/delete'>
+          <Route exact path="/notes/:noteId/edit">
+            <EditNote />
+          </Route>
+          <Route exact path="/notes" component={Notes} />
+          <Route exact path="/notes/:noteId" component={NoteDetails} />
+          <Route exact path="/notes/:noteId/delete">
             <DeleteNote />
           </Route>
-          <Route exact path='/'>
-            <Notebook/>
+          <Route exact path="/notebooks/:notebookId/delete">
+            <DeleteNotebook />
+          </Route>
+          <Route exact path="/notebooks">
+            <Notebook />
+          </Route>
+          <Route exact path="/notebooks/edit">
+            <EditNotebook />
+          </Route>
+          <Route exact path="/notebooks/new">
+            <CreateNotebook />
+          </Route>
+          <Route exact path="/notebooks/:notebookId/edit">
+            <EditNotebook />
           </Route>
         </Switch>
       )}

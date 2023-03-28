@@ -1,29 +1,27 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { removeNoteThunk } from "../../store/note";
+import React from "react";
 import { useModal } from "../../context/Modal";
-import { useHistory } from "react-router-dom";
-import { useParams } from "react-router-dom";
 
-export default function DeleteNote() {
-  const dispatch = useDispatch();
-  const closeModal = useModal();
-  const history = useHistory()
-  const { noteId } = useParams()
-  const [errors, setErrors] = useState([]);
-  console.log('noteid', noteId)
+export default function DeleteNote({
+  note,
+  handleConfirmDelete,
+  handleCancelDelete,
+}) {
+  const { closeModal } = useModal();
 
- const handleSubmit = async (e) => {
-   e.preventDefault();
-   await dispatch(removeNoteThunk(noteId))
-   history.push("/notes");
- };
-
+  const handleDelete = () => {
+    handleConfirmDelete(note.id);
+    closeModal();
+  };
 
   return (
-    <>
-      <h1> Are you sure you want to delete this note?</h1>
-      <button onClick={handleSubmit}>Delete</button>
-    </>
+    <div className="delete-modal">
+      <div className="modal-content">
+        <h3>Are you sure you want to delete this note?</h3>
+        <div className="modal-buttons">
+          <button onClick={handleDelete}>Yes</button>
+          <button onClick={handleCancelDelete}>No</button>
+        </div>
+      </div>
+    </div>
   );
 }

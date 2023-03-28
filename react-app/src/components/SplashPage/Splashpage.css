@@ -1,0 +1,32 @@
+.sanrio-note-landing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #F4D7F8;
+}
+
+.sanrio-note-title {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 4rem;
+  font-weight: 800;
+  text-align: center;
+  color: #000;
+}
+
+.sanrio-description {
+  font-size: 2.5rem;
+  font-weight: 300;
+  text-align: center;
+  color: #000;
+  margin: 0 0 2rem;
+}
+
+.login-description {
+  font-size: 1.5rem;
+  font-weight: 300;
+  text-align: center;
+  color: #000;
+}

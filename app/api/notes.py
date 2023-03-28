@@ -65,7 +65,7 @@ def edit_notes(id):
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 # DELETE  NOTES
-@notes_routes.route('/<int:id>', methods=["DELETE"])
+@notes_routes.route('/<int:id>/delete', methods=["DELETE"])
 @login_required
 def delete_note(id):
     data = Note.query.get(id)

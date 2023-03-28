@@ -4,4 +4,10 @@
 
 .hidden {
   display: none;
+ 
+}
+
+.profile-button {
+  display: flex;
+
 }

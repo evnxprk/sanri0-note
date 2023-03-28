@@ -73,7 +73,7 @@ export default function CreateNote() {
             </label>
           </div>
         </div>
-        <button className="create-note-submit-button" type="submit">
+        <button className="create-note-button" type="submit">
           Create Note
         </button>
       </form>

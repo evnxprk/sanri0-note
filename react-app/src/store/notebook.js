@@ -63,7 +63,7 @@ export const getOneNotebookThunk = (id) => async(dispatch) => {
 }
 
 export const createNotebookThunk = (notebook) => async (dispatch) => {
-    const response = await fetch("/api/notebooks", {
+    const response = await fetch("/api/notebooks/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -80,31 +80,32 @@ export const createNotebookThunk = (notebook) => async (dispatch) => {
 }
 
 export const editNotebookThunk = (id, notebook) => async (dispatch) => {
-    const response = await fetch (`/api/notebooks/${id}`, {
-        method: "PUT", 
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(notebook)
-    })
-    if(response.ok) {
-        const data = await response.json()
-        dispatch(updateNotebook(data))
-    }
-}
+  const response = await fetch(`/api/notebooks/${id}/edit`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(notebook),
+  });
+
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(updateNotebook(data));
+    return data;
+  }
+};
+
 
 export const deleteNotebookThunk = (id) => async (dispatch) => {
-    const response = await fetch(`/api/notes/${id}`, {
+    const response = await fetch(`/api/notebooks/${id}/delete`, {
         method: "DELETE",
-        headers: {
-            "Content-Type": "application/json"
-        }
     })
 
     if(response.ok) {
-        dispatch(deleteNotebook(id))
-        return id 
-    }
+        const data = await response.json()
+        dispatch(deleteNotebook(data))
+        console.log("this is data: ", data)
+    } 
 }
 
 // REDUCER 

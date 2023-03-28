@@ -36,23 +36,22 @@ def get_single(id):
     return jsonify(single_notebook.to_dict())
 
 # CREATE A NOTEBOOK 
-@notebook_routes.route('', methods=['POST'])
+@notebook_routes.route('/', methods=['POST'])
 @login_required
 def create_notebook():
-    data = request.get_json()
-
+    print('new note: ', current_user)
     form = NotebookForm()
-    form["csrf_token"].data = request.cookies["csrf_token"]
-
+    form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         notebook = Notebook(
-            name=data['name'],
+            name=form.data['name'],
             owner_id=current_user.id
         )
         db.session.add(notebook)
         db.session.commit()
         return notebook.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+
 
 # EDIT A NOTEBOOK 
 @notebook_routes.route('<int:id>/edit', methods=['PUT'])
@@ -76,7 +75,7 @@ def edit_notebook(id):
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 # DELETE A NOTEBOOK
-@notebook_routes.route('<int:id>', methods=["DELETE"])
+@notebook_routes.route('/<int:id>/delete', methods=["DELETE"])
 @login_required
 def delete_notebook(id):
     data = Notebook.query.get(id)

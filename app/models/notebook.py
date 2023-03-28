@@ -9,6 +9,7 @@ class Notebook(db.Model):
     owner_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
     name = db.Column(db.String)
     created_at = db.Column(db.DateTime, default=datetime.utcnow())
+    
     owner = db.relationship('User', back_populates='notebooks')
     notes = db.relationship('Note', back_populates='notebook')
     

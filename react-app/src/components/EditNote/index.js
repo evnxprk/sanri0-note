@@ -10,7 +10,7 @@ export default function EditNote() {
   const history = useHistory();
   const {closeModal} = useModal()
   const notes = useSelector((state) => state.notesReducer.singleNote)
-
+  const sessionUser = useSelector((state)=> state.session.user)
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [errors, setErrors] = useState([])
@@ -19,9 +19,9 @@ export default function EditNote() {
     setDescription(notes.description)
   }, [notes]);
 
-  const updateNote = (note) => {
-    setDescription(note)
-  }
+//   const updateNote = (note) => {
+//     setDescription(note)
+//   }
 
 //   const note = useSelector((state) => state.notesReducer.singleNote);
 
@@ -30,6 +30,7 @@ const handleSubmit = async (e) => {
   const notesData = {
     title,
     description,
+    writer_id: sessionUser.id
   };
   await dispatch(editNoteThunk(notesData, noteId))
     .then(() => closeModal())
