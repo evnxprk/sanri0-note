@@ -3,7 +3,13 @@ from wtforms import StringField, TextAreaField, IntegerField
 from wtforms.validators import DataRequired, Length
 
 class NotesForm(FlaskForm):
-    title=StringField('title',validators=[DataRequired(), Length(min=1, max=30)])
-    description=TextAreaField('description', validators=[DataRequired(), Length(max=250, min=1)])
+    title = StringField('title', validators=[
+        DataRequired(message='Title is required.'),
+        Length(min=1, max=30, message='Title must be between 1 and 30 characters long.')
+    ])
+    description = TextAreaField('description', validators=[
+        DataRequired(message='Description is required.'),
+        Length(min=1, max=250, message='Description must be between 1 and 250 characters long.')
+    ])
     writer_id = IntegerField('writer id', validators=[DataRequired()])
-    notebook_id = IntegerField('notebook id', validators=[])
+    notebook_id = IntegerField('notebook id')

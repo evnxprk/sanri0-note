@@ -28,7 +28,6 @@ export default function Notes() {
   };
 
   const handleConfirmDelete = (noteId) => {
-    console.log('hi')
     dispatch(removeNoteThunk(noteId))
       .then(() => {
         setNoteToDelete(null);
@@ -45,9 +44,7 @@ export default function Notes() {
   }
 
   if (notes.length === 0) {
-    return (
-      <h1 className="first-note"> NO NOTES!!! Create your first note! </h1>
-    );
+    return <h1 className="first-note"> Create your first note! </h1>;
   }
 
   const handleEdit = (noteId) => {
@@ -58,10 +55,8 @@ export default function Notes() {
     <>
       {notes.map((note) => {
         return (
-          <div key={note.id}>
-            <NavLink to={`/notes/${note.id}`}>
-              <div>{note.title}</div>
-            </NavLink>
+          <div key={note.id} className="note-container">
+            <div>{note.title}</div>
             <div>{note.description}</div>
             <div className="note-options">
               <button
@@ -77,11 +72,12 @@ export default function Notes() {
                   setModalContent(
                     <div>
                       <p>Are you sure you want to delete this note?</p>
-                      <button onClick={() => handleConfirmDelete(note.id)}>Yes</button>
+                      <button onClick={() => handleConfirmDelete(note.id)}>
+                        Yes
+                      </button>
                       <button onClick={() => setNoteToDelete(null)}>No</button>
                     </div>
                   );
-                  // handleDelete(note.id);
                 }}
               >
                 Delete

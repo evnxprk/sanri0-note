@@ -3,34 +3,37 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { getOneNoteThunk, editNoteThunk } from "../../store/note";
 import { useModal } from "../../context/Modal";
+import './editNote.css'
 
 export default function EditNote() {
   const dispatch = useDispatch();
   const { noteId } = useParams();
+  // const sessionUser = useSelector((state) => state.session.sessionUser)
+  const note = useSelector((state) => state.notesReducer.note);
   const history = useHistory();
-  const {closeModal} = useModal()
-  const notes = useSelector((state) => state.notesReducer.singleNote)
-  const sessionUser = useSelector((state)=> state.session.user)
+  const { closeModal } = useModal();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [errors, setErrors] = useState([])
+  const [errors, setErrors] = useState([]);
+  const sessionUser = useSelector((state) => state.session.user)
 
   useEffect(() => {
-    setDescription(notes.description)
-  }, [notes]);
+    dispatch(getOneNoteThunk(noteId));
+  }, [dispatch, noteId]);
 
-//   const updateNote = (note) => {
-//     setDescription(note)
-//   }
-
-//   const note = useSelector((state) => state.notesReducer.singleNote);
+  useEffect(() => {
+    if (note) {
+      setTitle(note.title);
+      setDescription(note.description);
+    }
+  }, [note]);
 
 const handleSubmit = async (e) => {
   e.preventDefault();
   const notesData = {
     title,
     description,
-    writer_id: sessionUser.id
+    writer_id: sessionUser.id,
   };
   await dispatch(editNoteThunk(notesData, noteId))
     .then(() => closeModal())
@@ -42,16 +45,35 @@ const handleSubmit = async (e) => {
         console.error("Invalid response format:", res);
       }
     });
-  history.push(`/notes/${noteId}`);
+  history.push('/dashboard');
 };
 
 
-
-
+  useEffect(() => {
+    const errors = [];
+    if (title.length < 2 || title.length > 50) {
+      errors.push("Title must be longer than 2 and less than 50 characters.");
+    }
+    if (description.length < 2 || description.length > 255) {
+      errors.push(
+        "Description must be longer than 2 and less than 255 characters."
+      );
+    }
+    setErrors(errors);
+  }, [title, description]);
 
   return (
     <>
-      <h1> Edit This Note</h1>
+      <h1>Edit This Note</h1>
+      <div className="form-errors">
+        {errors.length > 0 && (
+          <ul>
+            {errors.map((error, idx) => (
+              <li key={idx}>{error}</li>
+            ))}
+          </ul>
+        )}
+      </div>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -59,7 +81,7 @@ const handleSubmit = async (e) => {
           onChange={(e) => setTitle(e.target.value)}
           placeholder="title"
           required
-        />  
+        />
         <textarea
           type="text"
           value={description}

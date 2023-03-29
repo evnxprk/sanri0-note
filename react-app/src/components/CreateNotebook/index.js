@@ -8,8 +8,8 @@ export default function CreateNotebook() {
   const { closeModal } = useModal();
   const dispatch = useDispatch();
   const history = useHistory();
-  const [hasSubmitted, setSubmitted] = useState(false);
-  const sessionUser = useSelector((state) => state.session.user);
+  // const [hasSubmitted, setSubmitted] = useState(false);
+  // const sessionUser = useSelector((state) => state.session.user);
 
   const [name, setName] = useState("");
   const newName = (e) => setName(e.target.value);
@@ -17,43 +17,34 @@ export default function CreateNotebook() {
 
   useEffect(() => {
     const errors = [];
-    if (name.length < 1) {
-      errors.push("Name must be longer than 1 character long.");
+    if (name.length < 0 || name.length > 50 ) {
+      errors.push("Name must be longer than 1 and less than 50 characters long.");
     }
     setErrors(errors);
-    setSubmitted(false)
+    // setSubmitted(false)
   }, [name]);
 
- const handleSubmit = (e) => {
-   e.preventDefault();
-   const newNotebook = {
-     name,
-   };
-   dispatch(createNotebookThunk(newNotebook))
-     .then((notebook) => {
-       if (notebook) {
-         history.push("/notebooks");
-         closeModal();
-       } 
-     })
-     .catch((error) => {
-       setErrors([error.message]);
-     });
- };
-
-
+const handleSubmit = (e) => {
+  e.preventDefault();
+  const newNotebook = {
+    name,
+  };
+  dispatch(createNotebookThunk(newNotebook))
+    .then((notebook) => {
+      if (notebook) {
+        history.push("/dashboard");
+        closeModal();
+      }
+    })
+    .catch((error) => {
+      setErrors([error.message]);
+    });
+};
 
   return (
     <div>
       <div className="create-form-header">
         <h2>Create New Notebook</h2>
-        <button
-          type="button"
-          onClick={closeModal}
-          style={{ cursor: "pointer" }}
-        >
-          X
-        </button>
       </div>
       <form className="create-form-content" onSubmit={handleSubmit}>
         <div className="form-errors">

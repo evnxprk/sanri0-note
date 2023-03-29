@@ -1,4 +1,64 @@
-.form-header {
-display: flex;
-justify-content: space-between;
+.create-form-header {
+  margin-bottom: 20px;
+}
+
+.create-form-header h2 {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.create-form-content {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.form-errors {
+  margin-bottom: 20px;
+}
+
+.form-errors ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.form-errors li {
+  color: red;
+  margin-bottom: 5px;
+}
+
+.form-fields {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.form-fields label {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.form-fields input[type="text"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.create-notebook-button {
+  background-color: #f0ade2;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.create-notebook-button:hover {
+  background-color: #008d24;
 }

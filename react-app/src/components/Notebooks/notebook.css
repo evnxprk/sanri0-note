@@ -1,0 +1,52 @@
+.notebook-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.notebook {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.notebook:hover {
+  cursor: pointer;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.notebook-name {
+  color: #444;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.notebook-name:hover {
+  color: #000;
+  text-decoration: underline;
+}
+
+.notebook-options {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.notebook-edit-button,
+.notebook-delete-button {
+  color: #888;
+  background-color: transparent;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: color 0.2s ease-in-out;
+}
+
+.notebook-edit-button:hover,
+.notebook-delete-button:hover {
+  color: #000;
+}

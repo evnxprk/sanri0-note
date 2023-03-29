@@ -11,6 +11,4 @@ const Modal = ({ ModalContent, handleConfirmDelete }) => {
   );
 };
 
-
-
 export default Modal;

@@ -1,9 +1,11 @@
-import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-export default function NoteDetails() {
-  const { noteId } = useParams();
+export default function NoteDetails({ noteId }) {
   const note = useSelector((state) => state.notesReducer.allNotes[noteId]);
+
+  if (!note) {
+    return null;
+  }
 
   return (
     <>

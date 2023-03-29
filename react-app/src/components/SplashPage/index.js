@@ -1,7 +1,9 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
+import ProfileButton from "../Navigation/ProfileButton";
 import "./Splashpage.css";
+import { Link } from "react-router-dom";
 
 export default function SplashPage() {
   const sessionUser = useSelector((state) => state.session.user);
@@ -13,6 +15,9 @@ export default function SplashPage() {
 
   return (
     <div className="sanrio-note-landing">
+      <div className="splash-nav">
+        <ProfileButton user={sessionUser} />
+      </div>
       <h1
         className="sanrio-note-title"
         style={{
@@ -23,6 +28,9 @@ export default function SplashPage() {
       >
         What is Sanrio Note?
       </h1>
+      <Link to="/signup">
+        <button className="sign-up-button">Sign Up For Free</button>
+      </Link>
       <p className="sanrio-description" style={{ fontSize: "30px" }}>
         Remember everything and tackle any project with your notes, and
         notebooks all in one place.

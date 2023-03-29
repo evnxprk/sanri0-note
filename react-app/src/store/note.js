@@ -103,6 +103,7 @@ export const editNoteThunk = (noteData, noteId) => async (dispatch) => {
 
   if (response.ok) {
     console.log("RESPONSE WENT THROUGH");
+    console.log("DATA GONE THROUGH????")
     const data = await response.json();
     dispatch(updateNote(data));
     return data

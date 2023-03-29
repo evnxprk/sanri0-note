@@ -1,4 +1,4 @@
-import { useModal } from "../../context/Modal";
+// import { useModal } from "../../context/Modal";
 import { editNotebookThunk } from "../../store/notebook";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,19 +6,22 @@ import { useHistory} from "react-router-dom";
 import { useParams } from "react-router-dom";
 
 export default function EditNotebook() {
-  const { closeModal } = useModal();
+    // console.log("sup");
   const dispatch = useDispatch();
-  const history = useHistory()
-  const { notebookId } = useParams()
-  const notebooks = useSelector((state) => state.notebookReducer.singleNotebook)
-  const [name, setName] = useState('');
+  const history = useHistory();
+  const { notebookId } = useParams();
+  const notebooks = useSelector(
+    (state) => state.notebookReducer.singleNotebook
+  );
+  const [name, setName] = useState("");
   const [errors, setErrors] = useState([]);
-  const sessionUser = useSelector((state) => state.session.user)
-
+  const sessionUser = useSelector((state) => state.session.user);
 
   useEffect(() => {
-    setName(notebooks.name)
-  },[notebooks])
+    if (notebooks.name) {
+      setName(notebooks.name);
+    }
+  }, [notebooks]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,8 +29,12 @@ export default function EditNotebook() {
     const notebookData = {
       name,
     };
+
+    if (notebookId) {
       await dispatch(editNotebookThunk(notebookId, notebookData))
-        .then(() => closeModal())
+        .then(() => {
+          // closeModal();
+        })
         .catch(async (res) => {
           if (res && res.json) {
             const data = await res.json();
@@ -36,9 +43,9 @@ export default function EditNotebook() {
             console.error("Invalid response format:", res);
           }
         });
-        history.push('/notebooks/')
+      }
+      history.push('/dashboard');
   };
-
 
   return (
     <>
@@ -58,7 +65,7 @@ export default function EditNotebook() {
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            placeholder='name'
+            placeholder="name"
             required
           />
           <button className="edit-submit-button" type="submit">

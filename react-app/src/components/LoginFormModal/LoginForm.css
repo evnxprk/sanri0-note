@@ -1,51 +1,77 @@
 .login-modal-wrapper {
-   max-width: 512px;
-    margin: 0px auto 28px auto;
-    padding: 62.12px 99px 48px;
-    width: 314px;
-    box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.1);
-    border-radius: 2px;
-    text-align: left;
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #f7f7f7;
+  padding: 30px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+  width: 400px;
+  margin: auto;
 }
 
-.login-form-container {
-    display: flex;
-    flex-direction: column;
+.login-modal-wrapper h1 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-align: center;
 }
 
 .login-form {
-    display: flex;
-    flex-direction: column;
-
+  display: flex;
+  flex-direction: column;
+  width: 70%;
 }
 
-.demo-user {
- background-color: #00a82d;
-    border-radius: 7px;
-    margin-top: 9px;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-    font-weight: 400;
-    display: flex;
-    justify-content: center;
+.login-form label {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.login-form input[type="text"],
+.login-form input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  border-radius: 3px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  margin-bottom: 20px;
 }
 
 .login-button {
-    background-color: #00a82d;
-    border-radius: 7px;
-    margin-top: 9px;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-    font-weight: 400;
-    display: flex;
-    justify-content: center;
+  background-color: #3eb489;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 3px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
 }
-/* .demo-user-container {
-    display: flex;
-} */
+
+.login-button:hover {
+  background-color: #36a580;
+}
+
+.demo-user-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
 
 .or {
-    display: flex;
-    margin-top: 9px;
-    justify-content: center;
+  font-size: 16px;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.demo-user {
+  background-color: #f7f7f7;
+  border: 1px solid #ccc;
+  padding: 10px 20px;
+  border-radius: 3px;
+  font-size: 16px;
+  cursor: pointer;
 }

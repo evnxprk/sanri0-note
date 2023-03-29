@@ -33,6 +33,8 @@ function App() {
           <Route exact path="/">
             <SplashPage />
           </Route>
+          {/* <Route exact path="/notes" component={Notes} /> */}
+          {/* <Route exact path="/notes/:noteId" component={NoteDetails} /> */}
           <Route exact path="/dashboard">
             <DashBoard />
           </Route>
@@ -51,8 +53,6 @@ function App() {
           <Route exact path="/notes/:noteId/edit">
             <EditNote />
           </Route>
-          <Route exact path="/notes" component={Notes} />
-          <Route exact path="/notes/:noteId" component={NoteDetails} />
           <Route exact path="/notes/:noteId/delete">
             <DeleteNote />
           </Route>
@@ -62,13 +62,10 @@ function App() {
           <Route exact path="/notebooks">
             <Notebook />
           </Route>
-          <Route exact path="/notebooks/edit">
-            <EditNotebook />
-          </Route>
           <Route exact path="/notebooks/new">
             <CreateNotebook />
           </Route>
-          <Route exact path="/notebooks/:notebookId/edit">
+          <Route exact path="/notebook/:notebookId/edit">
             <EditNotebook />
           </Route>
         </Switch>
