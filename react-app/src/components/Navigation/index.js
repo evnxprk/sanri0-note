@@ -2,6 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
+import melody from '../../images/melody.jpg'
 import "./Navigation.css";
 
 function Navigation({ isLoaded }) {
@@ -10,7 +11,7 @@ function Navigation({ isLoaded }) {
   return (
     <div className="sidebar">
       <NavLink exact to="/" className="nav-link">
-        Home
+        <img className="melody-logo" src={melody}/>
       </NavLink>
       {/* {isLoaded && (
         <div className="profile-button">

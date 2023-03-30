@@ -24,7 +24,7 @@ export default function SplashPage() {
         style={{
           fontSize: "56px",
           fontFamily: "Soleil_Medium,Helvetica,Arial,sans-serif",
-          color: "#3EB489",
+          // color: "#3EB489",
         }}
       >
         Sanrio Note

@@ -18,6 +18,9 @@
   margin-bottom: 32px;
 }
 
+.sanrio-note-title {
+  color: rgb(145, 171, 226);
+}
 /* h1 {
   color: rgb(202, 244, 229);
 } */
@@ -43,6 +46,10 @@ body {
   background-color: rgb(249, 214, 220);
 }
 
+.sanrio-description {
+  color:rgb(141, 141, 226)
+}
+
 .login-description {
   color: rgb(133, 185, 230);
 }
@@ -57,7 +64,7 @@ body {
 
 .sign-up-button {
   font-size: 35px;
-  background-color: pink;
+  background-color: rgb(163, 172, 232);
   border: none;
   color: rgb(100, 94, 94);
 }
@@ -92,13 +99,9 @@ body {
   flex-direction: column;
 } */
 
-.notepage-photo {
-  width: 50%;
-  margin-right: 30px;
-  margin-bottom: 30px;
-}
 
 #note-logo {
+  border-radius: 10em;
   float: left;
   width: 300px;
   height: 300px;
@@ -126,6 +129,9 @@ body {
   float: left;
   margin: 0 30px 20px 0;
   width: 400px;
+   /* width: 50%; */
+  margin-right: 30px;
+  margin-bottom: 30px;
 }
 
 .notepage-photo img {
@@ -138,7 +144,7 @@ body {
   text-align: justify;
   /* margin: 0; */
   max-width: 50%;
-  color: white ;
+  /* color: white ; */
   display: inline-block;
   font-size: 30px;
   font-family:Verdana, Geneva, Tahoma, sans-serif;

@@ -113,8 +113,8 @@ export default function Notes() {
           <div key={note.id} className="note-container">
             <NavLink to={`/note/${note.id}`} noteId={note.id}>
               {console.log('noteid', note.id)}
-            <div dangerouslySetInnerHTML={{ __html: note.title }} />
-            <div dangerouslySetInnerHTML={{ __html: note.description }} />
+            { note.title }
+            { note.description }
             </NavLink>
             <div className="note-options">
               <button
