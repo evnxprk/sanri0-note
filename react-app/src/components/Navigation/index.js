@@ -11,7 +11,7 @@ function Navigation({ isLoaded }) {
   return (
     <div className="sidebar">
       <NavLink exact to="/" className="nav-link">
-        <img className="melody-logo" src={melody}/>
+        <img className="melody-logo" src={melody} style={{width:'30px'}}/> 
       </NavLink>
       {/* {isLoaded && (
         <div className="profile-button">

@@ -111,11 +111,11 @@ export default function Notes() {
       {notes.map((note) => {
         return (
           <div key={note.id} className="note-container">
+            <div>
             <NavLink to={`/note/${note.id}`} noteId={note.id}>
-              {console.log('noteid', note.id)}
             { note.title }
-            { note.description }
             </NavLink>
+            </div>
             <div className="note-options">
               <button
                 className="note-edit-button"

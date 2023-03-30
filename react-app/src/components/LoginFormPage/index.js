@@ -48,7 +48,7 @@ function LoginFormPage() {
             required
           />
         </label>
-        <button type="submit">Log In</button>
+        <button className='login-button' type="submit" style={{backgroundColor: 'antiqueWhite'}}>Log In</button>
       </form>
     </>
   );

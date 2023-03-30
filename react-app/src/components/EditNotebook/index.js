@@ -23,6 +23,11 @@ export default function EditNotebook() {
     }
   }, [notebooks]);
 
+  useEffect(() => {
+    const errors = []
+    if(name.length < 1 || name.length > 50) errors.push('Name must be between 1 and 50 characters.')
+  })
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 

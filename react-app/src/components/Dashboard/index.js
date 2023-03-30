@@ -5,9 +5,18 @@ import Notes from "../Notes";
 import ProfileButton from "../Navigation/ProfileButton";
 import "./dashboard.css";
 import { useSelector } from "react-redux";
+import { logout } from "../../store/session";
+import { useDispatch } from "react-redux";
 
 export default function Dashboard() {
   const sessionUser = useSelector((state) => state.session.user)
+  const dispatch = useDispatch()
+
+   const handleLogout = (e) => {
+     e.preventDefault();
+     dispatch(logout());
+   };
+
   return (
     <div className="dashboard-container">
       <div className="sidebar">
@@ -19,9 +28,7 @@ export default function Dashboard() {
             <i className="fas fa-book"></i> Create New Notebook
           </NavLink>
         </div>
-            <div className="profile-button">
-              <ProfileButton user={sessionUser} />
-            </div>
+        <div className='logout-sidebar-button' onClick={handleLogout}>Logout</div>
         </div>
       <div className="main-content">
         <div className="notebooks-container">
