@@ -23,6 +23,23 @@ def undo_notes():
         
     db.session.commit()
 
+
+def seed_notebooks():
+    nb1 = Notebook(name="Hello Kitty and Friends", owner_id=1)
+    nb2 = Notebook(name="Kuromi and My Melody fighting", owner_id=2)
+    nb3 = Notebook(name="My Melody and Friends", owner_id=3)
+    db.session.add_all([nb1, nb2, nb3])
+    db.session.commit()
+
+
+def undo_notebooks():
+    if environment == "production":
+        db.session.execute(f"TRUNCATE table {SCHEMA}.notebooks RESTART IDENTITY CASCADE;")
+    else:
+        db.session.execute(text("DELETE FROM notebooks"))
+        
+    db.session.commit()
+
 # def undo_notebook():
 #     if environment == "production":
 #         db.session.execute(f"TRUNCATE table {SCHEMA}.notebooks RESTART IDENTITY CASCADE;")

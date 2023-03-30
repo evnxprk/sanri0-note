@@ -15,7 +15,7 @@ import CreateNotebook from "./components/CreateNotebook";
 import DeleteNotebook from "./components/DeleteNotebook";
 import DashBoard from "./components/Dashboard";
 import SplashPage from "./components/SplashPage";
-import NoteDetails from "./components/NoteDetails";
+import XNoteDetails from "./components/XNoteDetails";
 
 function App() {
   const dispatch = useDispatch();
@@ -34,7 +34,7 @@ function App() {
             <SplashPage />
           </Route>
           {/* <Route exact path="/notes" component={Notes} /> */}
-          {/* <Route exact path="/notes/:noteId" component={NoteDetails} /> */}
+          <Route exact path="/dashbboard"/>
           <Route exact path="/dashboard">
             <DashBoard />
           </Route>
@@ -68,6 +68,10 @@ function App() {
           <Route exact path="/notebook/:notebookId/edit">
             <EditNotebook />
           </Route>
+
+          <Route exact path='/note/:noteId'>
+            <XNoteDetails/>
+          </Route>
         </Switch>
       )}
     </>
@@ -75,3 +79,5 @@ function App() {
 }
 
 export default App;
+
+

@@ -58,7 +58,8 @@ def edit_notes(id):
     if form.validate_on_submit():
         data.title = form.data['title']
         data.description = form.data['description']
-        # data.writer_id = form.data['writer_id']
+        data.writer_id = form.data['writer_id']
+        data.notebook_id = form.data['notebook_id']
         
         db.session.commit()
         return data.to_dict()
@@ -92,5 +93,10 @@ def get_note_by_id(id):
         return jsonify({'error': 'Unauthorized'}), 401
 
     return note.to_dict()
+
+#add note to notebook
+
+#additional backend route for the url `/api/notes/${noteid}/notebooks/notebookid`
+
 
 

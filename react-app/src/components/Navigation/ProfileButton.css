@@ -12,6 +12,12 @@
   flex-direction: column;
 }
 
+#note-logo {
+  width:20px;
+  height: auto;
+
+}
+
 .profile-dropdown.hidden {
   display: none;
 }

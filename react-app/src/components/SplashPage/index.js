@@ -4,6 +4,7 @@ import { Redirect } from "react-router-dom";
 import ProfileButton from "../Navigation/ProfileButton";
 import "./Splashpage.css";
 import { Link } from "react-router-dom";
+import notepage  from "../../images/Cinnamoroll.jpg";
 
 export default function SplashPage() {
   const sessionUser = useSelector((state) => state.session.user);
@@ -26,11 +27,21 @@ export default function SplashPage() {
           color: "#3EB489",
         }}
       >
-        What is Sanrio Note?
+        Sanrio Note
       </h1>
-      <Link to="/signup">
-        <button className="sign-up-button">Sign Up For Free</button>
-      </Link>
+      <div className="notepage-photo">
+        <img id="note-logo" src={notepage} />
+      </div>
+      <div className="signup">
+        <Link to="/signup">
+          <button className="sign-up-button">Sign Up For Free</button>
+        </Link>
+      </div>
+      <div className="account-container">
+        <div className="account-login">
+          <Link className='login-link'to="/login">Already have an account? Log in! </Link>
+        </div>
+      </div>
       <p className="sanrio-description" style={{ fontSize: "30px" }}>
         Remember everything and tackle any project with your notes, and
         notebooks all in one place.

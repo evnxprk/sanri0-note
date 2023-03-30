@@ -1,4 +1,6 @@
 import React from "react";
+import Quill from "quill";
+import "quill/dist/quill.snow.css";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
@@ -6,23 +8,33 @@ import { useModal } from "../../context/Modal";
 import { createNoteThunk } from "../../store/note";
 import { getAllNotebooksThunk } from "../../store/notebook";
 import { useSelector } from "react-redux";
-// import NotebookSelect from "../AddNoteToNB";
 import "./createNote.css";
 
 export default function CreateNote() {
   const { closeModal } = useModal();
   const history = useHistory();
   const dispatch = useDispatch();
-  // const { notebookId } = useParams();
   const sessionUser = useSelector((state) => state.session.user);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  // const [selectedNotebook, setSelectedNotebook] = useState("");
   const [errors, setErrors] = useState([]);
   const [notebookId, setNotebookId] = useState(null);
+  const [editorState, setEditorState] = useState(null);
   const allNotebooks = useSelector(
     (state) => state.notebookReducer.allNotebooks
   );
+
+  useEffect(() => {
+    const editor = new Quill("#editor-container", {
+      theme: "snow",
+    });
+    setEditorState(editor);
+  }, []);
+
+  const handleEditorChange = () => {
+    const description = editorState.root.innerHTML;
+    setDescription(description);
+  };
 
   useEffect(() => {
     const errors = [];
@@ -41,25 +53,39 @@ export default function CreateNote() {
     dispatch(getAllNotebooksThunk());
   }, [dispatch]);
 
- const handleSubmit = async (e) => {
-   e.preventDefault();
-   let newNote = {
-     title,
-     description,
-     writer_id: sessionUser.id,
-   };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-   if (notebookId) {
-     newNote.notebook_id = parseInt(notebookId);
-   }
+    const description = editorState.getText(); // Get formatted text from editor
 
-   const note = await dispatch(createNoteThunk(newNote));
-   if (note) {
-     closeModal();
-     history.push("/dashboard");
-   }
- };
+    let newNote = {
+      title,
+      description,
+      writer_id: sessionUser.id,
+    };
 
+    if (notebookId) {
+      newNote.notebook_id = parseInt(notebookId);
+    }
+
+    const note = await dispatch(createNoteThunk(newNote));
+    if (note) {
+      closeModal();
+      history.push("/dashboard");
+    }
+  };
+
+
+  useEffect(() => {
+    if (editorState) {
+      editorState.on("text-change", handleEditorChange);
+    }
+    return () => {
+      if (editorState) {
+        editorState.off("text-change", handleEditorChange);
+      }
+    };
+  }, [editorState]);
 
   return (
     <div>
@@ -77,14 +103,7 @@ export default function CreateNote() {
             onChange={(e) => setTitle(e.target.value)}
           />
           <label>Description</label>
-          <input
-            type="text"
-            required
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
-         
-
+          <div id="editor-container" className="editor-container"></div>
           <button className="create-note-button" type="submit">
             Create Note
           </button>
