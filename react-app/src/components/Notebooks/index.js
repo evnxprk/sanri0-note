@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory, useParams } from "react-router-dom";
+import { getNotesByNotebookIdThunk } from "../../store/note";
 import {
   getAllNotebooksThunk,
   deleteNotebookThunk,
@@ -23,6 +24,10 @@ export default function Notebook() {
   const { ModalContent, closeModal, setModalContent } = useModal();
   const [editedNotebookName, setEditedNotebookName] = useState("");
   const [notebookToEdit, setNotebookToEdit] = useState(null);
+
+  useEffect(() => {
+    dispatch(getNotesByNotebookIdThunk(notebookId))
+  }, [dispatch])
 
   useEffect(() => {
     dispatch(getAllNotebooksThunk());
@@ -123,6 +128,9 @@ export default function Notebook() {
         </form>
       )}
       <Modal ModalContent={ModalContent} />
+      <div>
+        {}
+      </div>
     </div>
   );
 }

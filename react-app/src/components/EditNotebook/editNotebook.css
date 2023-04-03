@@ -31,3 +31,17 @@
   justify-content: center;
   display: flex;
 }
+
+.edit-form-container {
+  display: flex;
+  gap: 25px;
+  justify-content: center;
+}
+
+.notes-attached-box {
+  border: 2px solid red;
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+
+}

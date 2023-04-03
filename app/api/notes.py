@@ -94,6 +94,17 @@ def get_note_by_id(id):
 
     return note.to_dict()
 
+
+@notes_routes.route('/notebook/<int:notebook_id>', methods=['GET'])
+@login_required
+def get_notes_by_notebook_id(notebook_id):
+    notes = Note.query.filter(Note.notebook_id == notebook_id, Note.writer_id == current_user.id).all()
+
+    if not notes:
+        return jsonify({'error': 'No notes found for this notebook ID'}), 404
+
+    return jsonify([note.to_dict() for note in notes])
+
 #add note to notebook
 
 #additional backend route for the url `/api/notes/${noteid}/notebooks/notebookid`

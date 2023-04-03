@@ -9,6 +9,7 @@ import { useModal } from "../../context/Modal";
 import Modal from "../Modal";
 import './editNotebook.css'
 import sam from '../../images/sam.gif'
+import { getNotesByNotebookIdThunk } from "../../store/note";
 
 export default function EditNotebook() {
     // console.log("sup"); 
@@ -21,6 +22,14 @@ export default function EditNotebook() {
   const [name, setName] = useState("");
   const [errors, setErrors] = useState([]);
   const sessionUser = useSelector((state) => state.session.user);
+
+  useEffect(() => {
+    dispatch(getNotesByNotebookIdThunk(notebookId))
+  }, [dispatch])
+
+  const notesAttachedSel = useSelector((state) => state.notesReducer)
+  const notesAttached = Object.values(notesAttachedSel.allNotes)
+  console.log('hi', notesAttached)
 
   useEffect(() => {
     if (notebooks.name) {
@@ -60,6 +69,9 @@ export default function EditNotebook() {
      history.push("/dashboard");
    }
  };
+
+
+
 
 
   //* Delete Merge
@@ -155,6 +167,13 @@ export default function EditNotebook() {
           </form>
         )}
         <Modal ModalContent={ModalContent} />
+        <ul className='notes-attached-box' style={{ fontWeight: '600', fontSize: '20px'}}>Notes Attached
+        {notesAttached.map((note) => {
+          return (
+            <li style={{ fontWeight: '100', fontSize: '15px'}}>{note.title}</li>
+            )
+          })}
+          </ul>
       </div>
     </>
   );
