@@ -6,7 +6,7 @@ const Modal = ({ ModalContent, handleConfirmDelete }) => {
 
   return (
     <div className="modal">
-      <div className="modal-content">{ModalContent}</div>
+      {/* <div className="modal-content">{ModalContent}</div> */}
     </div>
   );
 };

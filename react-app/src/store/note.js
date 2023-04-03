@@ -3,6 +3,26 @@ const GET_ONE_NOTE = "notes/GET_ONE_NOTE";
 const CREATE_NOTE = "notes/CREATE_NOTE";
 const EDIT_NOTE = "notes/EDIT_NOTE";
 const DELETE_NOTE = "notes/DELETE_NOTE";
+
+const CLEAR_SINGLE_NOTE = "notes/CLEAR_SINGLE_NOTE";
+
+const UPDATE_INPUT_VALUE = "notes/UPDATE_INPUT_VALUE";
+
+export const updateInputValue = (value) => ({
+  type: UPDATE_INPUT_VALUE,
+  payload: value,
+});
+
+
+export const clearSingleNote = () => ({
+  type: CLEAR_SINGLE_NOTE,
+});
+
+
+export const clearSingleNoteThunk = () => async (dispatch) => {
+  dispatch(clearSingleNote());
+};
+
 // const ADD_NOTE_TO_NOTEBOOK = 'notes/ADD_NOTE_TO_NOTEBOOK'
 // const DELETE_NOTE_TO_NOTEBOOK = 'notes/DELETE_NOTE_TO_NOTEBOOK'
 
@@ -152,13 +172,16 @@ export const removeNoteThunk = (id) => async (dispatch) => {
 const initialState = {
   allNotes: {},
   singleNote: {},
+  inputValue: "",
 };
+
 
 const notesReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_ALL_NOTES: {
       const allNotes = {};
       action.allNotes.forEach((note) => {
+        console.log('reducer', note)
         allNotes[note.id] = note;
       });
       return {
@@ -201,6 +224,20 @@ const notesReducer = (state = initialState, action) => {
         allNotes: newNotes,
       };
     }
+    case UPDATE_INPUT_VALUE: {
+      return {
+        ...state,
+        inputValue: action.payload,
+      };
+    }
+
+      case CLEAR_SINGLE_NOTE: {
+      return {
+        ...state,
+        singleNote: {},
+      };
+    }
+
     default:
       return state;
   }

@@ -1,6 +1,6 @@
 import React from "react";
-import Quill from "quill";
-import "quill/dist/quill.snow.css";
+// import Quill from "quill";
+// import "quill/dist/quill.snow.css";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
@@ -24,17 +24,17 @@ export default function CreateNote() {
     (state) => state.notebookReducer.allNotebooks
   );
 
-  useEffect(() => {
-    const editor = new Quill("#editor-container", {
-      theme: "snow",
-    });
-    setEditorState(editor);
-  }, []);
+  // useEffect(() => {
+  //   const editor = new Quill("#editor-container", {
+  //     theme: "snow",
+  //   });
+  //   setEditorState(editor);
+  // }, []);
 
-  const handleEditorChange = () => {
-    const description = editorState.root.innerHTML;
-    setDescription(description);
-  };
+  // const handleEditorChange = () => {
+  //   const description = editorState.root.innerHTML;
+  //   setDescription(description);
+  // };
 
   useEffect(() => {
     const errors = [];
@@ -47,7 +47,7 @@ export default function CreateNote() {
       );
     }
     setErrors(errors);
-  }, [title]);
+  }, [title, description]);
 
   useEffect(() => {
     dispatch(getAllNotebooksThunk());
@@ -55,40 +55,56 @@ export default function CreateNote() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const description = editorState.getText(); // Get formatted text from editor
-
-    let newNote = {
-      title,
-      description,
-      writer_id: sessionUser.id,
-    };
-
-    if (notebookId) {
-      newNote.notebook_id = parseInt(notebookId);
+    let errors = [];
+    if (title.length < 2 || title.length > 50) {
+      errors.push("Title must be longer than 2 and less than 50 characters.");
     }
+    if (description.length < 2 || description.length > 255) {
+      errors.push(
+        "Description must be longer than 2 and less than 255 characters."
+      );
+    }
+    setErrors(errors);
+    if (errors.length === 0) {
+      let newNote = {
+        title,
+        description,
+        writer_id: sessionUser.id,
+      };
 
-    const note = await dispatch(createNoteThunk(newNote));
-    if (note) {
-      closeModal();
-      history.push("/dashboard");
+      if (notebookId) {
+        newNote.notebook_id = parseInt(notebookId);
+      }
+
+      const note = await dispatch(createNoteThunk(newNote));
+      if (note) {
+        closeModal();
+        history.push("/dashboard");
+      }
     }
   };
 
 
-  useEffect(() => {
-    if (editorState) {
-      editorState.on("text-change", handleEditorChange);
-    }
-    return () => {
-      if (editorState) {
-        editorState.off("text-change", handleEditorChange);
-      }
-    };
-  }, [editorState]);
+
+  // useEffect(() => {
+  //   if (editorState) {
+  //     editorState.on("text-change", handleEditorChange);
+  //   }
+  //   return () => {
+  //     if (editorState) {
+  //       editorState.off("text-change", handleEditorChange);
+  //     }
+  //   };
+  // }, [editorState]);
 
   return (
     <div>
+      <div className="form-errors">
+        {errors.map((error, idx) => (
+          <div key={idx}>{error}</div>
+        ))}
+      </div>
+
       <div className="create-form-header">
         <h2>Create New Note</h2>
       </div>
@@ -103,7 +119,13 @@ export default function CreateNote() {
             onChange={(e) => setTitle(e.target.value)}
           />
           <label>Description</label>
-          <div id="editor-container" className="editor-container"></div>
+          {/* <div id="editor-container" className="editor-container"></div> */}
+          <textarea
+            type="text"
+            required
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
           <button className="create-note-button" type="submit">
             Create Note
           </button>

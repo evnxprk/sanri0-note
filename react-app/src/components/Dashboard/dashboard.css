@@ -8,12 +8,14 @@
 /* Sidebar */
 .sidebar {
   width: 240px;
-  background-color: rgb(249, 214, 220);
+  /* background-color: rgb(249, 214, 220); */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   /* border-right: 1px solid #ccc; */
   padding: 16px;
+  padding-top: 35px;
+  gap: 100px
 
 }
 
@@ -66,12 +68,25 @@
 }
 
 .sidebar-nav-links .create-note-button {
-  background-color: #f2f2f2;
+  background-color: white;
+  border: 2px solid rgb(235, 233, 233);
   border-radius: 4px;
 }
 
 .sidebar-nav-links .create-notebook-button {
-  background-color: #fff;
+    background-color: white;
+  border: 2px solid rgb(235, 233, 233);
+  border-radius: 4px;
+}
+.sidebar-nav-links .github-button {
+    background-color: white;
+  border: 2px solid rgb(235, 233, 233);
+  border-radius: 4px;
+}
+.sidebar-nav-links .linkedin-button {
+    background-color: white;
+  border: 2px solid rgb(235, 233, 233);
+  border-radius: 4px;
 }
 
 .sidebar-login {
@@ -100,6 +115,7 @@
 .main-content {
   flex: 1;
   padding: 16px;
+  background-color: rgb(247, 215, 242);
 }
 
 .sidebar-login {
@@ -123,7 +139,7 @@
   margin-bottom: 16px;
 }
 
-.notebook {
+/* .notebook {
   display: flex;
   align-items: center;
   gap: 16px;
@@ -132,7 +148,7 @@
   border: 1px solid #ccc;
   border-radius: 4px;
   transition: box-shadow 0.2s ease-in-out;
-}
+} */
 
 .notebook:hover {
   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
@@ -197,3 +213,4 @@
 .logout-sidebar-button:hover {
   cursor: pointer;
 }
+

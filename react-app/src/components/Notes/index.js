@@ -29,6 +29,8 @@ export default function Notes() {
     dispatch(getAllNotebooksThunk());
   }, [dispatch]);
 
+  console.log('notees', useSelector((state) => state.notesReducer.allNotes))
+
   const notebookState = useSelector((state) => state.notebookReducer);
   const notebooks = Object.values(notebookState)
 
@@ -74,7 +76,7 @@ export default function Notes() {
 
   if (!notebooks.length) return null
   return (
-    <>
+    <div className='note-main-box'>
       {/* <form onSubmit={handleSubmit}>
         <label htmlFor="note-title">Title:</label>
         <input
@@ -110,13 +112,13 @@ export default function Notes() {
 
       {notes.map((note) => {
         return (
-          <div key={note.id} className="note-container">
+          <div key={note.id} className="note-box" onClick={() => handleEdit(note.id)}>
             <div>
-            <NavLink to={`/note/${note.id}`} noteId={note.id}>
+            {/* <NavLink to={`/note/${note.id}`} noteId={note.id}> */}
             { note.title }
-            </NavLink>
+            {/* </NavLink> */}
             </div>
-            <div className="note-options">
+            {/* <div className="note-options">
               <button
                 className="note-edit-button"
                 onClick={() => handleEdit(note.id)}
@@ -140,16 +142,16 @@ export default function Notes() {
               >
                 Delete
               </button>
-            </div>
+            </div> */}
           </div>
         );
       })}
-
+{/* 
       <Modal
         ModalContent={ModalContent}
         handleConfirmDelete={handleConfirmDelete}
-      />
-    </>
+      /> */}
+    </div>
   );
 }
 

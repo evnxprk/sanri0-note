@@ -1,11 +1,11 @@
-.splash-container {
+/* .splash-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100%;
   width: 100%;
-}
+} */
 
 .splash-nav {
   justify-content: flex-end;
@@ -20,7 +20,10 @@
 
 .sanrio-note-title {
   color: rgb(145, 171, 226);
+  /* justify-content: center;
+  display: flex; */
 }
+
 /* h1 {
   color: rgb(202, 244, 229);
 } */
@@ -42,14 +45,6 @@
   margin-top: 20px;
 }
 
-body {
-  background-color: rgb(249, 214, 220);
-}
-
-.sanrio-description {
-  color:rgb(141, 141, 226)
-}
-
 .login-description {
   color: rgb(133, 185, 230);
 }
@@ -60,14 +55,20 @@ body {
 }
 .login-link{
   color: black;
+  margin: 12px;
 }
 
 .sign-up-button {
-  font-size: 35px;
+  font-size: 40px;
   background-color: rgb(163, 172, 232);
   border: none;
   color: rgb(100, 94, 94);
+  border-radius: 20px;
+  height: 70px;
+  cursor: pointer;
 }
+
+
 
 .splash-right {
   width: 45%;
@@ -79,13 +80,6 @@ body {
   /* add some space between the image and text */
 }
 
-/* .sanrio-description {
-  display: inline-block;
-  font-size: 30px;
-  text-align: justify;
-  margin: 0;
-} */
-
 .splash-footer {
   display: flex;
   justify-content: center;
@@ -94,11 +88,12 @@ body {
   bottom: 16px;
 }
 
-/* .sanrio-note-landing {
+.social-media-footer {
   display: flex;
-  flex-direction: column;
-} */
+  align-items: center;
+  justify-content: space-evenly;
 
+}
 
 #note-logo {
   border-radius: 10em;
@@ -120,7 +115,7 @@ body {
 }
 
 .sanrio-note-landing {
-  width: 80%;
+  width: 100%;
   margin: 0 auto;
   text-align: center;
 }
@@ -141,16 +136,12 @@ body {
 
 .sanrio-description {
   margin-top: 20px;
+  border-top: gray solid 1px;
   text-align: justify;
-  /* margin: 0; */
   max-width: 50%;
-  /* color: white ; */
   display: inline-block;
-  font-size: 30px;
+  font-size: 18px;
   font-family:Verdana, Geneva, Tahoma, sans-serif;
-  /* text-align: justify; */
-  /* margin: 0; */
-
 }
 
 .profile-button {
@@ -179,10 +170,10 @@ body {
   /* margin-top: 5px; */
   padding: 10px;
   position: absolute;
-  right: 125px;
-  bottom: 700px;
+  right: 10px;
+  bottom: 640px;
   width: 200px;
-  z-index: 5;
+  z-index: 1;
 }
 
 .profile-dropdown.hidden {

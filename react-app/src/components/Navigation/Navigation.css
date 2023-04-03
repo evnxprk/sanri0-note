@@ -12,7 +12,26 @@
 
 }
 
-#melody-logo {
+.melody-logo {
 border: radius 10em;
+width: 75px;
+height: 60px
 }
 
+.navbar {
+  /* border: 2px solid black */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.navbar > div {
+  font-style:italic;
+  padding-top: 20px;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: rgb(246, 120, 141);
+  font-size: 30px;
+}

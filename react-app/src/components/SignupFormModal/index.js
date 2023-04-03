@@ -13,19 +13,32 @@ function SignupFormModal() {
   const [errors, setErrors] = useState([]);
   const { closeModal } = useModal();
 
-  const handleSubmit = async (e) => {
+ const handleSubmit = async (e) => {
     e.preventDefault();
-    if (password === confirmPassword) {
+    const errors = [];
+    if (username.length < 2 || username.length > 30) {
+      errors.push("Username must be between 2 and 30 characters long.");
+    }
+    if (password.length < 6) {
+      errors.push("Password must be at least 6 characters long.");
+    }
+    if (password !== confirmPassword) {
+      errors.push(
+        "Confirm Password field must be the same as the Password field"
+      );
+    }
+    if (!email.includes("@") || !email.includes(".")) {
+      errors.push("Please enter a valid email address.");
+    }
+    if (errors.length === 0) {
+      closeModal()
       const data = await dispatch(signUp(username, email, password));
       if (data) {
         setErrors(data);
-      } else {
-        closeModal();
       }
     } else {
-      setErrors([
-        "Confirm Password field must be the same as the Password field",
-      ]);
+      setErrors(errors);
+
     }
   };
 

@@ -82,29 +82,29 @@ export default function Notebook() {
   }
 
   return (
-    <>
+    <div className='notebooks-main-box'>
       {notebooks.map((notebook) => {
         return (
-          <div key={notebook.id}>
-            
-              <div>{notebook.name}</div>
-            <div className="notebook-options">
-              <button
+          <div className='notebook-card-box' onClick={() => handleEdit(notebook)} key={notebook.id}>
+            <div>
+            <p>{notebook.name}</p>
+            </div>
+            {/* <div className="notebook-options"> */}
+              {/* <button
                 className="notebook-edit-button"
                 as="button"
                 onClick={() => handleEdit(notebook)}
               >
                 Edit
-              </button>
-
-              <button
+              </button> */}
+              {/* <button
                 className="notebook-delete-button"
                 as="button"
                 onClick={() => handleDelete(notebook.id)}
               >
                 Delete
-              </button>
-            </div>
+              </button> */}
+            {/* </div> */}
           </div>
         );
       })}
@@ -123,6 +123,6 @@ export default function Notebook() {
         </form>
       )}
       <Modal ModalContent={ModalContent} />
-    </>
+    </div>
   );
 }

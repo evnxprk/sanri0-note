@@ -4,15 +4,15 @@ form {
   flex-direction: column;
   margin: 0 auto;
   max-width: 600px;
-  padding: 1rem;
+  padding: 2rem;
 }
 
 
-input[type="text"] {
+input {
   border: none;
   border-bottom: 2px solid #bbb;
   font-size: 1.5rem;
-  margin: 1rem 0;
+  /* margin: 1rem 0; */
   outline: none;
   padding: 0.5rem;
   width: 100%;
@@ -21,9 +21,9 @@ input[type="text"] {
 
 textarea {
   border: none;
-  border-bottom: 2px solid #bbb;
+  border: 2px solid #bbb;
   font-size: 1rem;
-  margin: 1rem 0;
+  /* margin: 1rem 0; */
   outline: none;
   padding: 0.5rem;
   resize: none;
@@ -40,6 +40,7 @@ button[type="submit"] {
   margin: 1rem 0;
   padding: 0.5rem;
   transition: background-color 0.2s ease-in-out;
+  border-radius: 7px;
   width: 100%;
 }
 
@@ -47,4 +48,57 @@ button[type="submit"] {
 .form-errors {
   color: red;
   margin: 1rem 0;
+}
+
+.edit-note-main-box {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+  border: 2px solid rgb(239, 205, 205);
+  border-radius: 16px;
+  width: 600px;
+  height: 80vh;
+}
+
+.edit-note-title {
+  text-decoration: underline;
+}
+
+.select-notebook-dropdown {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.select-notebook {
+  padding: 5px;
+  border: 2px solid rgb(231, 173, 173);;
+  border-radius: 5px;
+}
+
+.note-delete-button {
+  background-color: #f53535;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+  margin: 1rem 0;
+  padding: 0.5rem;
+  transition: background-color 0.2s ease-in-out;
+  width: 100%;
+  border-radius: 7px;
+}
+
+.edit-editor-container {
+  height: 300px
+}
+
+.editor-main-container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  /* border: 2px solid  black; */
+  justify-content: center;
 }

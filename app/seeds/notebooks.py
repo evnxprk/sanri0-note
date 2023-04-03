@@ -7,9 +7,12 @@ from sqlalchemy.sql import text
 
 def seed_notebooks():
     nb1 = Notebook(name="Hello Kitty and Friends", owner_id=1)
-    nb2 = Notebook(name="Kuromi and My Melody fighting", owner_id=2)
+    nb2 = Notebook(name="Kuromi and Melody fighting", owner_id=2)
     nb3 = Notebook(name="My Melody and Friends", owner_id=3)
-    db.session.add_all([nb1, nb2, nb3])
+    nb4 = Notebook(name="Adventures of Cinnamoroll and Pochacco", owner_id=3)
+    nb5 = Notebook(name="The Rivalry Of Melody And Kuromi", owner_id=2)
+    nb6 = Notebook(name="Pochacco and His Adventures", owner_id=1)
+    db.session.add_all([nb1, nb2, nb3, nb4, nb5, nb6])
     db.session.commit()
 
 

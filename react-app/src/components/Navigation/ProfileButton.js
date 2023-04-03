@@ -4,6 +4,7 @@ import { logout } from "../../store/session";
 import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
+import badz from '../../images/badz.png'
 
 
 function ProfileButton({ user }) {
@@ -40,8 +41,8 @@ function ProfileButton({ user }) {
 
   return (
     <>
-      <button onClick={openMenu}>
-        <i className="fas fa-user-circle" />
+      <button style={{ borderRadius: "8px", display:'flex', alignItems:"center", cursor:"pointer"}} onClick={openMenu}> Login
+        <img style={{width:'30px', height:'20px',}} src={badz} />
       </button>
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
@@ -56,13 +57,13 @@ function ProfileButton({ user }) {
           <>
             <OpenModalButton
               buttonText="Log In"
-              onItemClick={closeMenu}
+              onItemClick={() => closeMenu()}
               modalComponent={<LoginFormModal />}
             />
 
             <OpenModalButton
               buttonText="Sign Up"
-              onItemClick={closeMenu}
+              onItemClick={() => closeMenu()}
               modalComponent={<SignupFormModal />}
             />
           </>

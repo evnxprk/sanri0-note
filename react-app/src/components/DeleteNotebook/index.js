@@ -7,6 +7,7 @@ import {
   deleteNotebookThunk,
   getAllNotebooksThunk,
 } from "../../store/notebook";
+import './deleteNb.css'
 
 export default function DeleteNoteBook() {
   const dispatch = useDispatch();
@@ -24,7 +25,13 @@ export default function DeleteNoteBook() {
   return (
     <>
       <h1>Are you sure you want to delete this notebook?</h1>
-      <button onClick={handleDelete}>Delete</button>
+      <button
+        onClick={handleDelete}
+        style={{ backgroundColor: "red", color: "white" }}
+      >
+        Yes
+      </button>
+      <button onClick={handleDelete}>No</button>
     </>
   );
 }
