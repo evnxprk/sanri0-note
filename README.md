@@ -21,12 +21,12 @@ Clone the project
 
 ### HTTPS
 ```bash
-  git clone https://github.com/SA-Ark/HolyGrail.git
+  git clone https://github.com/evnxprk/sanri0-note.git
 ```
 
 ### SSH
 ```bash
-  git clone git@github.com:SA-Ark/HolyGrail.git
+  git clone git@github.com:evnxprk/sanri0-note.git
 ```
 
 Install dependencies
