@@ -13,6 +13,8 @@ import { getAllNotebooksThunk } from "../../store/notebook";
 import { getAllNotesThunk } from "../../store/note";
 import pochogif from '../../images/pochacco.gif'
 import pomgif from '../../images/pompom.gif'
+import tuxsam from '../../images/tuxsam.gif'
+import frog from '../../images/frog.gif'
 
 export default function Dashboard() {
   const sessionUser = useSelector((state) => state.session.user);
@@ -73,11 +75,11 @@ export default function Dashboard() {
       </div>
       <div className="main-content">
         <div className="notebooks-container">
-          <h1 className="section-title">Notebooks</h1>
+          <h1 className="section-title">Notebooks {tuxsam}</h1>
           <Notebook />
         </div>
         <div className="notes-container">
-          <h1 className="section-title">Notes</h1>
+          <h1 className="section-title">Notes {frog}</h1>
           <Notes />
         </div>
       </div>
