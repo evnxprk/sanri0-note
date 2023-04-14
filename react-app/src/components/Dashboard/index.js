@@ -75,11 +75,11 @@ export default function Dashboard() {
       </div>
       <div className="main-content">
         <div className="notebooks-container">
-          <h1 className="section-title">Notebooks {tuxsam}</h1>
+          <h1 className="section-title">Notebooks </h1>
           <Notebook />
         </div>
         <div className="notes-container">
-          <h1 className="section-title">Notes {frog}</h1>
+          <h1 className="section-title">Notes </h1>
           <Notes />
         </div>
       </div>
