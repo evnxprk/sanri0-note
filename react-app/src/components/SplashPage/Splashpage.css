@@ -1,138 +1,4 @@
-/* 
 
-.splash-nav {
-  justify-content: flex-end;
-  display: flex;
-}
-
-.splash-header {
-  display: flex;
-  align-items: center;
-  margin-bottom: 32px;
-}
-
-.sanrio-note-title {
-  color: rgb(145, 171, 226);
-
-}
-
-.splash-body {
-  display: flex;
-  justify-content: space-between;
-  width: 80%;
-  margin-bottom: 64px;
-}
-
-.splash-left {
-  width: 45%;
-}
-
-.signup {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-}
-
-.login-description {
-  color: rgb(133, 185, 230);
-}
-.account-login {
-  font-size: 18px;
-  display: flex;
-  justify-content: center;
-}
-.login-link{
-  color: black;
-}
-
-.cta-buttons {
-  display: grid;
-  justify-content: center;
-}
-
-.sign-up-button {
-  font-size: 30px;
-  background-color: rgb(163, 172, 232);
-  border: none;
-  color: rgb(100, 94, 94);
-  border-radius: 20px;
-  height: 70px;
-  cursor: pointer;
-}
-
-
-
-.splash-right {
-  width: 45%;
-}
-
-.notepage-photo {
-  float: left;
-  margin-right: 20px; 
-}
-
-.splash-footer {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  position: absolute;
-  bottom: 16px;
-}
-
-.social-media-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-
-}
-
-#note-logo {
-  border-radius: 10em;
-  float: left;
-  width: 300px;
-  height: 300px;
-  margin-right: 30px;
-}
-
-@media only screen and (max-width: 768px) {
-  .sanrio-note-landing {
-    flex-direction: column;
-  }
-
-  .notepage-photo {
-    width: 100%;
-    margin-right: 0;
-  }
-}
-
-.sanrio-note-landing {
-  width: 100%;
-  margin: 0 auto;
-  text-align: center;
-}
-
-.notepage-photo {
-  float: left;
-  margin: 0 30px 20px 0;
-  width: 400px;
-  margin-right: 30px;
-  margin-bottom: 30px;
-}
-
-.notepage-photo img {
-  max-width: 100%;
-  height: auto;
-}
-
-.sanrio-description {
-  margin-top: 20px;
-  border-top: gray solid 1px;
-  text-align: justify;
-  max-width: 50%;
-  display: inline-block;
-  font-size: 18px;
-  font-family:Verdana, Geneva, Tahoma, sans-serif;
-}
 
 .profile-button {
   display: flex;
@@ -159,8 +25,9 @@
   list-style: none;
   padding: 10px;
   position: absolute;
-  right: 10px;
-  bottom: 640px;
+  right: 50px;
+  /* bottom: 640px; */
+  top: 140px;
   width: 200px;
   z-index: 1;
 }
@@ -202,146 +69,232 @@
 
 .profile-dropdown a:hover {
   color: #0077c0;
-} */
+}
+
+/* Set global font and color styles */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  color: #333;
+  background-color: #fff;
+}
 
 .splash-page-container {
-  width: 100%;
-  margin: 0 auto;
-  text-align: center;
+  /* max-width: 1200px; */
+  /* margin-left: 0 auto; */
+  padding: 50px;
 }
+
 
 .splash-nav {
+  display: flex;
   justify-content: flex-end;
-  display: flex;
 }
 
-.splash-content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+#note-logo {
+  border-radius: 50%;
+  width: 300px;
+  height: 300px;
 }
 
-.notepage-photo {
-  float: left;
-  margin: 0 30px 20px 0;
-  width: 400px;
-  margin-right: 30px;
-  margin-bottom: 30px;
-}
-
-.notepage-photo img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 1em;
-}
-
-.description {
-  max-width: 800px;
-}
 
 .title {
-  font-size: 48px;
-  margin-bottom: 0;
-  color: rgb(73, 80, 87);
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
 }
 
 .subtitle {
-  font-size: 24px;
-  margin-top: 0;
-  color: rgb(133, 153, 168);
-  line-height: 1.5;
-  margin-bottom: 32px;
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
 }
+
 
 .cta-buttons {
   display: flex;
-  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
 }
 
 .sign-up-button {
-  align-items: center;
-  font-size: 30px;
-  background-color: rgb(255, 163, 163);
+  font-size: 2rem;
+  background-color: #1abc9c;
   border: none;
-  color: rgb(73, 80, 87);
-  border-radius: 20px;
-  height: 70px;
+  color: #fff;
+  border-radius: 0.5rem;
+  height: 4rem;
+  padding: 0 2rem;
   cursor: pointer;
-  padding: 0 40px;
-  margin-right: 16px;
+  margin-right: 1rem;
+  transition: background-color 0.3s;
+}
+
+.sign-up-button:hover {
+  background-color: #16a085;
 }
 
 .login-link {
-  font-size: 18px;
-  color: rgb(133, 185, 230);
-  margin-left: 16px;
+  color: #1abc9c;
+  text-decoration: none;
+  font-size: 1.5rem;
+  transition: color 0.3s;
+  
+}
+
+.login-link:hover {
+  color: #148f77;
+}
+
+
+.features {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 4rem;
+}
+
+.features-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  width: 100%;
+  text-align: center;
+}
+
+.feature {
+  flex-basis: calc(33.33% - 2rem);
+  margin: 1rem;
+  padding: 2rem;
+  border: 1px solid #ddd;
+  border-radius: 0.5rem;
+  transition: box-shadow 0.3s;
+}
+
+.feature:hover {
+  background-color: #f5f5f5;
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+}
+
+.feature:hover .feature-title {
+  color: #1abc9c;
+}
+
+.feature:hover .feature-icon {
+  filter: brightness(0.5);
 }
 
 
 
-.happy-place {
-  background-color: rgb(255, 163, 163);
-  padding: 64px;
+.feature-icon {
+  width: 5rem;
+  height: 5rem;
+  margin-bottom: 1rem;
+}
+
+.feature-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.feature-description {
+  font-size: 1.25rem;
+  line-height: 1.5;
+}
+
+
+.pricing {
   display: flex;
   justify-content: center;
+  margin-top: 4rem;
+}
+
+.pricing-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+}
+
+.plan {
+  padding: 2rem;
+  border: 1px solid #ddd;
+  border-radius: 0.5rem;
+  transition: box-shadow 0.3s;
+}
+
+.plan:hover {
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+}
+
+.plan-description {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.plan-button {
+  font-size: 1.5rem;
+  background-color: #1abc9c;
+  border: none;
+  color: #fff;
+  border-radius: 0.5rem;
+  height: 3rem;
+  padding: 0 1.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+
+.plan-button:hover {
+  background-color: #16a085;
+}
+
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
   align-items: center;
+  padding: 2rem;
+  border-top: 1px solid #ddd;
 }
 
 .happy-place-title {
-  font-size: 48px;
-  margin-bottom: 0;
-  color: white;
-  text-align: center;
-}
-
-.social-media {
-  background-color: rgb(241, 243, 244);
-  padding: 64px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
 }
 
 .social-media-title {
-  font-size: 36px;
-  margin-bottom: 64px;
-  color: rgb(73, 80, 87);
-  text-align: center;
-  width: 100%;
+  font-size: 1.25rem;
+  margin-right: 1rem;
 }
 
 .social-media-buttons {
   display: flex;
-  justify-content: center;
   align-items: center;
-  margin-top: 32px;
 }
 
-.github-button,
-.linkedin-button {
+.github-button, .linkedin-button {
   display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: 24px;
-  padding: 8px;
-  border-radius: 8px;
-  margin-right: 16px;
-  color: white;
-  text-decoration: none;
-  background-color: rgb(73, 80, 87);
-  transition: background-color 0.2s ease-in-out;
+  background-color: #fff;
+  border: none;
+  color: #333;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
-.github-button:hover,
-.linkedin-button:hover {
-  background-color: rgb(51, 56, 62);
+.github-button:hover, .linkedin-button:hover {
+  background-color: #f3f3f3;
 }
 
-.github-button img,
-.linkedin-button img {
-  width: 32px;
-  height: 32px;
-  margin-right: 8px;
+.github-button img, .linkedin-button img {
+  width: 2rem;
+  height: 2rem;
+  margin-left: 1rem;
 }
+
+.legal-text {
+  font-size: 1.25rem;
+}
+
+
