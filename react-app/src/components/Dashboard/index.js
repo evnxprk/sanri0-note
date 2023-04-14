@@ -75,11 +75,15 @@ export default function Dashboard() {
       </div>
       <div className="main-content">
         <div className="notebooks-container">
-          <h1 className="section-title">Notebooks </h1>
+          <img style={{ width: "30px" }} src={tuxsam}>
+            <h1 className="section-title">Notebooks </h1>
+          </img>
           <Notebook />
         </div>
         <div className="notes-container">
+          <img style={{ width: "30px" }} src={frog}>
           <h1 className="section-title">Notes </h1>
+          </img>
           <Notes />
         </div>
       </div>
