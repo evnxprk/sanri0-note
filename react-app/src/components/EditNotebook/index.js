@@ -27,6 +27,13 @@ export default function EditNotebook() {
     dispatch(getNotesByNotebookIdThunk(notebookId))
   }, [dispatch])
 
+  useEffect(() => {
+    if (notebooks.name) {
+      setName(notebooks.name);
+    }
+  }, [notebooks]);
+
+
   const notesAttachedSel = useSelector((state) => state.notesReducer)
   const notesAttached = Object.values(notesAttachedSel.allNotes)
   console.log('hi', notesAttached)

@@ -77,10 +77,10 @@ export default function SplashPage() {
  
 
       <div className="pricing">
-        <h2 className="pricing-title">Pricing</h2>
+        {/* <h2 className="pricing-title">Pricing</h2> */}
 
         <div className="plan">
-          <h3 className="plan-title">The best part of all this is that it's free!</h3>
+          {/* <h3 className="plan-title">The best part of all this is that it's free!</h3> */}
           <p className="plan-description">
             Get started with Sanrio Note for free, and enjoy basic features like
             notes and notebooks.
