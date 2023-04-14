@@ -126,12 +126,12 @@ export default function SplashPage() {
         </div>
 
         <div className="legal">
-          <NavLink to="/terms" className="legal-link">
+          {/* <NavLink to="/terms" className="legal-link">
             Terms of Service
           </NavLink>
           <NavLink to="/privacy" className="legal-link">
             Privacy Policy
-          </NavLink>
+          </NavLink> */}
           <span className="legal-text">© 2023 Sanrio Note</span>
         </div>
       </div>
