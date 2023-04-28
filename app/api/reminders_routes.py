@@ -50,4 +50,12 @@ def edit_task(id):
     task = Task.query.get(id)
     if task is None:
         return jsonify({'error': "Task Not Found"}), 404
-        
+    form = TaskForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        task.description = form.data['description']
+        task.complete = form.data['complete']
+        db.sesssion.commit()
+        task_dict = task.to_dict()
+        return task_dict
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 400
