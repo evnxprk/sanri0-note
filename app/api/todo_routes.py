@@ -26,5 +26,25 @@ def get_all_todo():
 @todo_routes.route('/<int:id>', methods=['GET'])
 @login_required
 
-def create_todo(id):
-    
+def get_all_todo(id):
+    todo = Todo.query.get(id)
+    if todo is None: 
+        return jsonify({'error': 'Todo not found'}), 404
+    return jsonify(todo.to_dict())
+
+@todo_routes.route('/', methods=['POST'])
+@login_required
+
+def create_todo():
+    form= TodoForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        todo = Todo (
+            title=form.data['title'],
+            writer_id=current_user.id
+        )
+        db.session.add(todo)
+        db.session.commit()
+        return todo.to_dict()
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+
