@@ -34,7 +34,7 @@ function App() {
             <SplashPage />
           </Route>
           {/* <Route exact path="/notes" component={Notes} /> */}
-          <Route exact path="/dashbboard"/>
+          {/* <Route exact path="/dashbboard"/> */}
           <Route exact path="/dashboard">
             <DashBoard />
           </Route>
