@@ -7,39 +7,39 @@ def seed_todo():
     )
     todo_2 = Todo(
         writer_id=1,
-        title='Todo 1'
+        title='Todo 2'
     )
     todo_3 = Todo(
         writer_id=1,
-        title='Todo 1'
+        title='Todo 3'
     )
     todo_4 = Todo(
         writer_id=1,
-        title='Todo 1'
+        title='Todo 4'
     )
     todo_5 = Todo(
         writer_id=1,
-        title='Todo 1'
+        title='Todo 5'
     )
     todo_6 = Todo(
         writer_id=1,
-        title='Todo 1'
+        title='Todo 6'
     )
     todo_7 = Todo(
         writer_id=1,
-        title='Todo 1'
+        title='Todo 7'
     )
     todo_8 = Todo(
         writer_id=1,
-        title='Todo 1'
+        title='Todo 8'
     )
     todo_9 = Todo(
         writer_id=1,
-        title='Todo 1'
+        title='Todo 9'
     )
     todo_10 = Todo(
         writer_id=1,
-        title='Todo 1'
+        title='Todo 10'
     )
 
     db.session.add(todo_1)
