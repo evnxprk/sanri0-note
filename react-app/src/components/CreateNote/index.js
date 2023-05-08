@@ -85,18 +85,6 @@ export default function CreateNote() {
   };
 
 
-
-  // useEffect(() => {
-  //   if (editorState) {
-  //     editorState.on("text-change", handleEditorChange);
-  //   }
-  //   return () => {
-  //     if (editorState) {
-  //       editorState.off("text-change", handleEditorChange);
-  //     }
-  //   };
-  // }, [editorState]);
-
   return (
     <div>
       <div className="form-errors">

@@ -49,7 +49,7 @@ export const getAllTasksThunk = () => async (dispatch) => {
 // }
 
 export const addTaskThunk = (tasks) => async (dispatch) => {
-  const res = await fetch("/api/tasks/new", {
+  const res = await fetch('/api/tasks', {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

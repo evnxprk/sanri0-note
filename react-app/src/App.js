@@ -16,6 +16,7 @@ import DeleteNotebook from "./components/DeleteNotebook";
 import DashBoard from "./components/Dashboard";
 import SplashPage from "./components/SplashPage";
 import XNoteDetails from "./components/XNoteDetails";
+import AddTask from "./components/AddTasks";
 
 function App() {
   const dispatch = useDispatch();
@@ -37,6 +38,9 @@ function App() {
           {/* <Route exact path="/dashbboard"/> */}
           <Route exact path="/dashboard">
             <DashBoard />
+          </Route>
+          <Route exact path='/tasks/new'>
+            <AddTask />
           </Route>
           <Route exact path="/login">
             <LoginFormPage />
