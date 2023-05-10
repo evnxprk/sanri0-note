@@ -48,23 +48,24 @@ export const getAllTasksThunk = () => async (dispatch) => {
 //     })
 // }
 
-export const addTaskThunk = (tasks) => async (dispatch) => {
-  const res = await fetch('/api/tasks', {
+export const addTaskThunk = (task) => async (dispatch) => {
+  const response = await fetch("/api/tasks/new", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(tasks),
+    body: JSON.stringify(task),
   });
-  if (res.ok) {
-    const data = await res.json();
-    dispatch(createTasks(data));
+
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(addTaskThunk(data));
     return data;
   }
 };
 
 export const editTaskThunk = (task, id) => async (dispatch) => {
-  const res = await fetch(`/api/tasks/edit/${id}`, {
+  const res = await fetch(`/api/tasks/${id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -74,7 +75,7 @@ export const editTaskThunk = (task, id) => async (dispatch) => {
   if (res.ok) {
     const data = await res.json();
     dispatch(editTask(data));
-    return data;
+    // return data;
   }
 };
 
@@ -96,41 +97,44 @@ const initialState = {
 };
 
 export default function taskReducer(state = initialState, action) {
+  let newState;
   switch (action.type) {
     case GET_ALL_TASKS:
+      newState = { ...state };
       const newTasks = {};
       action.payload.forEach((task) => {
         newTasks[task.id] = task;
       });
-      return {
-        ...state,
-        allTasks: action.payload,
-      };
+      newState.allTasks = newTasks;
+      return newState;
+
     case GET_ONE_TASK:
       return {
         ...state,
         singleTask: action.payload,
       };
+
     case CREATE_TASK:
-      return {
-        ...state,
-        allTasks: [action.payload, ...state.allTasks],
-      };
+      newState = { ...state };
+      const newTask = action.payload;
+      const newTaskState = { ...newState.allTasks, newTask };
+      newTaskState.allTasks = newTaskState;
+      return newState;
+
     case EDIT_TASK:
-      return {
-        ...state,
-        allTasks: state.allTasks.map((task) =>
-          task.id === action.payload.id ? action.payload : task
-        ),
+      newState = { ...state };
+      const updatedTask = action.payload;
+      const updatedTaskState = {
+        ...newState.allTasks,
+        [updatedTask.id]: updatedTask,
       };
+      newState.allTasks = updatedTaskState;
+      return newState;
+
     case DELETE_TASK:
-      const updatedTasks = state.allTasks.filter(
-        (task) => task.id !== action.payload
-      );
-      return {
-        ...state,
-        allTasks: updatedTasks,
-      };
+      newState = { ...state };
+      delete newState.allTasks[action.payload];
+      return newState;
     default:
       return state;
   }

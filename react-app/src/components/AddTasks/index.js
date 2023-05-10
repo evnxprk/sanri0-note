@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { useModal } from "../../context/Modal";
@@ -10,15 +10,20 @@ export default function AddTask() {
   const { closeModal } = useModal();
   const [description, setDescription] = useState("");
   const [errors, setErrors] = useState([]);
-//   const { taskId } = useParams();
 
-//   useEffect(() => {
-//     const errors = [];
-//     if (description.length < 2 || description.length > 255) {
-//       errors.push("Description must be longer than 1 character and less than 255 characters.");
-//     }
-//     setErrors(errors);
-//   }, [description]);
+  useEffect(() => {
+    const errors = [];
+    if (description.length < 2 || description.length > 50) {
+      errors.push(
+        "Description must be longer than 2 and less than 255 characters."
+      );
+    }
+    setErrors(errors);
+  }, [description]);
+
+    useEffect(() => {
+      dispatch(getAllTasksThunk());
+    }, [dispatch]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,13 +36,13 @@ export default function AddTask() {
     setErrors(errors);
     if (errors.length === 0) {
       let newTask = {
-        description
+        description:description,
       };
 
       const task = await dispatch(addTaskThunk(newTask));
       if (task) {
         closeModal();
-        history.push("/dashboard");
+        history.push("/all-tasks");
       }
     }
   };
