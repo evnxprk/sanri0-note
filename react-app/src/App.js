@@ -17,6 +17,7 @@ import DashBoard from "./components/Dashboard";
 import SplashPage from "./components/SplashPage";
 import XNoteDetails from "./components/XNoteDetails";
 import AddTask from "./components/AddTasks";
+import Tasks from "./components/AllTasks";
 
 function App() {
   const dispatch = useDispatch();
@@ -38,6 +39,9 @@ function App() {
           {/* <Route exact path="/dashbboard"/> */}
           <Route exact path="/dashboard">
             <DashBoard />
+          </Route>
+          <Route exact path='/all-tasks'>
+            <Tasks />
           </Route>
           <Route exact path='/tasks/new'>
             <AddTask />
