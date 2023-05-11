@@ -46,6 +46,16 @@ export const getAllTasksThunk = () => async (dispatch) => {
   }
 };
 
+export const getOneTaskThunk = (id) => async (dispatch) => {
+  const response = await fetch(`/api/tasks/${id}`);
+
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(getOneTask(data));
+    return data;
+  }
+};
+
 
 // export const getOneTaskThunk = (id) => async(dispatch) => {
 //     const res = await fetch (`/api/tasks/${id}`, {
