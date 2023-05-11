@@ -63,6 +63,7 @@ export default function EditTask() {
   const taskValues = Object.values(allTasks);
   const { ModalContent, closeModal, setModalContent } = useModal();
   const [editedTask, setEditedTask] = useState("");
+  const [taskToEdit, setTaskToEdit] = useState(null);
 
   const handleDelete = (taskId) => {
     setModalContent(
@@ -85,4 +86,64 @@ export default function EditTask() {
       </div>
     );
   };
+
+  return (
+    <>
+      <div className="edit-task-form"></div>
+      <div className="edit-form-container">
+        <div className="edit-form-errors">
+          <ul>
+            {errors.map((error, idx) => (
+              <li key={idx}>{error}</li>
+            ))}
+          </ul>
+        </div>
+        <div
+          className="form-box"
+          style={{
+            border: "1px solid black",
+            borderRadius: "20px",
+            width: "50%",
+            justifyContent: "center",
+            display: "grid",
+          }}
+        >
+          <div
+            style={{ fontSize: "24px", textAlign: "center", marginTop: "10px" }}
+          >
+            <img src={sam} style={{ width: "100px", marginLeft: "20px" }}></img>
+            Edit Task
+          </div>
+          <button className="edit-submit-button" type="submit">
+            Save Changes
+          </button>
+          <div
+            className="task-delete-container"
+            style={{ justifyContent: "center", display: "flex" }}
+          >
+            <button
+              className="edit-task-delete-button"
+              onClick={() => handleDelete(taskId)}
+            >
+              Delete Notebook
+            </button>
+          </div>
+        </div>
+        {taskToEdit && (
+          <form onSubmit={handleSubmit}>
+            <label>
+              Task Details:
+              <input
+                type="text"
+                value={editedTask}
+                onChange={(e) => setEditedTask(e.target.value)}
+                required
+              />
+            </label>
+            {/* <button type="submit">Save Changes</button> */}
+          </form>
+        )}
+      </div>
+    </>
+  );
 }
