@@ -15,6 +15,7 @@ import pochogif from '../../images/pochacco.gif'
 import pomgif from '../../images/pompom.gif'
 import tuxsam from '../../images/tuxsam.gif'
 import frog from '../../images/frog.gif'
+import Tasks from "../AllTasks";
 
 export default function Dashboard() {
   const sessionUser = useSelector((state) => state.session.user);
@@ -47,6 +48,10 @@ export default function Dashboard() {
             <img style={{ width: "30px" }} src={cinicookiegif}></img> Create
             Note
           </NavLink>
+          <NavLink to="/tasks/new" className="create-tasks-button">
+            <img style={{ width: "45px" }} src={tuxsam}></img> Create Task
+          </NavLink>
+          
           <NavLink to="/notebooks/new" className="create-notebook-button">
             <img style={{ width: "30px" }} src={cinigif}></img> Create Notebook
           </NavLink>
@@ -85,6 +90,12 @@ export default function Dashboard() {
           <h1 className="section-title">Notes </h1>
           {/* </img> */}
           <Notes />
+        </div>
+        <div className="tasks-container">
+          {/* <img style={{ width: "30px" }} src={frog}> */}
+          <h1 className="section-title">Tasks </h1>
+          {/* </img> */}
+          <Tasks />
         </div>
       </div>
     </div>

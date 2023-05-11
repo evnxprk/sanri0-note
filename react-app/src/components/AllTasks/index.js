@@ -33,15 +33,9 @@ export default function Tasks() {
 
   return (
     <div className="task-notebook-container">
-      <h1 style={{ textAlign: "center" }}>Tasks</h1>
+      {/* <h1 style={{ textAlign: "center" }}>Tasks</h1> */}
       <div className="task-list">
-        <div id="task-toggle-modal">
-          <OpenModalButton
-            buttonText="Add Task"
-            className="add-task-modal"
-            modalComponent={<AddTask />}
-          ></OpenModalButton>
-        </div>
+        
       </div>
     </div>
   );
