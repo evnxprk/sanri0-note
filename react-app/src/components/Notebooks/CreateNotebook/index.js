@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { useModal } from "../../context/Modal";
-import { createNotebookThunk } from "../../store/notebook";
+import { useModal } from "../../../context/Modal";
+import { createNotebookThunk } from "../../../store/notebook";
 
 export default function CreateNotebook() {
   const { closeModal } = useModal();

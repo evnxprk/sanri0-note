@@ -42,7 +42,7 @@ export default function CreateTask () {
     const task = await dispatch(addTaskThunk(newTask));
       if (task) {
         closeModal();
-        history.push("/all-tasks");
+        history.push("/dashboard");
       }
     }
   };

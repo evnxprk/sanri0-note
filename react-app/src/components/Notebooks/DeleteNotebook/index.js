@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useModal } from "../../context/Modal";
+import { useModal } from "../../../context/Modal";
 import { useHistory } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import {
   deleteNotebookThunk,
   getAllNotebooksThunk,
-} from "../../store/notebook";
+} from "../../../store/notebook";
 import './deleteNb.css'
 
 export default function DeleteNoteBook() {

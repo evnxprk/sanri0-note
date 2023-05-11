@@ -7,17 +7,19 @@ import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import Notes from "./components/Notes";
 import CreateNote from "./components/Notes/CreateNote";
-import EditNote from "./components/EditNote";
-import DeleteNote from "./components/DeleteNote";
+import EditNote from "./components/Notes/EditNote";
+import DeleteNote from "./components/Notes/DeleteNote";
 import Notebook from "./components/Notebooks";
 import EditNotebook from "./components/Notebooks/EditNotebook";
-import CreateNotebook from "./components/CreateNotebook";
-import DeleteNotebook from "./components/DeleteNotebook";
+import CreateNotebook from "./components/Notebooks/CreateNotebook";
+import DeleteNotebook from "./components/Notebooks/DeleteNotebook";
 import DashBoard from "./components/Dashboard";
 import SplashPage from "./components/SplashPage";
 import XNoteDetails from "./components/XNoteDetails";
 import CreateTask from "./components/Tasks/AddTasks";
 import Tasks from "./components/Tasks/AllTasks";
+import EditTask from "./components/Tasks/EditTasks";
+import DeleteTask from "./components/Tasks/DeleteTasks";
 
 function App() {
   const dispatch = useDispatch();
@@ -35,17 +37,18 @@ function App() {
           <Route exact path="/">
             <SplashPage />
           </Route>
-          {/* <Route exact path="/notes" component={Notes} /> */}
-          {/* <Route exact path="/dashbboard"/> */}
           <Route exact path="/dashboard">
             <DashBoard />
-          </Route>
-          <Route exact path='/all-tasks'>
-            <Tasks />
           </Route>
           <Route exact path='/tasks/new'>
             <CreateTask />
           </Route>
+          <Route exact path='/tasks/:taskId/edit'>
+            <EditTask />
+          </Route>
+        <Route exact path ='/tasks/:taskId/delete'>
+          <DeleteTask />
+        </Route>
           <Route exact path="/login">
             <LoginFormPage />
           </Route>

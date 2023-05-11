@@ -8,7 +8,7 @@ import { deleteNotebookThunk } from "../../../store/notebook";
 import { useModal } from "../../../context/Modal";
 import Modal from "../../Modal";
 import './editNotebook.css'
-import sam from '../../images/sam.gif'
+// import sam from '../../images/sam.gif'
 import { getNotesByNotebookIdThunk } from "../../../store/note";
 
 export default function EditNotebook() {
@@ -131,7 +131,7 @@ export default function EditNotebook() {
           <div
             style={{ fontSize: "24px", textAlign: "center", marginTop: "10px" }}
           >
-            <img src={sam} style={{ width: "100px", marginLeft: "20px" }}></img>
+            <img style={{ width: "100px", marginLeft: "20px" }}></img>
             Edit Notebook
           </div>
 
