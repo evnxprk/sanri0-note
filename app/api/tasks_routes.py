@@ -35,20 +35,20 @@ def get_single_task(id):
 
 @tasks_routes.route('/', methods=['POST'])
 @login_required
-
 def create_new_task():
     form = TaskForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         task = Task(
-            description = form.data['description'],
-            owner_id = current_user.id,
-            to_do_id = form.data['todo_id']
+            description=form.data['description'],
+            # owner_id=current_user.id,
+            to_do_id=form.data['to_do_id']
         )
         db.session.add(task)
         db.session.commit()
         return task.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+
 
 # Edit A Task
 

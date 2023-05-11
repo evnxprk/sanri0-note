@@ -5,4 +5,4 @@ from app.models import User
 
 class TodoForm(FlaskForm):
     writer_id = IntegerField('Author Id')
-    title = StringField('Title', validators=[DataRequired, Length(min=2, max=40)])
+    title = StringField('Title', validators=[DataRequired(), Length(min=2, max=40)])

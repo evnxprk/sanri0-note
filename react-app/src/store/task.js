@@ -19,6 +19,7 @@ const getOneTask = (task) => ({
 const createTasks = (task) => ({
   type: CREATE_TASK,
   payload: task,
+  
 });
 
 const editTask = (task) => ({

@@ -16,7 +16,7 @@ import DeleteNotebook from "./components/DeleteNotebook";
 import DashBoard from "./components/Dashboard";
 import SplashPage from "./components/SplashPage";
 import XNoteDetails from "./components/XNoteDetails";
-import AddTask from "./components/AddTasks";
+import CreateTask from "./components/AddTasks";
 import Tasks from "./components/AllTasks";
 
 function App() {
@@ -44,7 +44,7 @@ function App() {
             <Tasks />
           </Route>
           <Route exact path='/tasks/new'>
-            <AddTask />
+            <CreateTask />
           </Route>
           <Route exact path="/login">
             <LoginFormPage />

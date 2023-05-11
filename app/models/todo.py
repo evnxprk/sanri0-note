@@ -3,26 +3,21 @@ from datetime import datetime
 
 
 class Todo(db.Model):
-    __tablename__ = "lists"
-
-    if environment == "production":
-        __table_args__ = {'schema': SCHEMA}
-
+    __tablename__ = 'todo'
+    
     id = db.Column(db.Integer, primary_key=True)
-    writer_id = db.Column(db.Integer, db.ForeignKey(
-        add_prefix_for_prod('users.id')), nullable=False)
+    author_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     title = db.Column(db.String(100), nullable=False)
-    created_at = db.Column(db.DateTime, default=datetime.now())
-
-    # associations
-    writer = db.relationship('User', back_populates="todo")
-    tasks = db.relationship('Task', back_populates='list')
+    due_date = db.Column(db.DateTime, nullable=False)
+    
+    author = db.relationship('User', back_populates='todo_lists')
+    tasks = db.relationship('Task', back_populates='todo_list')
 
 
     def to_dict(self):
         return {
             "id": self.id,
-            "writer_id": self.writer_id,
+            "author_id": self.author_id,
             "title": self.title,
             "created_at": self.format_date(self.created_at)
         }

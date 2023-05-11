@@ -4,7 +4,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { useModal } from "../../context/Modal";
 import { addTaskThunk, getAllTasksThunk } from "../../store/task";
 
-export default function AddTask() {
+export default function CreateTask () {
   const history = useHistory();
   const dispatch = useDispatch();
   const { closeModal } = useModal();
@@ -13,7 +13,7 @@ export default function AddTask() {
 
   useEffect(() => {
     const errors = [];
-    if (description.length < 2 || description.length > 50) {
+    if (description.length < 2 || description.length > 255) {
       errors.push(
         "Description must be longer than 2 and less than 255 characters."
       );
@@ -39,7 +39,7 @@ export default function AddTask() {
         description:description,
       };
 
-      const task = await dispatch(addTaskThunk(newTask));
+    const task = await dispatch(addTaskThunk(newTask));
       if (task) {
         closeModal();
         history.push("/all-tasks");

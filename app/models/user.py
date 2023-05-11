@@ -14,7 +14,8 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String)
     notes = db.relationship('Note', back_populates='writer')
     notebooks = db.relationship('Notebook', back_populates='owner')
-    
+    todo_lists = db.relationship('Todo', back_populates='author')
+
     @property
     def password(self):
         return self.hashed_password
