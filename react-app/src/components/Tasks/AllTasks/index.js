@@ -4,8 +4,8 @@ import {
   deleteTaskThunk,
   editTaskThunk,
   getAllTasksThunk,
-} from "../../store/task";
-import OpenModalButton from "../OpenModalButton";
+} from "../../../store/task";
+import OpenModalButton from "../../OpenModalButton";
 import AddTask from "../AddTasks";
 
 export default function Tasks() {

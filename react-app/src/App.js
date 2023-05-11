@@ -6,18 +6,18 @@ import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import Notes from "./components/Notes";
-import CreateNote from "./components/CreateNote";
+import CreateNote from "./components/Notes/CreateNote";
 import EditNote from "./components/EditNote";
 import DeleteNote from "./components/DeleteNote";
 import Notebook from "./components/Notebooks";
-import EditNotebook from "./components/EditNotebook";
+import EditNotebook from "./components/Notebooks/EditNotebook";
 import CreateNotebook from "./components/CreateNotebook";
 import DeleteNotebook from "./components/DeleteNotebook";
 import DashBoard from "./components/Dashboard";
 import SplashPage from "./components/SplashPage";
 import XNoteDetails from "./components/XNoteDetails";
-import CreateTask from "./components/AddTasks";
-import Tasks from "./components/AllTasks";
+import CreateTask from "./components/Tasks/AddTasks";
+import Tasks from "./components/Tasks/AllTasks";
 
 function App() {
   const dispatch = useDispatch();

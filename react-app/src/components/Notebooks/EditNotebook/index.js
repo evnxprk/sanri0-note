@@ -1,15 +1,15 @@
 // import { useModal } from "../../context/Modal";
-import { editNotebookThunk } from "../../store/notebook";
+import { editNotebookThunk } from "../../../store/notebook";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory} from "react-router-dom";
 import { useParams } from "react-router-dom";
-import { deleteNotebookThunk } from "../../store/notebook";
-import { useModal } from "../../context/Modal";
-import Modal from "../Modal";
+import { deleteNotebookThunk } from "../../../store/notebook";
+import { useModal } from "../../../context/Modal";
+import Modal from "../../Modal";
 import './editNotebook.css'
 import sam from '../../images/sam.gif'
-import { getNotesByNotebookIdThunk } from "../../store/note";
+import { getNotesByNotebookIdThunk } from "../../../store/note";
 
 export default function EditNotebook() {
     // console.log("sup"); 

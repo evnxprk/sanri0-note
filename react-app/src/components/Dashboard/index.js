@@ -15,7 +15,7 @@ import pochogif from '../../images/pochacco.gif'
 import pomgif from '../../images/pompom.gif'
 import tuxsam from '../../images/tuxsam.gif'
 import frog from '../../images/frog.gif'
-import Tasks from "../AllTasks";
+import Tasks from "../Tasks/AllTasks";
 
 export default function Dashboard() {
   const sessionUser = useSelector((state) => state.session.user);
@@ -49,7 +49,7 @@ export default function Dashboard() {
             Note
           </NavLink>
           <NavLink to="/tasks/new" className="create-tasks-button">
-            <img style={{ width: "45px" }} src={tuxsam}></img> Create Task
+            <img style={{ width: "42px" }} src={tuxsam}></img> Create Task
           </NavLink>
           
           <NavLink to="/notebooks/new" className="create-notebook-button">

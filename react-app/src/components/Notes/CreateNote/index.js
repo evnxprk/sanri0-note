@@ -4,9 +4,9 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
-import { useModal } from "../../context/Modal";
-import { createNoteThunk } from "../../store/note";
-import { getAllNotebooksThunk } from "../../store/notebook";
+import { useModal } from "../../../context/Modal";
+import { createNoteThunk } from "../../../store/note";
+import { getAllNotebooksThunk } from "../../../store/notebook";
 import { useSelector } from "react-redux";
 import "./createNote.css";
 

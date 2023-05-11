@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
-import { useModal } from "../../context/Modal";
-import { addTaskThunk, getAllTasksThunk } from "../../store/task";
+import { useModal } from "../../../context/Modal";
+import { addTaskThunk, getAllTasksThunk } from "../../../store/task";
 
 export default function CreateTask () {
   const history = useHistory();
