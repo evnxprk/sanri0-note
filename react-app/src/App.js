@@ -40,15 +40,18 @@ function App() {
           <Route exact path="/dashboard">
             <DashBoard />
           </Route>
-          <Route exact path='/tasks/new'>
+          <Route exact path="/tasks/new">
             <CreateTask />
           </Route>
-          <Route exact path='/tasks/:taskId/edit'>
+          <Route exact path="/tasks/:taskId/edit">
             <EditTask />
           </Route>
-        <Route exact path ='/tasks/:taskId/delete'>
-          <DeleteTask />
-        </Route>
+          <Route exact path="/tasks/:taskId/delete">
+            <DeleteTask />
+          </Route>
+          <Route exact path="/tasks">
+            <Tasks />
+          </Route>
           <Route exact path="/login">
             <LoginFormPage />
           </Route>
@@ -70,7 +73,7 @@ function App() {
           <Route exact path="/notebooks/:notebookId/delete">
             <DeleteNotebook />
           </Route>
-          <Route exact path="/notebooks">
+          <Route exact path="/notebooks/:notebookId">
             <Notebook />
           </Route>
           <Route exact path="/notebooks/new">
@@ -79,9 +82,8 @@ function App() {
           <Route exact path="/notebook/:notebookId/edit">
             <EditNotebook />
           </Route>
-
-          <Route exact path='/note/:noteId'>
-            <XNoteDetails/>
+          <Route exact path="/note/:noteId">
+            <XNoteDetails />
           </Route>
         </Switch>
       )}
@@ -90,5 +92,3 @@ function App() {
 }
 
 export default App;
-
-

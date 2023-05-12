@@ -1,4 +1,4 @@
-// import { useModal } from "../../context/Modal";
+// import { useModal } from "../../../context/Modal";
 import { editNotebookThunk } from "../../../store/notebook";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";

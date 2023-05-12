@@ -96,7 +96,7 @@ export const editTaskThunk = (task, id) => async (dispatch) => {
 };
 
 export const deleteTaskThunk = (id) => async (dispatch) => {
-  const res = await fetch(`/api/tasks/delete/${id}`, {
+  const res = await fetch(`/api/tasks/${id}/delete`, {
     method: "DELETE",
   });
   if (res.ok) {
@@ -105,11 +105,13 @@ export const deleteTaskThunk = (id) => async (dispatch) => {
   }
 };
 
+
 // reducer
 const initialState = {
   allTasks: {},
   singleTask: {},
 };
+// ...
 
 export default function taskReducer(state = initialState, action) {
   switch (action.type) {
@@ -156,4 +158,3 @@ export default function taskReducer(state = initialState, action) {
       return state;
   }
 }
-

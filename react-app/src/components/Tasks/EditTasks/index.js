@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
+import { useModal } from "../../../context/Modal";
 import { deleteTaskThunk, editTaskThunk, getOneTaskThunk } from "../../../store/task";
 
 export default function EditTask() {
   const dispatch = useDispatch();
   const history = useHistory();
+//   const 
   const { taskId } = useParams();
   const tasks = useSelector((state) => state.taskReducer.singleTask);
   const [description, setDescription] = useState("");
@@ -111,7 +113,7 @@ export default function EditTask() {
           <div
             style={{ fontSize: "24px", textAlign: "center", marginTop: "10px" }}
           >
-            <img src={sam} style={{ width: "100px", marginLeft: "20px" }}></img>
+            <img style={{ width: "100px", marginLeft: "20px" }}></img>
             Edit Task
           </div>
           <button className="edit-submit-button" type="submit">

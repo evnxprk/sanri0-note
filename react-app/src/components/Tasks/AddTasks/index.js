@@ -36,16 +36,19 @@ export default function CreateTask () {
     setErrors(errors);
     if (errors.length === 0) {
       let newTask = {
-        description:description,
+        description: description,
       };
 
-    const task = await dispatch(addTaskThunk(newTask));
+      const task = await dispatch(addTaskThunk(newTask));
       if (task) {
         closeModal();
+        // Fetch all tasks again to update the state with the latest data
+        dispatch(getAllTasksThunk());
         history.push("/dashboard");
       }
     }
   };
+
 
   return (
     <div>

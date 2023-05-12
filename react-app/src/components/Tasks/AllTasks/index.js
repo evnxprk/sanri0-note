@@ -1,41 +1,33 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  deleteTaskThunk,
-  editTaskThunk,
-  getAllTasksThunk,
-} from "../../../store/task";
-import OpenModalButton from "../../OpenModalButton";
-import AddTask from "../AddTasks";
+import { deleteTaskThunk, getAllTasksThunk } from "../../../store/task";
 
 export default function Tasks() {
   const dispatch = useDispatch();
-  const tasks = useSelector((state) => state.taskReducer);
-  console.log("what is task: " , tasks)
-  const allTasks = Object.values(tasks);
+  const tasks = useSelector((state) => state.taskReducer.allTasks);
 
   useEffect(() => {
     dispatch(getAllTasksThunk());
   }, [dispatch]);
 
+  const handleDeleteTask = async (taskId) => {
+    await dispatch(deleteTaskThunk(taskId));
+    // Perform any additional actions after deleting the task
+  };
+
   if (Object.keys(tasks).length === 0) {
-    return null;
+    return <div>No tasks found.</div>;
   }
-
-  const editTaskChange = async (taskId, task) => {
-    await dispatch(editTaskThunk(taskId, task));
-  };
-
-  const handleDelete = async (id) => {
-    await dispatch(deleteTaskThunk(id));
-    dispatch(getAllTasksThunk());
-  };
 
   return (
     <div className="task-notebook-container">
-      {/* <h1 style={{ textAlign: "center" }}>Tasks</h1> */}
       <div className="task-list">
-        
+        {Object.values(tasks).map((task) => (
+          <div key={task.id}>
+            <p>{task.description}</p>
+            <button onClick={() => handleDeleteTask(task.id)}>Delete</button>
+          </div>
+        ))}
       </div>
     </div>
   );
