@@ -29,10 +29,10 @@ export default function Notes() {
     dispatch(getAllNotebooksThunk());
   }, [dispatch]);
 
-  console.log('notees', useSelector((state) => state.notesReducer.allNotes))
+  // console.log('notes', useSelector((state) => state.notesReducer.allNotes))
 
   const notebookState = useSelector((state) => state.notebookReducer);
-  const notebooks = Object.values(notebookState)
+  const notebooks = Object.values(notebookState);
 
   if (notes.length === 0) {
     return <h1 className="first-note"> Create your first note! </h1>;
@@ -74,91 +74,20 @@ export default function Notes() {
     history.push(`/notes/${noteId}/edit`);
   };
 
-  if (!notebooks.length) return null
+  if (!notebooks.length) return null;
   return (
-    <div className='note-main-box'>
-      {/* <form onSubmit={handleSubmit}>
-        <label htmlFor="note-title">Title:</label>
-        <input
-          id="note-title"
-          type="text"
-          value={newNoteTitle}
-          onChange={(e) => setNewNoteTitle(e.target.value)}
-        />
-
-        <label htmlFor="note-description">Description:</label>
-        <textarea
-          id="note-description"
-          value={newNoteDescription}
-          onChange={(e) => setNewNoteDescription(e.target.value)}
-        />
-
-        <label htmlFor="notebook-select">Notebook:</label>
-        <select
-          id="notebook-select"
-          value={selectedNotebookId}
-          onChange={(e) => setSelectedNotebookId(e.target.value)}
-        >
-          <option value="">Select a notebook...</option>
-          {notebooks.map((notebook) => (
-            <option key={notebook.id} value={notebook.id}>
-              {notebook.name}
-            </option>
-          ))}
-        </select>
-
-        <button type="submit">Add Note</button>
-      </form> */}
-
+    <div className="note-main-box">
       {notes.map((note) => {
         return (
-          <div key={note.id} className="note-box" onClick={() => handleEdit(note.id)}>
-            <div>
-            {/* <NavLink to={`/note/${note.id}`} noteId={note.id}> */}
-            { note.title }
-            {/* </NavLink> */}
-            </div>
-            {/* <div className="note-options">
-              <button
-                className="note-edit-button"
-                onClick={() => handleEdit(note.id)}
-              >
-                Edit
-              </button>
-              <button
-                className="note-delete-button"
-                onClick={(e) => {
-                  e.preventDefault();
-                  setModalContent(
-                    <div>
-                      <p>Are you sure you want to delete this note?</p>
-                      <button onClick={() => handleConfirmDelete(note.id)}>
-                        Yes
-                      </button>
-                      <button onClick={() => setNoteToDelete(null)}>No</button>
-                    </div>
-                  );
-                }}
-              >
-                Delete
-              </button>
-            </div> */}
+          <div
+            key={note.id}
+            className="note-box"
+            onClick={() => handleEdit(note.id)}
+          >
+            <div>{note.title}</div>
           </div>
         );
       })}
-{/* 
-      <Modal
-        ModalContent={ModalContent}
-        handleConfirmDelete={handleConfirmDelete}
-      /> */}
     </div>
   );
 }
-
-
-
-
-
-
-
-

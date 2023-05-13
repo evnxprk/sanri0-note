@@ -1,6 +1,8 @@
 from flask.cli import AppGroup
 from .users import seed_users, undo_users
 from .notes import seed_notes, undo_notes, seed_notebooks, undo_notebooks
+from .task import seed_tasks, undo_tasks
+from .todo import seed_todo, undo_todo
 
 from app.models.db import db, environment, SCHEMA
 
@@ -17,10 +19,13 @@ def seed():
         undo_users()
         undo_notebooks()
         undo_notes()
+        undo_tasks()
         # Add a truncate command here for every table that will be seeded.
     seed_users()
     seed_notebooks()
     seed_notes()
+    seed_tasks()
+    seed_todo()
 
     # Add other seed functions here
 
@@ -31,4 +36,6 @@ def undo():
     undo_users()
     undo_notes()
     undo_notebooks()
+    undo_tasks()
+    undo_todo()
     # Add other undo functions here

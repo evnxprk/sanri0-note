@@ -6,7 +6,7 @@ class Todo(db.Model):
     __tablename__ = 'todo'
     
     id = db.Column(db.Integer, primary_key=True)
-    author_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    writer_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     title = db.Column(db.String(100), nullable=False)
     due_date = db.Column(db.DateTime, nullable=False)
     
@@ -17,7 +17,7 @@ class Todo(db.Model):
     def to_dict(self):
         return {
             "id": self.id,
-            "author_id": self.author_id,
+            "writer_id": self.writer_id,
             "title": self.title,
             "created_at": self.format_date(self.created_at)
         }

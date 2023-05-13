@@ -1,10 +1,21 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteTaskThunk, getAllTasksThunk } from "../../../store/task";
+import { useHistory } from "react-router-dom";
+import { useModal } from "../../../context/Modal";
+import '../tasks.css'
+import { addTaskThunk, deleteTaskThunk, getAllTasksThunk } from "../../../store/task";
 
 export default function Tasks() {
   const dispatch = useDispatch();
-  const tasks = useSelector((state) => state.taskReducer.allTasks);
+  const getAllTasks = useSelector((state) => state.taskReducer);
+  const tasks = Object.values(getAllTasks.allTasks);
+  const history = useHistory()
+  const { closeModal, setModalContent, ModalContent } = useModal()
+  const [taskToDelete, setTaskToDelete] = useState(null);
+  const sessionUser = useSelector(state => state.session.user)
+  const [newTaskDescription, setNewTaskDescription] = useState('')
+  const [selectedTaskId, setSelectedTaskId] = useState(null);
+
 
   useEffect(() => {
     dispatch(getAllTasksThunk());
@@ -12,23 +23,60 @@ export default function Tasks() {
 
   const handleDeleteTask = async (taskId) => {
     await dispatch(deleteTaskThunk(taskId));
-    // Perform any additional actions after deleting the task
+    // history.push('/dashboard')
   };
 
-  if (Object.keys(tasks).length === 0) {
-    return <div>No tasks found.</div>;
+   const handleConfirmDelete = (taskId) => {
+     dispatch(deleteTaskThunk(taskId))
+       .then(() => {
+         setNewTaskDescription(null);
+         history.push("/dashboard");
+         closeModal();
+         setModalContent(null);
+       })
+       .catch((err) => console.log(err));
+   };
+  if (tasks.length === 0) {
+    return <h1 className="first-task"> Create your first task! </h1>;
   }
+  if (!sessionUser) {
+    history.push("/");
+    return null;
+  }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newTask = {
+      description: newTaskDescription,
+      to_do_id: selectedTaskId,
+    };
+    dispatch(addTaskThunk(newTask))
+      .then(() => {
+        setNewTaskDescription("");
+        setSelectedTaskId(null);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const handleEdit = (taskId) => {
+    history.push(`/tasks/${taskId}/edit`);
+  };
+
+  if (!tasks.length) return null;
 
   return (
-    <div className="task-notebook-container">
-      <div className="task-list">
-        {Object.values(tasks).map((task) => (
-          <div key={task.id}>
-            <p>{task.description}</p>
-            <button onClick={() => handleDeleteTask(task.id)}>Delete</button>
+    <div className="task-main-box">
+      {tasks.map((task) => {
+        return (
+          <div
+            key={task.id}
+            className="task-box"
+            onClick={() => handleEdit(task.id)}
+          >
+            <div>{task.description}</div>
           </div>
-        ))}
-      </div>
+        );
+      })}
     </div>
   );
 }
+

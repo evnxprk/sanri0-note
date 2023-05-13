@@ -106,7 +106,7 @@ export const getOneNoteThunk = (id) => async (dispatch) => {
 };
 
 export const createNoteThunk = (note) => async (dispatch) => {
-  const response = await fetch("/api/notes/", {
+  const response = await fetch('/api/notes/', {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

@@ -3,6 +3,8 @@ from flask_login import login_required, current_user
 from app.models import db, Task, Todo
 from app.forms import TaskForm
 
+tasks_routes = Blueprint('tasks', __name__)
+
 def validation_errors_to_error_messages(validation_errors):
     """
     Simple function that turns the WTForms validation errors into a simple list
@@ -13,7 +15,13 @@ def validation_errors_to_error_messages(validation_errors):
             errorMessages.append(f'{field} : {error}')
     return errorMessages
 
-tasks_routes = Blueprint('tasks', __name__)
+ #get all tasks
+@tasks_routes.route('/', methods=['GET'])
+@login_required
+def get_all_tasks():
+    all_tasks = Task.query.filter(Task.to_do_id == current_user.id).all()
+    return [task.to_dict() for task in all_tasks]
+    # return jsonify(task_list)
 
 #single task by id
 @tasks_routes.route('/<int:id>', methods=['GET'])
@@ -22,13 +30,7 @@ def get_single_task(id):
     task = Task.query.get(id)
     if task is None:
         return jsonify({'error': "Task not found"}), 404
-    task_dict = task.to_dict()
-
-    if task.to_do_id is not None:
-        todo = Todo.query.get(task.to_do_id)
-        task_dict['list'] = todo.to_dict()
-
-    return jsonify(task_dict)
+    return task.to_dict()
 
 # Create A Task
 @tasks_routes.route('/', methods=['POST'])
@@ -58,6 +60,7 @@ def edit_task(id):
     if form.validate_on_submit():
         task.description = form.data['description']
         task.complete = form.data['complete']
+        
         db.session.commit()
         task_dict = task.to_dict()
         return task_dict

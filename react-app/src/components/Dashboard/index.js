@@ -16,6 +16,7 @@ import pomgif from '../../images/pompom.gif'
 import tuxsam from '../../images/tuxsam.gif'
 import frog from '../../images/frog.gif'
 import Tasks from "../Tasks/AllTasks";
+import { getAllTasksThunk } from "../../store/task";
 
 export default function Dashboard() {
   const sessionUser = useSelector((state) => state.session.user);
@@ -31,7 +32,8 @@ export default function Dashboard() {
   useEffect(() => {
     dispatch(getAllNotebooksThunk());
     dispatch(getAllNotesThunk());
-  }, []);
+    dispatch(getAllTasksThunk())
+  }, [dispatch]);
 
   return (
     <div className="dashboard-container">

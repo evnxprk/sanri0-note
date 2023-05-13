@@ -99,18 +99,16 @@
 }
 
 .note-box > div {
-  /* border: 2px solid rgb(224, 180, 180); */
   border-radius: 5px;
   margin-top: 3px;
   display: flex;
   justify-content: center;
   width: 100px;
-  /* height: 45px; */
   max-height: 90px;
   box-sizing: border-box;
   padding: 5px;
   align-items: center;
-  word-break: break-all;
+  overflow-wrap: anywhere; /* Updated property */
   white-space: normal;
 }
 

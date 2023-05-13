@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { useModal } from "../../../context/Modal";
 import { addTaskThunk, getAllTasksThunk } from "../../../store/task";
@@ -10,6 +10,7 @@ export default function CreateTask () {
   const { closeModal } = useModal();
   const [description, setDescription] = useState("");
   const [errors, setErrors] = useState([]);
+  const sessionUser = useSelector(state => state.session.user)
 
   useEffect(() => {
     const errors = [];
@@ -37,6 +38,7 @@ export default function CreateTask () {
     if (errors.length === 0) {
       let newTask = {
         description: description,
+        to_do_id: sessionUser.id
       };
 
       const task = await dispatch(addTaskThunk(newTask));

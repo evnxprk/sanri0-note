@@ -35,7 +35,7 @@ const deleteTask = (taskId) => ({
 // thunks
 
 export const getAllTasksThunk = () => async (dispatch) => {
-  const res = await fetch("/api/tasks");
+  const res = await fetch(`/api/tasks/`);
   if (res.ok) {
     const data = await res.json();
     dispatch(getAllTasks(data));
@@ -55,13 +55,6 @@ export const getOneTaskThunk = (id) => async (dispatch) => {
     return data;
   }
 };
-
-
-// export const getOneTaskThunk = (id) => async(dispatch) => {
-//     const res = await fetch (`/api/tasks/${id}`, {
-
-//     })
-// }
 
 export const addTaskThunk = (task) => async (dispatch) => {
   const response = await fetch("/api/tasks/", {
@@ -105,15 +98,14 @@ export const deleteTaskThunk = (id) => async (dispatch) => {
   }
 };
 
+//reducer 
 
-// reducer
 const initialState = {
-  allTasks: {},
+  allTasks: {}, // Initialize allTasks as an empty object
   singleTask: {},
 };
-// ...
 
-export default function taskReducer(state = initialState, action) {
+const taskReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_ALL_TASKS:
       const newTasks = {};
@@ -157,4 +149,6 @@ export default function taskReducer(state = initialState, action) {
     default:
       return state;
   }
-}
+};
+
+export default taskReducer;

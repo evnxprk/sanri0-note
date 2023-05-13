@@ -1,43 +1,43 @@
+
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { useModal } from "../../../context/Modal";
-import { deleteTaskThunk, editTaskThunk, getOneTaskThunk } from "../../../store/task";
+import Modal from "../../Modal";
+import { deleteTaskThunk, editTaskThunk, getAllTasksThunk, getOneTaskThunk } from "../../../store/task";
 
-export default function EditTask() {
+export default function EditNote() {
+  const myTask = useSelector((state) => state.taskReducer.singleTask);
   const dispatch = useDispatch();
-  const history = useHistory();
-//   const 
   const { taskId } = useParams();
-  const tasks = useSelector((state) => state.taskReducer.singleTask);
-  const [description, setDescription] = useState("");
+  const history = useHistory();
+  const { closeModal, setModalContent, ModalContent } = useModal();
+  const [description, setDescription] = useState(myTask.description);
   const [errors, setErrors] = useState([]);
+  const sessionUser = useSelector((state) => state.session.user);
 
   useEffect(() => {
-    dispatch(getOneTaskThunk(taskId));
-  }, [dispatch]);
+   
+    dispatch(getOneTaskThunk(taskId)).catch((err) => console.log(err));
+    setDescription(myTask.description);
+  }, [dispatch, taskId]);
 
   useEffect(() => {
-    if (tasks.description) {
-      setDescription(tasks.description);
-    }
-  }, [tasks]);
+    setDescription(myTask.description);
+  }, [myTask]);
 
-  useEffect(() => {
-    const errors = [];
-    if (description.length < 2 || description.length > 255) {
-      errors.push(
-        "Description must be longer than 2 character and less than 255 characters."
-      );
-    }
-    setErrors(errors);
-  }, [description]);
+  // useEffect(() => {
+  //   if (note) {
+  //     setTitle(note.title);
+  //     setDescription(note.description);
+  //   }
+  // }, [note]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const taskData = {
       description,
+      to_do_id: sessionUser.id,
     };
 
     const errors = [];
@@ -49,103 +49,92 @@ export default function EditTask() {
     setErrors(errors);
 
     if (errors.length === 0) {
-      if (taskId) {
-        await dispatch(editTaskThunk(taskId, taskData)).catch((res) => {
-          console.error("Invalid response format:", res);
+      await dispatch(editTaskThunk(taskData, taskId))
+        .then(() => closeModal())
+        .catch(async (res) => {
+          if (res && res.json) {
+            const data = await res.json();
+            if (data && data.errors) setErrors(data.errors);
+          } else {
+            console.error("Invalid response format:", res);
+          }
         });
-      }
+      setDescription("");
       history.push("/dashboard");
     }
   };
-  //* Delete Merge
 
-  const allTasks = useSelector(
-    (state) => state.taskReducer.allTasks
-  );
-  const taskValues = Object.values(allTasks);
-  const { ModalContent, closeModal, setModalContent } = useModal();
-  const [editedTask, setEditedTask] = useState("");
-  const [taskToEdit, setTaskToEdit] = useState(null);
+  const [taskToDelete, setTaskToDelete] = useState(null);
 
-  const handleDelete = (taskId) => {
-    setModalContent(
-      <div>
-        <p>Are you sure you want to delete this task?</p>
-        <button
-          onClick={() => {
-            dispatch(deleteTaskThunk(taskId))
-              .then(() => {
-                closeModal();
-                setModalContent(null);
-                history.push("/");
-              })
-              .catch((err) => console.log(err));
-          }}
-        >
-          Yes
-        </button>
-        <button onClick={closeModal}>No</button>
-      </div>
-    );
+  const handleConfirmDelete = (taskId) => {
+    dispatch(deleteTaskThunk(taskId))
+      .then(() => {
+        setTaskToDelete(null);
+        history.push("/");
+        closeModal();
+        setModalContent(null);
+      })
+      .catch((err) => console.log(err));
   };
 
+  const cancelFunc = () => {
+    setTaskToDelete(null);
+    closeModal();
+  };
+
+  //* Editor Merge
+
+  if (!Object.values(myTask).length) return null;
+
   return (
-    <>
-      <div className="edit-task-form"></div>
-      <div className="edit-form-container">
-        <div className="edit-form-errors">
-          <ul>
-            {errors.map((error, idx) => (
-              <li key={idx}>{error}</li>
-            ))}
-          </ul>
+    <div className="editor-main-container">
+      <div className="edit-task-main-box">
+        <h1 className="edit-task-description">{myTask.description}</h1>
+        <div className="form-errors">
+          {errors.length > 0 && (
+            <ul>
+              {errors.map((error, idx) => (
+                <li key={idx}>{error}</li>
+              ))}
+            </ul>
+          )}
         </div>
-        <div
-          className="form-box"
-          style={{
-            border: "1px solid black",
-            borderRadius: "20px",
-            width: "50%",
-            justifyContent: "center",
-            display: "grid",
-          }}
-        >
-          <div
-            style={{ fontSize: "24px", textAlign: "center", marginTop: "10px" }}
-          >
-            <img style={{ width: "100px", marginLeft: "20px" }}></img>
-            Edit Task
-          </div>
+        <form onSubmit={handleSubmit}>
+          <label>Description</label>
+          <textarea
+            type="text"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            placeholder="description"
+            required
+          />
           <button className="edit-submit-button" type="submit">
             Save Changes
           </button>
-          <div
-            className="task-delete-container"
-            style={{ justifyContent: "center", display: "flex" }}
+
+          <button
+            className="task-delete-button"
+            onClick={(e) => {
+              e.preventDefault();
+              setModalContent(
+                <div>
+                  <p>Are you sure you want to delete this task?</p>
+                  <button onClick={() => handleConfirmDelete(taskId)}>
+                    Yes
+                  </button>
+                  <button onClick={() => cancelFunc()}>No</button>
+                </div>
+              );
+            }}
           >
-            <button
-              className="edit-task-delete-button"
-              onClick={() => handleDelete(taskId)}
-            >
-              Delete Notebook
-            </button>
-          </div>
-        </div>
-        {taskToEdit && (
-          <form onSubmit={handleSubmit}>
-            <label>
-              Task Details:
-              <input
-                type="text"
-                value={editedTask}
-                onChange={(e) => setEditedTask(e.target.value)}
-                required
-              />
-            </label>
-            {/* <button type="submit">Save Changes</button> */}
-          </form>
-        )}
+            Delete Note
+          </button>
+        </form>
+        <Modal
+          ModalContent={ModalContent}
+          handleConfirmDelete={handleConfirmDelete}
+        />
       </div>
-    </>
+    </div>
   );
 }
