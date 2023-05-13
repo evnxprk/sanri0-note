@@ -8,7 +8,7 @@ class Todo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     writer_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     title = db.Column(db.String(100), nullable=False)
-    due_date = db.Column(db.DateTime, nullable=False)
+    # due_date = db.Column(db.DateTime, nullable=False)
     
     author = db.relationship('User', back_populates='todo_lists')
     tasks = db.relationship('Task', back_populates='todo_list')

@@ -20,6 +20,7 @@ def seed():
         undo_notebooks()
         undo_notes()
         undo_tasks()
+        undo_todo()
         # Add a truncate command here for every table that will be seeded.
     seed_users()
     seed_notebooks()

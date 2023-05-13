@@ -17,6 +17,7 @@ import tuxsam from '../../images/tuxsam.gif'
 import frog from '../../images/frog.gif'
 import Tasks from "../Tasks/AllTasks";
 import { getAllTasksThunk } from "../../store/task";
+import Todo from "../Todo/AllToDo";
 
 export default function Dashboard() {
   const sessionUser = useSelector((state) => state.session.user);
@@ -98,6 +99,12 @@ export default function Dashboard() {
           <h1 className="section-title">Tasks </h1>
           {/* </img> */}
           <Tasks />
+        </div>
+        <div className="tasks-container">
+          {/* <img style={{ width: "30px" }} src={frog}> */}
+          <h1 className="section-title">Todo </h1>
+          {/* </img> */}
+          <Todo />
         </div>
       </div>
     </div>

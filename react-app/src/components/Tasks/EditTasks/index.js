@@ -6,7 +6,7 @@ import { useModal } from "../../../context/Modal";
 import Modal from "../../Modal";
 import { deleteTaskThunk, editTaskThunk, getAllTasksThunk, getOneTaskThunk } from "../../../store/task";
 
-export default function EditNote() {
+export default function EditTasks() {
   const myTask = useSelector((state) => state.taskReducer.singleTask);
   const dispatch = useDispatch();
   const { taskId } = useParams();
@@ -127,7 +127,7 @@ export default function EditNote() {
               );
             }}
           >
-            Delete Note
+            Delete Task
           </button>
         </form>
         <Modal

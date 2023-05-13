@@ -15,18 +15,20 @@ def validation_errors_to_error_messages(validation_errors):
 
 todo_routes = Blueprint('todo', __name__)
 
+#Get All Todo
 @todo_routes.route('/')
 @login_required
 
 def get_all_todo():
     todo = Todo.query.filter(Todo.writer_id == current_user.id).all()
-    todo_dict = [todo.to_dict() for todos in todo]
+    todo_dict = [todos.to_dict() for todos in todo]
     return jsonify(todo_dict)
 
+#Get One Todo
 @todo_routes.route('/<int:id>', methods=['GET'])
 @login_required
 
-def get_all_todo(id):
+def get_one_todo(id):
     todo = Todo.query.get(id)
     if todo is None: 
         return jsonify({'error': 'Todo not found'}), 404
@@ -47,4 +49,37 @@ def create_todo():
         db.session.commit()
         return todo.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+
+#Edit Todo
+
+@todo_routes.route('/<int:id>',methods=['PUT'])
+@login_required
+def edit_todo(id):
+    todo= Todo.query.get(id)
+    if todo is None:
+        return jsonify({'error': 'Todo not found'}), 404
+    form = TodoForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        todo.title = form.data['title'],
+        todo.writer_id = form.data['writer_id']
+
+        db.session.commit()
+        todo_dict = todo.to_dict()
+        return todo_dict
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+
+#Delete Todo
+
+@todo_routes.route('/<int:id>/delete', methods=["DELETE"])
+@login_required
+def delete_todo(id):
+    todo = Todo.query.get(id)
+    if todo is None:
+        return jsonify({'error': "Todo Not Found"}), 404
+    db.session.delete(todo)
+    db.session.commit()
+    return jsonify({"message": "Todo Successfully Deleted"}), 200
+
+
 

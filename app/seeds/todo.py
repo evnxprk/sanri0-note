@@ -1,59 +1,53 @@
 from app.models import db, Todo, environment, SCHEMA
 
 def seed_todo():
-    todo_1 = Todo(
+    todo1 = Todo(
         writer_id=1,
         title='Todo 1'
     )
-    todo_2 = Todo(
+    todo2 = Todo(
         writer_id=1,
         title='Todo 2'
     )
-    todo_3 = Todo(
+    todo3 = Todo(
         writer_id=1,
         title='Todo 3'
     )
-    todo_4 = Todo(
+    todo4 = Todo(
         writer_id=1,
         title='Todo 4'
     )
-    todo_5 = Todo(
+    todo5 = Todo(
         writer_id=1,
         title='Todo 5'
     )
-    todo_6 = Todo(
+    todo6 = Todo(
         writer_id=1,
         title='Todo 6'
     )
-    todo_7 = Todo(
+    todo7 = Todo(
         writer_id=1,
         title='Todo 7'
     )
-    todo_8 = Todo(
+    todo8 = Todo(
         writer_id=1,
         title='Todo 8'
     )
-    todo_9 = Todo(
+    todo9 = Todo(
         writer_id=1,
         title='Todo 9'
     )
-    todo_10 = Todo(
+    todo10 = Todo(
         writer_id=1,
         title='Todo 10'
     )
 
-    db.session.add(todo_1)
-    db.session.add(todo_2)
-    db.session.add(todo_3)
-    db.session.add(todo_4)
-    db.session.add(todo_5)
-    db.session.add(todo_6)
-    db.session.add(todo_7)
-    db.session.add(todo_8)
-    db.session.add(todo_9)
-    db.session.add(todo_10)
 
-    db.session.commit()
+db.session.add_all([todo1, todo2, todo3, todo4, todo5,
+                   todo6, todo7, todo8, todo9, todo10])
+db.session.commit()
+
+
 
 def undo_todo():
 
