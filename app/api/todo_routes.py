@@ -16,13 +16,13 @@ def validation_errors_to_error_messages(validation_errors):
 todo_routes = Blueprint('todo', __name__)
 
 #Get All Todo
-@todo_routes.route('/')
+@todo_routes.route('/', methods=['GET'])
 @login_required
 
 def get_all_todo():
     todo = Todo.query.filter(Todo.writer_id == current_user.id).all()
-    todo_dict = [todos.to_dict() for todos in todo]
-    return jsonify(todo_dict)
+    return [todos.to_dict() for todos in todo]
+    # return jsonify(todo_dict)
 
 #Get One Todo
 @todo_routes.route('/<int:id>', methods=['GET'])
@@ -34,21 +34,24 @@ def get_one_todo(id):
         return jsonify({'error': 'Todo not found'}), 404
     return jsonify(todo.to_dict())
 
+
 @todo_routes.route('/', methods=['POST'])
 @login_required
-
 def create_todo():
-    form= TodoForm()
+    form = TodoForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        todo = Todo (
+        print("Form data:", form.data)
+        writer_id = int(form.data['writer_id'])
+        todo = Todo(
             title=form.data['title'],
-            writer_id=current_user.id
+            writer_id= form.data['writer_id']
         )
         db.session.add(todo)
         db.session.commit()
-        return todo.to_dict()
+        return todo.to_dict(), 201
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+
 
 #Edit Todo
 

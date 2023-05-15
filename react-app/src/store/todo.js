@@ -4,9 +4,9 @@ const CREATE_TODO = "todo/CREATE_TODO";
 const EDIT_TODO = "todo/EDIT_TODO";
 const DELETE_TODO = "todo/DELETE_TODO";
 
-//action creators
+// action creators
 
-const getAllTodos = (todo) => ({
+const getAllTodo = (todo) => ({
   type: GET_ALL_TODO,
   payload: todo,
 });
@@ -16,7 +16,7 @@ const getOneTodo = (todo) => ({
   payload: todo,
 });
 
-const createTodo = (todo) => ({
+const addTodo = (todo) => ({
   type: CREATE_TODO,
   payload: todo,
 });
@@ -26,24 +26,28 @@ const editTodo = (todo) => ({
   payload: todo,
 });
 
-const deleteTodo = (todo) => ({
+const deleteTodo = (todoId) => ({
   type: DELETE_TODO,
-  payload: todo,
+  payload: todoId,
 });
 
-//thunks
+// thunks
 
 export const getAllTodoThunk = () => async (dispatch) => {
-  const response = await fetch(`/api/todo`);
-  if (response.ok) {
-    const data = await response.json();
-    dispatch(getAllTodoThunk(data));
+  const res = await fetch(`/api/todo/`);
+  if (res.ok) {
+    const data = await res.json();
+    dispatch(getAllTodo(data));
     return data;
+  } else {
+    console.error("Failed to fetch todo");
+    return [];
   }
 };
 
 export const getOneTodoThunk = (id) => async (dispatch) => {
-  const response = await fetch(`/api/tasks/${id}`);
+  const response = await fetch(`/api/todo/${id}`);
+
   if (response.ok) {
     const data = await response.json();
     dispatch(getOneTodo(data));
@@ -51,8 +55,8 @@ export const getOneTodoThunk = (id) => async (dispatch) => {
   }
 };
 
-export const createTodoThunk = (todo) => async (dispatch) => {
-  const response = await fetch("/api/tasks", {
+export const addTodoThunk = (todo) => async (dispatch) => {
+  const response = await fetch("/api/todo/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -62,51 +66,53 @@ export const createTodoThunk = (todo) => async (dispatch) => {
 
   if (response.ok) {
     const data = await response.json();
-    dispatch(createTodo(data));
+    dispatch(addTodo(data));
     return data;
   }
 };
 
 export const editTodoThunk = (todo, id) => async (dispatch) => {
-  const response = await fetch(`/api/todo/${id}`, {
+  const res = await fetch(`/api/todo/${id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(todo),
   });
-  if (response.ok) {
-    const data = await response.json();
+  if (res.ok) {
+    const data = await res.json();
     dispatch(editTodo(data));
     // return data;
   }
 };
 
 export const deleteTodoThunk = (id) => async (dispatch) => {
-  const response = await fetch(`/api/tasks/${id}/delete`, {
+  const res = await fetch(`/api/todo/${id}/delete`, {
     method: "DELETE",
   });
-  if (response.ok) {
-    const data = await response.json();
+  if (res.ok) {
+    const data = await res.json();
     dispatch(deleteTodo(id));
   }
 };
 
+//reducer
+
 const initialState = {
-  allTodo: {},
+  allTodo: {}, 
   singleTodo: {},
 };
 
 const todoReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_ALL_TODO:
-      const newTodo = {};
+      const allTodo = {};
       action.payload.forEach((todo) => {
-        newTodo[todo.id] = todo;
+        allTodo[todo.id] = todo;
       });
       return {
         ...state,
-        allTodo: newTodo,
+        alltodo: allTodo,
       };
     case GET_ONE_TODO:
       return {
@@ -114,29 +120,29 @@ const todoReducer = (state = initialState, action) => {
         singleTodo: action.payload,
       };
     case CREATE_TODO:
-      const newTodos = action.payload;
+      const newTodo = action.payload;
       return {
         ...state,
-        allTodo: {
+        alltodo: {
           ...state.allTodo,
-          [newTodos.id]: newTodo,
+          [newTodo.id]: newTodo,
         },
       };
     case EDIT_TODO:
-      const updatedTodo = action.payload;
+      const updateTodo = action.payload;
       return {
         ...state,
-        allTodo: {
+        alltodo: {
           ...state.allTodo,
-          [updatedTodo.id]: updatedTodo,
+          [updateTodo.id]: updateTodo,
         },
       };
     case DELETE_TODO:
-      const updateTodo = { ...state.allTodo };
-      delete updateTodo[action.payload];
+      const updatedTodo = { ...state.allTodo };
+      delete updatedTodo[action.payload];
       return {
         ...state,
-        allTodo: updateTodo,
+        alltodo: updatedTodo,
       };
     default:
       return state;

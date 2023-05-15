@@ -11,12 +11,13 @@ import cinigif from "../../images/cinigif.gif";
 import cinicookiegif from "../../images/cinicookiegif.gif";
 import { getAllNotebooksThunk } from "../../store/notebook";
 import { getAllNotesThunk } from "../../store/note";
+import { getAllTasksThunk } from "../../store/task";
+import { getAllTodoThunk } from "../../store/todo";
 import pochogif from '../../images/pochacco.gif'
 import pomgif from '../../images/pompom.gif'
 import tuxsam from '../../images/tuxsam.gif'
 import frog from '../../images/frog.gif'
 import Tasks from "../Tasks/AllTasks";
-import { getAllTasksThunk } from "../../store/task";
 import Todo from "../Todo/AllToDo";
 
 export default function Dashboard() {
@@ -34,6 +35,7 @@ export default function Dashboard() {
     dispatch(getAllNotebooksThunk());
     dispatch(getAllNotesThunk());
     dispatch(getAllTasksThunk())
+    dispatch(getAllTodoThunk())
   }, [dispatch]);
 
   return (
@@ -54,9 +56,12 @@ export default function Dashboard() {
           <NavLink to="/tasks/new" className="create-tasks-button">
             <img style={{ width: "42px" }} src={tuxsam}></img> Create Task
           </NavLink>
-          
+
           <NavLink to="/notebooks/new" className="create-notebook-button">
             <img style={{ width: "30px" }} src={cinigif}></img> Create Notebook
+          </NavLink>
+          <NavLink to="/todo/new" className="create-todo-button">
+            <img style={{ width: "30px" }} src={cinigif}></img> Create Todo Item
           </NavLink>
           <NavLink
             className="github-button"
@@ -84,7 +89,7 @@ export default function Dashboard() {
       <div className="main-content">
         <div className="notebooks-container">
           {/* <img style={{ width: "30px" }} src={tuxsam}> */}
-            <h1 className="section-title">Notebooks </h1>
+          <h1 className="section-title">Notebooks </h1>
           {/* </img> */}
           <Notebook />
         </div>
@@ -100,7 +105,7 @@ export default function Dashboard() {
           {/* </img> */}
           <Tasks />
         </div>
-        <div className="tasks-container">
+        <div className="todo-container">
           {/* <img style={{ width: "30px" }} src={frog}> */}
           <h1 className="section-title">Todo </h1>
           {/* </img> */}

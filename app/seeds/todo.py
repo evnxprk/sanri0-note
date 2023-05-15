@@ -41,11 +41,11 @@ def seed_todo():
         writer_id=1,
         title='Todo 10'
     )
+    db.session.add_all([todo1, todo2, todo3, todo4, todo5,
+                       todo6, todo7, todo8, todo9, todo10])
+    db.session.commit()
 
 
-db.session.add_all([todo1, todo2, todo3, todo4, todo5,
-                   todo6, todo7, todo8, todo9, todo10])
-db.session.commit()
 
 
 

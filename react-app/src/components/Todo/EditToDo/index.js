@@ -18,7 +18,7 @@ export default function EditTodo() {
 
   useEffect(() => {
     dispatch(getOneTodoThunk(todoId)).catch((err) => console.log(err));
-    setDescription(myTodo.title);
+    setTitle(myTodo.title);
   }, [dispatch, todoId]);
 
   useEffect(() => {
@@ -118,7 +118,7 @@ export default function EditTodo() {
               setModalContent(
                 <div>
                   <p>Are you sure you want to delete this todo?</p>
-                  <button onClick={() => handleConfirmDelete(taskId)}>
+                  <button onClick={() => handleConfirmDelete(todoId)}>
                     Yes
                   </button>
                   <button onClick={() => cancelFunc()}>No</button>

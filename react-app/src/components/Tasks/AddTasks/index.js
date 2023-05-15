@@ -28,6 +28,7 @@ export default function CreateTask () {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
     let errors = [];
     if (description.length < 2 || description.length > 255) {
       errors.push(

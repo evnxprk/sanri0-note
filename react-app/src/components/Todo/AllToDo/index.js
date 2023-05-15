@@ -2,7 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useModal } from "../../../context/Modal";
-import { createTodoThunk, deleteTodoThunk, getAllTodoThunk } from "../../../store/todo";
+import {
+  addTodoThunk,
+  deleteTodoThunk,
+  getAllTodoThunk,
+} from "../../../store/todo";
+
 // import "../tasks.css";
 
 
@@ -49,7 +54,7 @@ export default function Todo() {
       title: newTitle,
       writer_id: selectedTodoId,
     };
-    dispatch(createTodoThunk(newTodo))
+    dispatch(addTodoThunk(newTodo))
       .then(() => {
         setNewTitle("");
         setSelectedTodoId(null);
