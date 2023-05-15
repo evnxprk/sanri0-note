@@ -1,0 +1,85 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.list-box {
+  background-image: url('../../images/_.jpeg');
+   background-position: center;
+  background-size: cover; 
+  border: 4px solid rgb(164, 193, 243);
+  border-radius: 8px;
+  width: 130px;
+  max-width: 100%;
+  height: 160px;
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Added align-items to center the image vertically */
+  flex-wrap: wrap;
+  box-sizing: border-box;
+}
+
+.list-box:hover {
+  cursor: pointer;
+}
+
+.list-box > div {
+  border-radius: 5px;
+  margin-top: 3px;
+  display: flex;
+  justify-content: center;
+  width: 100px;
+  max-height: 90px;
+  box-sizing: border-box;
+  padding: 5px;
+  align-items: center;
+  overflow-wrap: anywhere; /* Updated property */
+  white-space: normal;
+}
+
+
+
+.list-main-box {
+  display: flex;
+  gap: 50px;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.list-container:hover {
+  cursor: pointer;
+}
+
+.list-edit-button,
+.list-delete-button {
+ background-color: #ff0101;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 1rem;
+    margin: 1rem 0;
+    padding: 0.5rem;
+    transition: background-color 0.2s ease-in-out;
+    border-radius: 7px;
+    width: 100%;
+    justify-content: center;
+    display: flex;
+}
+
+.list-edit-button:hover,
+.list-delete-button:hover {
+  color: #000;
+}

@@ -4,12 +4,12 @@ import { useHistory, useParams } from "react-router-dom";
 import { useModal } from "../../../context/Modal";
 import { deleteListThunk, editListThunk, getOneListThunk } from "../../../store/list";
 import Modal from "../../Modal";
-
+import '../todo.css'
 
 export default function EditList() {
-  const myList = useSelector((state) => state.listReducer.singleList);
-  const dispatch = useDispatch();
   const { listId } = useParams();
+  const dispatch = useDispatch();
+  const myList = useSelector((state) => state.listReducer.singleList);
   const history = useHistory();
   const { closeModal, setModalContent, ModalContent } = useModal();
   const [title, setTitle] = useState(myList.title);
@@ -18,19 +18,11 @@ export default function EditList() {
 
   useEffect(() => {
     dispatch(getOneListThunk(listId)).catch((err) => console.log(err));
-    setTitle(myList.title);
   }, [dispatch, listId]);
 
   useEffect(() => {
     setTitle(myList.title);
   }, [myList]);
-
-  // useEffect(() => {
-  //   if (note) {
-  //     setTitle(note.title);
-  //     setDescription(note.description);
-  //   }
-  // }, [note]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

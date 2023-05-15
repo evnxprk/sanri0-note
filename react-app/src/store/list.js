@@ -52,6 +52,8 @@ export const getOneListThunk = (id) => async (dispatch) => {
     const data = await response.json();
     dispatch(getOneList(data));
     return data;
+  } else {
+    console.error('cannot get one id')
   }
 };
 
@@ -129,12 +131,12 @@ const listReducer = (state = initialState, action) => {
         },
       };
     case EDIT_LIST:
-      const updatelist = action.payload;
+      const updateList = action.payload;
       return {
         ...state,
         allList: {
           ...state.allList,
-          [updatelist.id]: updatelist,
+          [updateList.id]: updateList,
         },
       };
     case DELETE_LIST:

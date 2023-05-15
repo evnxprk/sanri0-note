@@ -62,9 +62,10 @@ export default function List() {
       .catch((err) => console.log(err));
   };
 
-  const handleEdit = (listId) => {
-    history.push(`/todos/${listId}/edit`);
-  };
+const handleEdit = (listId) => {
+  history.push(`/todos/${listId}/edit`);
+};
+
 
   if (!list.length) return null;
 
