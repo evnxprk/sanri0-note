@@ -9,6 +9,7 @@ export default function CreateList() {
   const dispatch = useDispatch();
   const { closeModal } = useModal();
   const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const [errors, setErrors] = useState([]);
   const sessionUser = useSelector((state) => state.session.user);
 
@@ -19,8 +20,13 @@ export default function CreateList() {
         "Title must be longer than 2 and less than 255 characters."
       );
     }
+    if (description.length < 2 || description.length > 255) {
+    errors.push(
+      "Description must be longer than 2 and less than 255 characters."
+    );
+    }
     setErrors(errors);
-  }, [title]);
+  }, [title, description]);
 
   useEffect(() => {
     dispatch(getAllListThunk());
@@ -35,11 +41,18 @@ export default function CreateList() {
         "Title must be longer than 2 and less than 255 characters."
       );
     }
+    if (description.length < 2 || description.length > 255) {
+    errors.push(
+      "Description must be longer than 2 and less than 255 characters."
+    );
+    }
     setErrors(errors);
+
     if (errors.length === 0) {
       let newList = {
         title: title,
         writer_id: sessionUser.id,
+        description:description
       };
 
       const list = await dispatch(addListThunk(newList));
@@ -72,6 +85,14 @@ export default function CreateList() {
             required
             value={title}
             onChange={(e) => setTitle(e.target.value)}
+            placeholder='title'
+          />
+          <input
+            type="text"
+            required
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            placeholder='description'
           />
           <button className="create-list-button" type="submit">
             Create List

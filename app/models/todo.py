@@ -8,6 +8,7 @@ class Todo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     writer_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     title = db.Column(db.String(100), nullable=False)
+    description = db.Column(db.String(255))
     # due_date = db.Column(db.DateTime, nullable=False)
     
     author = db.relationship('User', back_populates='todo_lists')
@@ -17,6 +18,7 @@ class Todo(db.Model):
     def to_dict(self):
         return {
             "id": self.id,
+            'description':self.description,
             # "writer_id": self.writer_id,
             "title": self.title,
             # "created_at": self.format_date(self.created_at)

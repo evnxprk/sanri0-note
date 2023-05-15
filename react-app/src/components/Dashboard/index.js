@@ -19,6 +19,7 @@ import tuxsam from '../../images/tuxsam.gif'
 import frog from '../../images/frog.gif'
 import Tasks from "../Tasks/AllTasks";
 import List from "../List/AllLists";
+import twingif from '../../images/twin.gif'
 
 export default function Dashboard() {
   const sessionUser = useSelector((state) => state.session.user);
@@ -61,7 +62,7 @@ export default function Dashboard() {
             <img style={{ width: "30px" }} src={cinigif}></img> Create Notebook
           </NavLink>
           <NavLink to="/todos/new" className="create-list-button">
-            <img style={{ width: "30px" }} src={cinigif}></img> Create List
+            <img style={{ width: "30px" }} src={twingif}></img> Create List
           </NavLink>
           <NavLink
             className="github-button"
@@ -89,7 +90,7 @@ export default function Dashboard() {
       <div className="main-content">
         <div className="notebooks-container">
           {/* <img style={{ width: "30px" }} src={tuxsam}> */}
-          <h1 className="section-title">Notebooks </h1>
+          <h1 className="section-title">Notebooks  </h1>
           {/* </img> */}
           <Notebook />
         </div>

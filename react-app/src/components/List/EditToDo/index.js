@@ -10,9 +10,11 @@ export default function EditList() {
   const { listId } = useParams();
   const dispatch = useDispatch();
   const myList = useSelector((state) => state.listReducer.singleList);
+  console.log("myList: ", myList)
   const history = useHistory();
   const { closeModal, setModalContent, ModalContent } = useModal();
   const [title, setTitle] = useState(myList.title);
+    const [description, setDescription] = useState(myList.description)
   const [errors, setErrors] = useState([]);
   const sessionUser = useSelector((state) => state.session.user);
 
@@ -22,6 +24,7 @@ export default function EditList() {
 
   useEffect(() => {
     setTitle(myList.title);
+    setDescription(myList.description);
   }, [myList]);
 
   const handleSubmit = async (e) => {
@@ -29,12 +32,18 @@ export default function EditList() {
     const listData = {
       title,
       writer_id: sessionUser.id,
+      description
     };
 
     const errors = [];
     if (title.length < 2 || title.length > 50) {
       errors.push(
         "Title must be longer than 2 and less than 50 characters."
+      );
+    }
+    if (description.length < 2 || description.length > 255) {
+      errors.push(
+        "Description must be longer than 2 and less than 255 characters."
       );
     }
     setErrors(errors);
@@ -51,6 +60,7 @@ export default function EditList() {
           }
         });
       setTitle("");
+      setDescription('')
       history.push("/dashboard");
     }
   };
@@ -97,6 +107,14 @@ export default function EditList() {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             placeholder="title"
+            required
+          />
+          <label>Description</label>
+          <textarea
+            type="text"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            placeholder="description"
             required
           />
           <button className="edit-submit-button" type="submit">
