@@ -73,20 +73,25 @@ export const addListThunk = (list) => async (dispatch) => {
   }
 };
 
-export const editListThunk = (list, id) => async (dispatch) => {
-  const res = await fetch(`/api/todos/${id}`, {
+export const editListThunk = (listId, listData) => async (dispatch) => {
+  const res = await fetch(`/api/todos/${listId}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(list),
+    body: JSON.stringify(listData),
   });
   if (res.ok) {
     const data = await res.json();
-    dispatch(editList(data));
-    // return data;
+    const updatedList = { ...data, id: listId }; // Include listId in the updated list object
+    dispatch(editList(updatedList));
+    return updatedList;
+  } else {
+    console.error("Failed to edit list");
   }
 };
+
+
 
 export const deleteListThunk = (id) => async (dispatch) => {
   const res = await fetch(`/api/todos/${id}/delete`, {

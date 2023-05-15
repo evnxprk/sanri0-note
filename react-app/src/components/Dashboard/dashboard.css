@@ -78,12 +78,30 @@
   border: 2px solid rgb(235, 233, 233);
   border-radius: 4px;
 }
-.sidebar-nav-links .create-tasks-button {
+.sidebar-nav-links .all-tasks-button {
+    background-color: white;
+  border: 2px solid rgb(235, 233, 233);
+  border-radius: 4px;
+}
+.sidebar-nav-links .all-todos-button {
+    background-color: white;
+  border: 2px solid rgb(235, 233, 233);
+  border-radius: 4px;
+}.sidebar-nav-links .all-notebooks-button {
+    background-color: white;
+  border: 2px solid rgb(235, 233, 233);
+  border-radius: 4px;
+}.sidebar-nav-links .all-notes-button {
     background-color: white;
   border: 2px solid rgb(235, 233, 233);
   border-radius: 4px;
 }
 .sidebar-nav-links .create-list-button {
+    background-color: white;
+  border: 2px solid rgb(235, 233, 233);
+  border-radius: 4px;
+}
+.sidebar-nav-links .create-tasks-button {
     background-color: white;
   border: 2px solid rgb(235, 233, 233);
   border-radius: 4px;

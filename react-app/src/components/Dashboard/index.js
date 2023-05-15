@@ -18,8 +18,13 @@ import pomgif from '../../images/pompom.gif'
 import tuxsam from '../../images/tuxsam.gif'
 import frog from '../../images/frog.gif'
 import Tasks from "../Tasks/AllTasks";
-import List from "../List/AllLists";
+import Lists from "../List/AllLists";
 import twingif from '../../images/twin.gif'
+import cini from '../../images/cini.gif'
+import hellokitty from '../../images/hellokitty.gif'
+import mymel from '../../images/mymel.gif'
+import skateboard from '../../images/skateboard.gif'
+// import Lists from "../List/AllLists";
 
 export default function Dashboard() {
   const sessionUser = useSelector((state) => state.session.user);
@@ -63,6 +68,18 @@ export default function Dashboard() {
           </NavLink>
           <NavLink to="/todos/new" className="create-list-button">
             <img style={{ width: "30px" }} src={twingif}></img> Create List
+          </NavLink>
+          <NavLink to="/notes" className="all-notes-button">
+            <img style={{ width: "30px" }} src={cini}></img> My Notes
+          </NavLink>
+          <NavLink to="/notebooks" className="all-notebooks-button">
+            <img style={{ width: "30px" }} src={hellokitty}></img> My Notebooks
+          </NavLink>
+          <NavLink to="/tasks" className="all-tasks-button">
+            <img style={{ width: "30px" }} src={mymel}></img> My Tasks
+          </NavLink>
+          <NavLink to="/todos" className="all-todos-button">
+            <img style={{ width: "30px" }} src={skateboard}></img> My Lists
           </NavLink>
           <NavLink
             className="github-button"
@@ -110,7 +127,7 @@ export default function Dashboard() {
           {/* <img style={{ width: "30px" }} src={frog}> */}
           <h1 className="section-title">List </h1>
           {/* </img> */}
-          <List />
+          <Lists />
         </div>
       </div>
     </div>

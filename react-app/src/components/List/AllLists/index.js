@@ -8,15 +8,15 @@ import {
   getAllListThunk,
 } from "../../../store/list";
 
-// import "../tasks.css";
+import "../todo.css";
 
 
-export default function List() {
+export default function Lists() {
   const dispatch = useDispatch();
   const getAllList = useSelector((state) => state.listReducer);
   const list = Object.values(getAllList.allList);
   const history = useHistory();
-  const [description, setDescription] = useState('')
+  // const [description, setDescription] = useState('')
   const { closeModal, setModalContent, ModalContent } = useModal();
   const [listToDelete, setlistToDelete] = useState(null);
   const sessionUser = useSelector((state) => state.session.user);
@@ -54,7 +54,7 @@ export default function List() {
     const newlist = {
       title: newTitle,
       writer_id: selectedlistId,
-      description:description
+      // description:description
     };
     dispatch(addListThunk(newlist))
       .then(() => {
@@ -81,7 +81,6 @@ const handleEdit = (listId) => {
             onClick={() => handleEdit(lists.id)}
           >
             <div>{lists.title}</div>
-            <div>{lists.description}</div>
           </div>
         );
       })}

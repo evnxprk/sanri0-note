@@ -22,7 +22,7 @@ import EditTask from "./components/Tasks/EditTasks";
 import DeleteTask from "./components/Tasks/DeleteTasks";
 import List from "./components/List/AllLists";
 import CreateList from "./components/List/CreateLists";
-import EditList from "./components/List/EditToDo";
+import EditLists from "./components/List/EditToDo";
 import DeleteList from "./components/List/DeleteList";
 
 function App() {
@@ -60,7 +60,7 @@ function App() {
           <List />
          </Route>
          <Route exact path='/todos/:listId/edit'>
-          <EditList />
+          <EditLists />
          </Route>
          <Route exact path='/todos/new'>
           <CreateList />

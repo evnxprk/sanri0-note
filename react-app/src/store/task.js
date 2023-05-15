@@ -39,6 +39,7 @@ export const getAllTasksThunk = () => async (dispatch) => {
   if (res.ok) {
     const data = await res.json();
     dispatch(getAllTasks(data));
+    console.log('this got hit whoo')
     return data;
   } else {
     console.error("Failed to fetch tasks");
