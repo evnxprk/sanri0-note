@@ -12,13 +12,13 @@ import cinicookiegif from "../../images/cinicookiegif.gif";
 import { getAllNotebooksThunk } from "../../store/notebook";
 import { getAllNotesThunk } from "../../store/note";
 import { getAllTasksThunk } from "../../store/task";
-import { getAllTodoThunk } from "../../store/todo";
+import { getAllListThunk } from "../../store/list";
 import pochogif from '../../images/pochacco.gif'
 import pomgif from '../../images/pompom.gif'
 import tuxsam from '../../images/tuxsam.gif'
 import frog from '../../images/frog.gif'
 import Tasks from "../Tasks/AllTasks";
-import Todo from "../Todo/AllToDo";
+import List from "../List/AllLists";
 
 export default function Dashboard() {
   const sessionUser = useSelector((state) => state.session.user);
@@ -35,7 +35,7 @@ export default function Dashboard() {
     dispatch(getAllNotebooksThunk());
     dispatch(getAllNotesThunk());
     dispatch(getAllTasksThunk())
-    dispatch(getAllTodoThunk())
+    dispatch(getAllListThunk())
   }, [dispatch]);
 
   return (
@@ -60,8 +60,8 @@ export default function Dashboard() {
           <NavLink to="/notebooks/new" className="create-notebook-button">
             <img style={{ width: "30px" }} src={cinigif}></img> Create Notebook
           </NavLink>
-          <NavLink to="/todo/new" className="create-todo-button">
-            <img style={{ width: "30px" }} src={cinigif}></img> Create Todo Item
+          <NavLink to="/todos/new" className="create-list-button">
+            <img style={{ width: "30px" }} src={cinigif}></img> Create List
           </NavLink>
           <NavLink
             className="github-button"
@@ -105,11 +105,11 @@ export default function Dashboard() {
           {/* </img> */}
           <Tasks />
         </div>
-        <div className="todo-container">
+        <div className="list-container">
           {/* <img style={{ width: "30px" }} src={frog}> */}
-          <h1 className="section-title">Todo </h1>
+          <h1 className="section-title">List </h1>
           {/* </img> */}
-          <Todo />
+          <List />
         </div>
       </div>
     </div>

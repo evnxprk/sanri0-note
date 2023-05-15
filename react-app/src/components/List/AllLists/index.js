@@ -3,36 +3,36 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useModal } from "../../../context/Modal";
 import {
-  addTodoThunk,
-  deleteTodoThunk,
-  getAllTodoThunk,
-} from "../../../store/todo";
+  addListThunk,
+  deleteListThunk,
+  getAllListThunk,
+} from "../../../store/list";
 
 // import "../tasks.css";
 
 
-export default function Todo() {
+export default function List() {
   const dispatch = useDispatch();
-  const getAllTodo = useSelector((state) => state.todoReducer);
-  const todo = Object.values(getAllTodo.allTodo);
+  const getAllList = useSelector((state) => state.listReducer);
+  const list = Object.values(getAllList.allList);
   const history = useHistory();
   const { closeModal, setModalContent, ModalContent } = useModal();
-  const [todoToDelete, setTodoToDelete] = useState(null);
+  const [listToDelete, setlistToDelete] = useState(null);
   const sessionUser = useSelector((state) => state.session.user);
   const [newTitle, setNewTitle] = useState("");
-  const [selectedTodoId, setSelectedTodoId] = useState(null);
+  const [selectedlistId, setSelectedlistId] = useState(null);
 
   useEffect(() => {
-    dispatch(getAllTodoThunk());
+    dispatch(getAllListThunk());
   }, [dispatch]);
 
-  const handleDeleteTask = async (todoId) => {
-    await dispatch(deleteTodoThunk(todoId));
+  const handleDeleteTask = async (listId) => {
+    await dispatch(deleteListThunk(listId));
     // history.push('/dashboard')
   };
 
-  const handleConfirmDelete = (todoId) => {
-    dispatch(deleteTodoThunk(todoId))
+  const handleConfirmDelete = (listId) => {
+    dispatch(deleteListThunk(listId))
       .then(() => {
         setNewTitle(null);
         history.push("/dashboard");
@@ -41,8 +41,8 @@ export default function Todo() {
       })
       .catch((err) => console.log(err));
   };
-  if (todo.length === 0) {
-    return <h1 className="first-todo"> Create your first todo item! </h1>;
+  if (list.length === 0) {
+    return <h1 className="first-list"> Create your first list item! </h1>;
   }
   if (!sessionUser) {
     history.push("/");
@@ -50,34 +50,34 @@ export default function Todo() {
   }
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newTodo = {
+    const newlist = {
       title: newTitle,
-      writer_id: selectedTodoId,
+      writer_id: selectedlistId,
     };
-    dispatch(addTodoThunk(newTodo))
+    dispatch(addListThunk(newlist))
       .then(() => {
         setNewTitle("");
-        setSelectedTodoId(null);
+        setSelectedlistId(null);
       })
       .catch((err) => console.log(err));
   };
 
-  const handleEdit = (todoId) => {
-    history.push(`/todo/${todoId}/edit`);
+  const handleEdit = (listId) => {
+    history.push(`/todos/${listId}/edit`);
   };
 
-  if (!todo.length) return null;
+  if (!list.length) return null;
 
   return (
-    <div className="todo-main-box">
-      {todo.map((todos) => {
+    <div className="list-main-box">
+      {list.map((lists) => {
         return (
           <div
-            key={todos.id}
-            className="todo-box"
-            onClick={() => handleEdit(todos.id)}
+            key={lists.id}
+            className="list-box"
+            onClick={() => handleEdit(lists.id)}
           >
-            <div>{todos.title}</div>
+            <div>{lists.title}</div>
           </div>
         );
       })}

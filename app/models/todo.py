@@ -17,7 +17,7 @@ class Todo(db.Model):
     def to_dict(self):
         return {
             "id": self.id,
-            "writer_id": self.writer_id,
+            # "writer_id": self.writer_id,
             "title": self.title,
-            "created_at": self.format_date(self.created_at)
+            # "created_at": self.format_date(self.created_at)
         }

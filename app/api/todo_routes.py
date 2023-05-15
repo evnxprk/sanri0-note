@@ -13,7 +13,7 @@ def validation_errors_to_error_messages(validation_errors):
             errorMessages.append(f'{field} : {error}')
     return errorMessages
 
-todo_routes = Blueprint('todo', __name__)
+todo_routes = Blueprint('todos', __name__)
 
 #Get All Todo
 @todo_routes.route('/', methods=['GET'])

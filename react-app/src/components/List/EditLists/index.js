@@ -2,28 +2,28 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { useModal } from "../../../context/Modal";
-import { deleteTodoThunk, editTodoThunk, getOneTodoThunk } from "../../../store/todo";
+import { deleteListThunk, editListThunk, getOneListThunk } from "../../../store/list";
 import Modal from "../../Modal";
 
 
-export default function EditTodo() {
-  const myTodo = useSelector((state) => state.todoReducer.singleTodo);
+export default function EditList() {
+  const myList = useSelector((state) => state.listReducer.singleList);
   const dispatch = useDispatch();
-  const { todoId } = useParams();
+  const { listId } = useParams();
   const history = useHistory();
   const { closeModal, setModalContent, ModalContent } = useModal();
-  const [title, setTitle] = useState(myTodo.title);
+  const [title, setTitle] = useState(myList.title);
   const [errors, setErrors] = useState([]);
   const sessionUser = useSelector((state) => state.session.user);
 
   useEffect(() => {
-    dispatch(getOneTodoThunk(todoId)).catch((err) => console.log(err));
-    setTitle(myTodo.title);
-  }, [dispatch, todoId]);
+    dispatch(getOneListThunk(listId)).catch((err) => console.log(err));
+    setTitle(myList.title);
+  }, [dispatch, listId]);
 
   useEffect(() => {
-    setTitle(myTodo.title);
-  }, [myTodo]);
+    setTitle(myList.title);
+  }, [myList]);
 
   // useEffect(() => {
   //   if (note) {
@@ -34,7 +34,7 @@ export default function EditTodo() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const todoData = {
+    const listData = {
       title,
       writer_id: sessionUser.id,
     };
@@ -48,7 +48,7 @@ export default function EditTodo() {
     setErrors(errors);
 
     if (errors.length === 0) {
-      await dispatch(editTodoThunk(todoData, todoId))
+      await dispatch(editListThunk(listData, listId))
         .then(() => closeModal())
         .catch(async (res) => {
           if (res && res.json) {
@@ -63,12 +63,12 @@ export default function EditTodo() {
     }
   };
 
-  const [todoToDelete, setTodoToDelete] = useState(null);
+  const [listToDelete, setListToDelete] = useState(null);
 
-  const handleConfirmDelete = (todoId) => {
-    dispatch(deleteTodoThunk(todoId))
+  const handleConfirmDelete = (listId) => {
+    dispatch(deleteListThunk(listId))
       .then(() => {
-        setTodoToDelete(null);
+        setListToDelete(null);
         history.push("/");
         closeModal();
         setModalContent(null);
@@ -77,18 +77,18 @@ export default function EditTodo() {
   };
 
   const cancelFunc = () => {
-    setTodoToDelete(null);
+    setListToDelete(null);
     closeModal();
   };
 
   //* Editor Merge
 
-  if (!Object.values(myTodo).length) return null;
+  if (!Object.values(myList).length) return null;
 
   return (
     <div className="editor-main-container">
-      <div className="edit-todo-main-box">
-        <h1 className="edit-todo-description">{myTodo.title}</h1>
+      <div className="edit-list-main-box">
+        <h1 className="edit-list-description">{myList.title}</h1>
         <div className="form-errors">
           {errors.length > 0 && (
             <ul>
@@ -112,13 +112,13 @@ export default function EditTodo() {
           </button>
 
           <button
-            className="todo-delete-button"
+            className="list-delete-button"
             onClick={(e) => {
               e.preventDefault();
               setModalContent(
                 <div>
-                  <p>Are you sure you want to delete this todo?</p>
-                  <button onClick={() => handleConfirmDelete(todoId)}>
+                  <p>Are you sure you want to delete this list?</p>
+                  <button onClick={() => handleConfirmDelete(listId)}>
                     Yes
                   </button>
                   <button onClick={() => cancelFunc()}>No</button>
@@ -126,7 +126,7 @@ export default function EditTodo() {
               );
             }}
           >
-            Delete todo
+            Delete list
           </button>
         </form>
         <Modal

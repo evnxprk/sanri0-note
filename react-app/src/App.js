@@ -20,10 +20,10 @@ import CreateTask from "./components/Tasks/AddTasks";
 import Tasks from "./components/Tasks/AllTasks";
 import EditTask from "./components/Tasks/EditTasks";
 import DeleteTask from "./components/Tasks/DeleteTasks";
-import Todo from "./components/Todo/AllToDo";
-import CreateTodo from "./components/Todo/CreateToDo";
-import EditTodo from "./components/Todo/EditToDo";
-import DeleteTodo from "./components/Todo/DeleteToDo";
+import List from "./components/List/AllLists";
+import CreateList from "./components/List/CreateLists";
+import EditList from "./components/List/EditLists";
+import DeleteList from "./components/List/DeleteList";
 
 function App() {
   const dispatch = useDispatch();
@@ -53,21 +53,22 @@ function App() {
           <Route exact path="/tasks/:taskId/delete">
             <DeleteTask />
           </Route>
-          <Route exact path="/tasks">
+          <Route exact path="/tasks/">
             <Tasks />
           </Route>
-          <Route exact path='/todo'>
-          <Todo />
-          </Route>
-          <Route exact path='/todo/new'>
-          <CreateTodo />
-          </Route>
-          <Route exact path='/todo/:todoId/edit'>
-          <EditTodo />
-          </Route>
-          <Route exact path='/todo/:todoId/delete'>
-          <DeleteTodo />
-          </Route>
+         <Route exact path='/todos'>
+          <List />
+         </Route>
+         <Route exact path='/todos/:todoId/edit'>
+          <EditList />
+         </Route>
+         <Route exact path='/todos/new'>
+          <CreateList />
+         </Route>
+         <Route exact path='/todos/:todoId/delete'>
+          <DeleteList />
+         </Route>
+        
           <Route exact path="/login">
             <LoginFormPage />
           </Route>

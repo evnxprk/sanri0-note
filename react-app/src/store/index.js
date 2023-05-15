@@ -4,7 +4,7 @@ import session from './session'
 import notesReducer from './note';
 import notebookReducer from './notebook';
 import taskReducer from './task';
-import todoReducer from './todo';
+import listReducer from './list';
 
 
 
@@ -14,7 +14,7 @@ const rootReducer = combineReducers({
   notesReducer,
   notebookReducer,
   taskReducer,
-  todoReducer
+  listReducer
 });
 
 
