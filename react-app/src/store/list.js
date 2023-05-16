@@ -1,8 +1,8 @@
-const GET_ALL_LIST = "list/GET_ALL_LIST";
-const GET_ONE_LIST = "list/GET_ONE_LIST";
-const CREATE_LIST = "list/CREATE_LIST";
-const EDIT_LIST = "list/EDIT_LIST";
-const DELETE_LIST = "list/DELETE_LIST";
+const GET_ALL_LIST = "todos/GET_ALL_LIST";
+const GET_ONE_LIST = "todos/GET_ONE_LIST";
+const CREATE_LIST = "todos/CREATE_LIST";
+const EDIT_LIST = "todos/EDIT_LIST";
+const DELETE_LIST = "todos/DELETE_LIST";
 
 // action creators
 
@@ -73,21 +73,19 @@ export const addListThunk = (list) => async (dispatch) => {
   }
 };
 
-export const editListThunk = (listId, listData) => async (dispatch) => {
-  const res = await fetch(`/api/todos/${listId}`, {
+export const editListThunk = (listData, id) => async (dispatch) => {
+  const response = await fetch(`/api/todos/${id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(listData),
   });
-  if (res.ok) {
-    const data = await res.json();
-    const updatedList = { ...data, id: listId }; // Include listId in the updated list object
-    dispatch(editList(updatedList));
-    return updatedList;
-  } else {
-    console.error("Failed to edit list");
+
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(editList(data));
+    // return data
   }
 };
 
@@ -136,12 +134,12 @@ const listReducer = (state = initialState, action) => {
         },
       };
     case EDIT_LIST:
-      const updateList = action.payload;
+      const updatedList = action.payload;
       return {
         ...state,
         allList: {
           ...state.allList,
-          [updateList.id]: updateList,
+          [updatedList.id]: updatedList,
         },
       };
     case DELETE_LIST:

@@ -1,8 +1,8 @@
-const GET_ALL_NOTES = "notes/GET_ALL_NOTES";
 const GET_ONE_NOTE = "notes/GET_ONE_NOTE";
 const CREATE_NOTE = "notes/CREATE_NOTE";
 const EDIT_NOTE = "notes/EDIT_NOTE";
 const DELETE_NOTE = "notes/DELETE_NOTE";
+const GET_ALL_NOTES = 'notes/GET_ALL_NOTES'
 const GET_NOTEBOOK_NOTES = "notes/GET_NOTEBOOK_NOTES";
 
 const CLEAR_SINGLE_NOTE = "notes/CLEAR_SINGLE_NOTE";

@@ -10,7 +10,7 @@ import {
   getOneListThunk,
 } from "../../../store/list";
 
-export default function EditTasks() {
+export default function EditLists() {
   const myList = useSelector((state) => state.listReducer.singleList);
   const dispatch = useDispatch();
   const { listId } = useParams();
@@ -25,7 +25,7 @@ export default function EditTasks() {
    dispatch(getOneListThunk(listId)).catch((err) => console.log(err));
    setTitle(myList.title);
    setDescription(myList.description);
- }, [dispatch, listId, myList.title, myList.description]);
+ }, [dispatch, listId]);
 
 
   useEffect(() => {
@@ -40,41 +40,43 @@ export default function EditTasks() {
   //   }
   // }, [note]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const listData = {
-      title,
-      description,
-      writer_id: sessionUser.id,
-    };
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    const errors = [];
-    if (title.length < 2 || title.length > 255) {
-      errors.push("Title must be longer than 2 and less than 255 characters.");
-    }
-    if (description.length < 2 || description.length > 255) {
-      errors.push(
-        "Description must be longer than 2 and less than 255 characters."
-      );
-    }
-    setErrors(errors);
-
-    if (errors.length === 0) {
-      await dispatch(editListThunk(listData, listId))
-        .then(() => closeModal())
-        .catch(async (res) => {
-          if (res && res.json) {
-            const data = await res.json();
-            if (data && data.errors) setErrors(data.errors);
-          } else {
-            console.error("Invalid response format:", res);
-          }
-        });
-      setTitle("");
-      setDescription("");
-      history.push("/todos");
-    }
+  const listData = {
+    title,
+    description,
+    writer_id: sessionUser.id, // Make sure to include the writer_id in listData
   };
+
+  const errors = [];
+  if (title.length < 2 || title.length > 255) {
+    errors.push("Title must be longer than 2 and less than 255 characters.");
+  }
+  if (description.length < 2 || description.length > 255) {
+    errors.push(
+      "Description must be longer than 2 and less than 255 characters."
+    );
+  }
+  setErrors(errors);
+
+  if (errors.length === 0) {
+    await dispatch(editListThunk(listData, listId))
+      .then(() => closeModal())
+      .catch(async (res) => {
+        if (res && res.json) {
+          const data = await res.json();
+          if (data && data.errors) setErrors(data.errors);
+        } else {
+          console.error("Invalid response format:", res);
+        }
+      });
+    setDescription("");
+    setTitle("")
+    history.push("/todos");
+  }
+};
+
 
   const [listToDelete, setListToDelete] = useState(null);
 

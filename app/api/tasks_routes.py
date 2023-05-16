@@ -49,7 +49,7 @@ def create_new_task():
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 # Edit A Task
-@tasks_routes.route('/<int:id>', methods=['PUT'])
+@tasks_routes.route('/<int:id>/edit', methods=['PUT'])
 @login_required
 def edit_task(id):
     task = Task.query.get(id)
@@ -59,7 +59,7 @@ def edit_task(id):
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         task.description = form.data['description']
-        task.complete = form.data['complete']
+        # task.complete = form.data['complete']
         
         db.session.commit()
         task_dict = task.to_dict()

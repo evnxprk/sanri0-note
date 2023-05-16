@@ -15,7 +15,7 @@ import CreateNotebook from "./components/Notebooks/CreateNotebook";
 import DeleteNotebook from "./components/Notebooks/DeleteNotebook";
 import DashBoard from "./components/Dashboard";
 import SplashPage from "./components/SplashPage";
-import XNoteDetails from "./components/XNoteDetails";
+import NoteDetails from "./components/Notes/NoteDetails";
 import CreateTask from "./components/Tasks/AddTasks";
 import Tasks from "./components/Tasks/AllTasks";
 import EditTask from "./components/Tasks/EditTasks";
@@ -24,6 +24,9 @@ import List from "./components/List/AllLists";
 import CreateList from "./components/List/CreateLists";
 import EditLists from "./components/List/EditToDo";
 import DeleteList from "./components/List/DeleteList";
+import TaskDetails from "./components/Tasks/TaskContent";
+import NotebookDetails from "./components/Notebooks/NotebookDetails";
+import ListDetails from "./components/List/ListDetails";
 
 function App() {
   const dispatch = useDispatch();
@@ -56,19 +59,24 @@ function App() {
           <Route exact path="/tasks/">
             <Tasks />
           </Route>
-         <Route exact path='/todos'>
-          <List />
-         </Route>
-         <Route exact path='/todos/:listId/edit'>
-          <EditLists />
-         </Route>
-         <Route exact path='/todos/new'>
-          <CreateList />
-         </Route>
-         <Route exact path='/todos/:listId/delete'>
-          <DeleteList />
-         </Route>
-        
+          <Route exact path="/tasks/:taskId">
+            <TaskDetails />
+          </Route>
+          <Route exact path="/todos">
+            <List />
+          </Route>
+          <Route exact path="/todos/:listId/edit">
+            <EditLists />
+          </Route>
+          <Route exact path="/todos/new">
+            <CreateList />
+          </Route>
+          <Route exact path="/todos/:listId/delete">
+            <DeleteList />
+          </Route>
+          <Route exact path="/todos/:listId/">
+            <ListDetails />
+          </Route>
           <Route exact path="/login">
             <LoginFormPage />
           </Route>
@@ -96,11 +104,14 @@ function App() {
           <Route exact path="/notebooks/new">
             <CreateNotebook />
           </Route>
-          <Route exact path="/notebook/:notebookId/edit">
+          <Route exact path="/notebooks/:notebookId/edit">
             <EditNotebook />
           </Route>
-          <Route exact path="/note/:noteId">
-            <XNoteDetails />
+          <Route exact path="/notes/:noteId">
+            <NoteDetails />
+          </Route>
+          <Route exact path="/notebooks/:notebookId">
+            <NotebookDetails />
           </Route>
         </Switch>
       )}

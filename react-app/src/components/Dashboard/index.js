@@ -69,7 +69,7 @@ export default function Dashboard() {
           <NavLink to="/todos/new" className="create-list-button">
             <img style={{ width: "30px" }} src={twingif}></img> Create List
           </NavLink>
-          <NavLink to="/notes" className="all-notes-button">
+          {/* <NavLink to="/notes" className="all-notes-button">
             <img style={{ width: "30px" }} src={cini}></img> My Notes
           </NavLink>
           <NavLink to="/notebooks" className="all-notebooks-button">
@@ -80,7 +80,7 @@ export default function Dashboard() {
           </NavLink>
           <NavLink to="/todos" className="all-todos-button">
             <img style={{ width: "30px" }} src={skateboard}></img> My Lists
-          </NavLink>
+          </NavLink> */}
           <NavLink
             className="github-button"
             to={{ pathname: "https://github.com/evnxprk" }}

@@ -1,21 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useHistory, useParams } from "react-router-dom";
-import { getNotesByNotebookIdThunk } from "../../store/note";
+import { useHistory } from "react-router-dom";
 import {
-  getAllNotebooksThunk,
+  getNotesByNotebookIdThunk,
+} from "../../store/note";
+import {
   deleteNotebookThunk,
+  getAllNotebooksThunk,
   editNotebookThunk,
 } from "../../store/notebook";
-import { getAllNotesThunk } from "../../store/note";
 import "./notebook.css";
 import { useModal } from "../../context/Modal";
 import Modal from "../../components/Modal";
+import { useState } from "react";
 
 export default function Notebook() {
   const history = useHistory();
   const dispatch = useDispatch();
-  const { notebookId } = useParams();
   const allNotebooks = useSelector(
     (state) => state.notebookReducer.allNotebooks
   );
@@ -26,18 +27,17 @@ export default function Notebook() {
   const [notebookToEdit, setNotebookToEdit] = useState(null);
 
   useEffect(() => {
-    dispatch(getNotesByNotebookIdThunk(notebookId))
-  }, [dispatch])
-
-  useEffect(() => {
     dispatch(getAllNotebooksThunk());
-    dispatch(getAllNotesThunk());
   }, [dispatch]);
+
+  const handleNotebookClick = (notebookId) => {
+    history.push(`/notebooks/${notebookId}`);
+  };
 
   const handleEdit = (notebook) => {
     setNotebookToEdit(notebook);
     setEditedNotebookName(notebook.name);
-    history.push(`/notebook/${notebook.id}/edit`);
+    history.push(`/notebooks/${notebook.id}/edit`);
   };
 
   const handleDelete = (notebookId) => {
@@ -80,57 +80,41 @@ export default function Notebook() {
   if (Object.values(allNotebooks).length === 0) {
     return (
       <h1 className="first-notebook">
-        {" "}
         No Notebooks! Create your first notebook!
       </h1>
     );
   }
 
   return (
-    <div className='notebooks-main-box'>
+    <div className="notebooks-main-box">
       {notebooks.map((notebook) => {
         return (
-          <div className='notebook-card-box' onClick={() => handleEdit(notebook)} key={notebook.id}>
+          <div
+            key={notebook.id}
+            className="notebook-card-box"
+            onClick={() => handleNotebookClick(notebook.id)}
+          >
             <div>
-            <p>{notebook.name}</p>
+              <p>{notebook.name}</p>
             </div>
-            {/* <div className="notebook-options"> */}
-              {/* <button
+            {/* <div className="notebook-options">
+              <button
                 className="notebook-edit-button"
-                as="button"
                 onClick={() => handleEdit(notebook)}
               >
                 Edit
-              </button> */}
-              {/* <button
+              </button>
+              <button
                 className="notebook-delete-button"
-                as="button"
                 onClick={() => handleDelete(notebook.id)}
               >
                 Delete
-              </button> */}
-            {/* </div> */}
+              </button>
+            </div> */}
           </div>
         );
       })}
-      {notebookToEdit && (
-        <form onSubmit={handleSubmit}>
-          <label>
-            Notebook Name:
-            <input
-              type="text"
-              value={editedNotebookName}
-              onChange={(e) => setEditedNotebookName(e.target.value)}
-              required
-            />
-          </label>
-          <button type="submit">Save Changes</button>
-        </form>
-      )}
       <Modal ModalContent={ModalContent} />
-      <div>
-        {}
-      </div>
     </div>
   );
 }
