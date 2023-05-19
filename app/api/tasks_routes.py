@@ -3,7 +3,7 @@ from flask_login import login_required, current_user
 from app.models import db, Task, Todo
 from app.forms import TaskForm
 
-tasks_routes = Blueprint('tasks', __name__)
+tasks_routes = Blueprint('task', __name__)
 
 def validation_errors_to_error_messages(validation_errors):
     """
