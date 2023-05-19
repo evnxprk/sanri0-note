@@ -49,7 +49,7 @@ def create_new_task():
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 # Edit A Task
-@tasks_routes.route('/<int:id>/edit', methods=['PUT'])
+@tasks_routes.route('/<int:id>', methods=['PUT'])
 @login_required
 def edit_task(id):
     task = Task.query.get(id)
