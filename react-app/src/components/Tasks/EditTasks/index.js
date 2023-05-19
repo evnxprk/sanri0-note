@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { useModal } from "../../../context/Modal";
 import Modal from "../../Modal";
-import { deleteTaskThunk, editTaskThunk, getAllTasksThunk, getOneTaskThunk } from "../../../store/task";
+import { deleteTaskThunk, editTaskThunk, getOneTaskThunk } from "../../../store/task";
 
 export default function EditTasks() {
   const myTask = useSelector((state) => state.taskReducer.singleTask);

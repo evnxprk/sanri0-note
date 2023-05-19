@@ -1,26 +1,23 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
-import { deleteListThunk, getOneListThunk } from "../../../store/list";
+import { deleteListThunk } from "../../../store/list";
 
 export default function ListDetails() {
   const dispatch = useDispatch();
   const history = useHistory();
   const { listId } = useParams();
-  const list = useSelector((state) => state.listReducer.singleList);
-
-  useEffect(() => {
-    dispatch(getOneListThunk(listId));
-  }, [dispatch, listId]);
+  const lists = useSelector((state) => state.listReducer.allList);
+  const list = lists[listId];
 
   const handleEditList = () => {
-    history.push(`/todos/${listId}/edit`);
+    history.push(`/todo/${listId}/edit`);
   };
 
   const handleDeleteList = () => {
     dispatch(deleteListThunk(listId))
       .then(() => {
-        history.push("/todos");
+        history.push("/tasks");
       })
       .catch((error) => {
         console.log(error);
@@ -34,7 +31,7 @@ export default function ListDetails() {
   return (
     <div>
       <h1>{list.title}</h1>
-      <h3>{list.description}</h3>
+      <h4>{list.description}</h4>
       <button onClick={handleEditList}>Edit</button>
       <button onClick={handleDeleteList}>Delete</button>
     </div>

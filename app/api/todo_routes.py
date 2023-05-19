@@ -64,7 +64,7 @@ def edit_todo(id):
     form = TodoForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        todo.title = form.data['title'],
+        todo.title = form.data['title']
         todo.description = form.data['description']
 
         db.session.commit()

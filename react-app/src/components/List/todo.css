@@ -17,9 +17,9 @@
 }
 
 .list-box {
-  background-image: url('../../images/note.jpeg');
-   background-position: center;
-  background-size: cover; 
+  background-image: url("../../images/note.jpeg");
+  background-position: center;
+  background-size: cover;
   border: 4px solid rgb(164, 193, 243);
   border-radius: 8px;
   width: 130px;
@@ -50,8 +50,6 @@
   white-space: normal;
 }
 
-
-
 .list-main-box {
   display: flex;
   gap: 50px;
@@ -65,18 +63,18 @@
 
 .list-edit-button,
 .list-delete-button {
- background-color: #ff0101;
-    border: none;
-    color: white;
-    cursor: pointer;
-    font-size: 1rem;
-    margin: 1rem 0;
-    padding: 0.5rem;
-    transition: background-color 0.2s ease-in-out;
-    border-radius: 7px;
-    width: 100%;
-    justify-content: center;
-    display: flex;
+  background-color: #ff0101;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+  margin: 1rem 0;
+  padding: 0.5rem;
+  transition: background-color 0.2s ease-in-out;
+  border-radius: 7px;
+  width: 100%;
+  justify-content: center;
+  display: flex;
 }
 
 .list-edit-button:hover,

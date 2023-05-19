@@ -3,7 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { useModal } from "../../../context/Modal";
 import Modal from "../../Modal";
-import { deleteListThunk, editListThunk, getOneListThunk } from "../../../store/list";
+import {
+  deleteListThunk,
+  editListThunk,
+  getOneListThunk,
+} from "../../../store/list";
 
 export default function EditLists() {
   const myList = useSelector((state) => state.listReducer.singleList);
@@ -11,35 +15,41 @@ export default function EditLists() {
   const { listId } = useParams();
   const history = useHistory();
   const { closeModal, setModalContent, ModalContent } = useModal();
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+  const [title, setTitle] = useState(myList.title);
+  const [description, setDescription] = useState(myList.description);
   const [errors, setErrors] = useState([]);
   const sessionUser = useSelector((state) => state.session.user);
 
-
-useEffect(() => {
-  dispatch(getOneListThunk(listId)).catch((err) => console.log(err));
-}, [dispatch, listId]);
-
-useEffect(() => {
-  if (myList) {
+  useEffect(() => {
+    dispatch(getOneListThunk(listId)).catch((err) => console.log(err));
     setTitle(myList.title);
     setDescription(myList.description);
-  }
-}, [myList]);
+  }, [dispatch, listId]);
+
+  useEffect(() => {
+    setTitle(myList.title);
+    setDescription(myList.description);
+  }, [myList]);
+
+  // useEffect(() => {
+  //   if (note) {
+  //     setTitle(note.title);
+  //     setDescription(note.description);
+  //   }
+  // }, [note]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const listData = {
       title,
-      description,
-      writer_id: sessionUser.id,
+      description
     };
 
     const errors = [];
-    if (title.length < 2 || title.length > 50) {
-      errors.push("Title must be longer than 2 and less than 50 characters.");
+    if (title.length < 2 || title.length > 255) {
+      errors.push(
+        "Title must be longer than 2 and less than 255 characters."
+      );
     }
     if (description.length < 2 || description.length > 255) {
       errors.push(
@@ -50,25 +60,27 @@ useEffect(() => {
 
     if (errors.length === 0) {
       await dispatch(editListThunk(listData, listId))
-        .then(() => {
-          closeModal();
-          setTitle("");
-          setDescription("");
-          history.push("/todos");
-        })
-        .catch((res) => {
-          if (res && res.errors) {
-            setErrors(res.errors);
+        .then(() => closeModal())
+        .catch(async (res) => {
+          if (res && res.json) {
+            const data = await res.json();
+            if (data && data.errors) setErrors(data.errors);
           } else {
             console.error("Invalid response format:", res);
           }
         });
+      setTitle("")
+      setDescription("")
+      history.push("/dashboard");
     }
   };
 
-  const handleConfirmDelete = () => {
+  const [listToDelete, setListToDelete] = useState(null);
+
+  const handleConfirmDelete = (listId) => {
     dispatch(deleteListThunk(listId))
       .then(() => {
+        setListToDelete(null);
         history.push("/");
         closeModal();
         setModalContent(null);
@@ -77,12 +89,13 @@ useEffect(() => {
   };
 
   const cancelFunc = () => {
+    setListToDelete(null);
     closeModal();
   };
 
-  if (!myList) {
-    return null;
-  }
+  //* Editor Merge
+
+  if (!Object.values(myList).length) return null;
 
   return (
     <div className="editor-main-container">
@@ -126,16 +139,21 @@ useEffect(() => {
               setModalContent(
                 <div>
                   <p>Are you sure you want to delete this list?</p>
-                  <button onClick={handleConfirmDelete}>Yes</button>
-                  <button onClick={cancelFunc}>No</button>
+                  <button onClick={() => handleConfirmDelete(listId)}>
+                    Yes
+                  </button>
+                  <button onClick={() => cancelFunc()}>No</button>
                 </div>
               );
             }}
           >
-            Delete List
+            Delete list
           </button>
         </form>
-        <Modal ModalContent={ModalContent} />
+        <Modal
+          ModalContent={ModalContent}
+          handleConfirmDelete={handleConfirmDelete}
+        />
       </div>
     </div>
   );
