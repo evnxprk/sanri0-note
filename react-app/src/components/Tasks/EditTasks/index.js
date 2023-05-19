@@ -60,7 +60,7 @@ export default function EditTasks() {
           }
         });
       setDescription("");
-      history.push("/dashboard");
+      history.push("/tasks");
     }
   };
 

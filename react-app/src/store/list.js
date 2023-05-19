@@ -74,20 +74,25 @@ export const addListThunk = (list) => async (dispatch) => {
 };
 
 export const editListThunk = (listData, id) => async (dispatch) => {
+  const { title } = listData; // Extract the title from listData
+
   const response = await fetch(`/api/todos/${id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(listData),
+    body: JSON.stringify(listData), // Pass the updated title in the request body
   });
 
   if (response.ok) {
     const data = await response.json();
     dispatch(editList(data));
-    // return data
+  } else {
+    console.error("Failed to update the list");
   }
 };
+
+
 
 
 
