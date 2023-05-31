@@ -30,7 +30,7 @@ from datetime import datetime
 
 
 class Todo(db.Model):
-    __tablename__ = 'todo'
+    __tablename__ = 'todos'
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}
     id = db.Column(db.Integer, primary_key=True)
