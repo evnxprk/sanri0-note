@@ -40,7 +40,7 @@ class Todo(db.Model):
     due_date = db.Column(db.Date)
 
     writer = db.relationship('User', back_populates='todos')
-    tasks = db.relationship('Task', backref='todo')
+    tasks = db.relationship('Task', backref='todos')
 
     def to_dict(self):
         return {
