@@ -85,7 +85,7 @@ def upgrade():
     sa.Column('description', sa.String(length=255), nullable=True),
     sa.Column('to_do_id', sa.Integer(), nullable=True),
     sa.Column('complete', sa.Boolean(), nullable=True),
-    sa.ForeignKeyConstraint(['to_do_id'], ['todo.id'], ),
+    sa.ForeignKeyConstraint(['to_do_id'], ['todos.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
 

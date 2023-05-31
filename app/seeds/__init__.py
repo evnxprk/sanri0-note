@@ -19,14 +19,14 @@ def seed():
         undo_users()
         undo_notebooks()
         undo_notes()
-        undo_tasks()
         undo_todo()
+        undo_tasks()
         # Add a truncate command here for every table that will be seeded.
     seed_users()
     seed_notebooks()
     seed_notes()
-    seed_tasks()
     seed_todo()
+    seed_tasks()
 
     # Add other seed functions here
 
@@ -37,6 +37,6 @@ def undo():
     undo_users()
     undo_notes()
     undo_notebooks()
-    undo_tasks()
     undo_todo()
+    undo_tasks()
     # Add other undo functions here
