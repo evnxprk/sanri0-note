@@ -51,19 +51,6 @@ def upgrade():
         op.execute(f"ALTER TABLE notebooks SET SCHEMA {SCHEMA};")
 
 
-    op.create_table('todos',
-    sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('writer_id', sa.Integer(), nullable=False),
-    sa.Column('title', sa.String(length=100), nullable=False),
-    sa.Column('description', sa.String(length=255), nullable=True),
-    sa.ForeignKeyConstraint(['writer_id'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('id')
-    )
-
-    if environment == "production":
-        op.execute(f"ALTER TABLE todos SET SCHEMA {SCHEMA};")
-
-
     op.create_table('notes',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('writer_id', sa.Integer(), nullable=True),
@@ -78,6 +65,19 @@ def upgrade():
 
     if environment == "production":
         op.execute(f"ALTER TABLE notes SET SCHEMA {SCHEMA};")
+
+    
+    op.create_table('todos',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('writer_id', sa.Integer(), nullable=False),
+    sa.Column('title', sa.String(length=100), nullable=False),
+    sa.Column('description', sa.String(length=255), nullable=True),
+    sa.ForeignKeyConstraint(['writer_id'], ['users.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
+
+    if environment == "production":
+        op.execute(f"ALTER TABLE todos SET SCHEMA {SCHEMA};")
 
 
     op.create_table('tasks',
