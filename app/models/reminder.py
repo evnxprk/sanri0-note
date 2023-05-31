@@ -14,7 +14,7 @@ class Reminder(db.Model):
     due_date = db.Column(db.Date)
 
     writer = db.relationship('User', back_populates='reminders')
-    task = db.relationship('Task', back_populates='reminders')
+    # task = db.relationship('Task', back_populates='reminders')
 
     def to_dict(self):
         return {
