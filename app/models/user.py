@@ -52,6 +52,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String)
     password = db.Column(db.String)
     notes = db.relationship('Note', back_populates='writer')
+    todos = db.relationship('Todo', back_populates='writer')
 
     @property
     def hashed_password(self):
