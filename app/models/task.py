@@ -30,8 +30,8 @@ class Task(db.Model):
         __table_args__ = {'schema': SCHEMA}
     id = db.Column(db.Integer, primary_key=True)
     description = db.Column(db.String)
-    to_do_id = db.Column(db.Integer, db.ForeignKey(
-        add_prefix_for_prod('todo.id')))
+    todo_id = db.Column(db.Integer, db.ForeignKey(
+        add_prefix_for_prod('todos.id')))
     complete = db.Column(db.Boolean)
 
     # reminders = db.relationship('Reminder', back_populates='task')
@@ -40,6 +40,6 @@ class Task(db.Model):
         return {
             'id': self.id,
             'description': self.description,
-            'to_do_id': self.to_do_id,
+            'todo_id': self.todo_id,
             'complete': self.complete,
         }
