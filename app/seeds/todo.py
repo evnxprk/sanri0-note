@@ -64,8 +64,8 @@ def undo_todo():
 
     if environment == "production":
         db.session.execute(
-            f"TRUNCATE table {SCHEMA}.lists RESTART IDENTITY CASCADE;")
+            f"TRUNCATE table {SCHEMA}.todos RESTART IDENTITY CASCADE;")
     else:
-        db.session.execute("DELETE FROM lists")
+        db.session.execute("DELETE FROM todos")
 
     db.session.commit()
