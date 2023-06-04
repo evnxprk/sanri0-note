@@ -30,7 +30,7 @@ class Task(db.Model):
         __table_args__ = {'schema': SCHEMA}
     id = db.Column(db.Integer, primary_key=True)
     description = db.Column(db.String)
-    todo_id = db.Column(db.Integer, db.ForeignKey(
+    to_do_id = db.Column(db.Integer, db.ForeignKey(
         add_prefix_for_prod('todos.id')))
     complete = db.Column(db.Boolean)
 
@@ -40,6 +40,6 @@ class Task(db.Model):
         return {
             'id': self.id,
             'description': self.description,
-            'todo_id': self.todo_id,
+            'to_do_id': self.todo_id,
             'complete': self.complete,
         }
