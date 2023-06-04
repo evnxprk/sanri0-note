@@ -50,20 +50,23 @@ class User(db.Model, UserMixin):
     last_name = db.Column(db.String)
     username = db.Column(db.String)
     email = db.Column(db.String)
-    hashed_password = db.Column(db.String)
-    notes = db.relationship('Note', back_populates='writer')
+    _hashed_password = db.Column(db.String)
+
+    # Updated relationship
     todos = db.relationship('Todo', back_populates='writer')
+
+    notes = db.relationship('Note', back_populates='writer')
 
     @property
     def hashed_password(self):
-        return self.password
+        return self._hashed_password
 
     @hashed_password.setter
     def hashed_password(self, password):
-        self.password = generate_password_hash(password)
+        self._hashed_password = generate_password_hash(password)
 
     def check_password(self, password):
-        return check_password_hash(self.password, password)
+        return check_password_hash(self._hashed_password, password)
 
     def to_dict(self):
         return {

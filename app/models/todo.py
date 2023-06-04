@@ -37,17 +37,15 @@ class Todo(db.Model):
     writer_id = db.Column(db.Integer, db.ForeignKey(
         add_prefix_for_prod('users.id')))
     title = db.Column(db.String)
-    # due_date = db.Column(db.Date)
     description = db.Column(db.String)
 
     writer = db.relationship('User', back_populates='todos')
-    tasks = db.relationship('Task', backref='todos')
+    tasks = db.relationship('Task', backref='todo')  # Updated relationship
 
     def to_dict(self):
         return {
             'id': self.id,
             'writer_id': self.writer_id,
             'title': self.title,
-            # 'due_date': self.due_date,
             'description': self.description
         }

@@ -34,12 +34,10 @@ class Task(db.Model):
         add_prefix_for_prod('todos.id')))
     complete = db.Column(db.Boolean)
 
-    # reminders = db.relationship('Reminder', back_populates='task')
-
     def to_dict(self):
         return {
             'id': self.id,
             'description': self.description,
-            'to_do_id': self.todo_id,
+            'to_do_id': self.to_do_id,
             'complete': self.complete,
         }
