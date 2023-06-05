@@ -9,10 +9,10 @@ export default function DeleteList() {
   const dispatch = useDispatch();
   const { closeModal } = useModal();
   const history = useHistory();
-  const { listId } = useParams();
+  const { todoId } = useParams();
 
   const handleDelete = async () => {
-    await dispatch(deleteListThunk(listId));
+    await dispatch(deleteListThunk(todoId));
     await dispatch(getAllListThunk());
     closeModal();
     history.push("/list");

@@ -65,16 +65,16 @@ function App() {
           <Route exact path="/todos">
             <List />
           </Route>
-          <Route exact path="/todos/:listId/edit">
+          <Route exact path="/todos/:todoId/edit">
             <EditLists />
           </Route>
           <Route exact path="/todos/new">
             <CreateList />
           </Route>
-          <Route exact path="/todos/:listId/delete">
+          <Route exact path="/todos/:todoId/delete">
             <DeleteList />
           </Route>
-          <Route exact path="/todos/:listId/">
+          <Route exact path="/todos/:todoId/">
             <ListDetails />
           </Route>
           <Route exact path="/login">

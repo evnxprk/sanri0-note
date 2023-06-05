@@ -26,9 +26,9 @@ const editList = (list) => ({
   payload: list,
 });
 
-const deleteList = (listId) => ({
+const deleteList = (todoId) => ({
   type: DELETE_LIST,
-  payload: listId,
+  payload: todoId,
 });
 
 // thunks

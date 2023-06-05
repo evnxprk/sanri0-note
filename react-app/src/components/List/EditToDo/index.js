@@ -12,7 +12,7 @@ import {
 export default function EditLists() {
   const myList = useSelector((state) => state.listReducer.singleList);
   const dispatch = useDispatch();
-  const { listId } = useParams();
+  const { todoId } = useParams();
   const history = useHistory();
   const { closeModal, setModalContent, ModalContent } = useModal();
   const [title, setTitle] = useState(myList.title);
@@ -21,10 +21,10 @@ export default function EditLists() {
   const sessionUser = useSelector((state) => state.session.user);
 
   useEffect(() => {
-    dispatch(getOneListThunk(listId)).catch((err) => console.log(err));
+    dispatch(getOneListThunk(todoId)).catch((err) => console.log(err));
     setTitle(myList.title);
     setDescription(myList.description);
-  }, [dispatch, listId]);
+  }, [dispatch, todoId]);
 
   useEffect(() => {
     setTitle(myList.title);
@@ -59,7 +59,7 @@ export default function EditLists() {
     setErrors(errors);
 
     if (errors.length === 0) {
-      await dispatch(editListThunk(listData, listId))
+      await dispatch(editListThunk(listData, todoId))
         .then(() => closeModal())
         .catch(async (res) => {
           if (res && res.json) {
@@ -77,8 +77,8 @@ export default function EditLists() {
 
   const [listToDelete, setListToDelete] = useState(null);
 
-  const handleConfirmDelete = (listId) => {
-    dispatch(deleteListThunk(listId))
+  const handleConfirmDelete = (todoId) => {
+    dispatch(deleteListThunk(todoId))
       .then(() => {
         setListToDelete(null);
         history.push("/");
@@ -139,7 +139,7 @@ export default function EditLists() {
               setModalContent(
                 <div>
                   <p>Are you sure you want to delete this list?</p>
-                  <button onClick={() => handleConfirmDelete(listId)}>
+                  <button onClick={() => handleConfirmDelete(todoId)}>
                     Yes
                   </button>
                   <button onClick={() => cancelFunc()}>No</button>

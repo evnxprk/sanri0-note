@@ -18,8 +18,8 @@ export default function Lists() {
     return <h1 className="first-list">Create your first list!</h1>;
   }
 
-  const handleTaskClick = (listId) => {
-    history.push(`/todo/${listId}`);
+  const handleTaskClick = (todoId) => {
+    history.push(`/todos/${todoId}`);
   };
 
   return (

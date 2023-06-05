@@ -6,18 +6,18 @@ import { deleteListThunk } from "../../../store/list";
 export default function ListDetails() {
   const dispatch = useDispatch();
   const history = useHistory();
-  const { listId } = useParams();
+  const { todoId } = useParams();
   const lists = useSelector((state) => state.listReducer.allList);
-  const list = lists[listId];
+  const list = lists[todoId];
 
   const handleEditList = () => {
-    history.push(`/todo/${listId}/edit`);
+    history.push(`/todos/${todoId}/edit`);
   };
 
   const handleDeleteList = () => {
-    dispatch(deleteListThunk(listId))
+    dispatch(deleteListThunk(todoId))
       .then(() => {
-        history.push("/tasks");
+        history.push("/");
       })
       .catch((error) => {
         console.log(error);
