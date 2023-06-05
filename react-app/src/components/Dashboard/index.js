@@ -66,9 +66,10 @@ export default function Dashboard() {
           <NavLink to="/notebooks/new" className="create-notebook-button">
             <img style={{ width: "30px" }} src={cinigif}></img> Create Notebook
           </NavLink>
-          <NavLink to="/todos/new" className="create-list-button">
+          <NavLink to="/todo/new" exact className="create-list-button">
             <img style={{ width: "30px" }} src={twingif}></img> Create List
           </NavLink>
+
           {/* <NavLink to="/notes" className="all-notes-button">
             <img style={{ width: "30px" }} src={cini}></img> My Notes
           </NavLink>
@@ -107,7 +108,7 @@ export default function Dashboard() {
       <div className="main-content">
         <div className="notebooks-container">
           {/* <img style={{ width: "30px" }} src={tuxsam}> */}
-          <h1 className="section-title">Notebooks  </h1>
+          <h1 className="section-title">Notebooks </h1>
           {/* </img> */}
           <Notebook />
         </div>

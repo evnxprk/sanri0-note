@@ -100,7 +100,7 @@ export default function EditTasks() {
             alignItems: "center",
           }}
         >
-          Task that need to be done:
+          Task that need to be done: 
           {myTask.description}
         </h3>
         <div className="form-errors">

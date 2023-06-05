@@ -68,9 +68,9 @@ function App() {
           <Route exact path="/todos/:todoId">
             <EditLists />
           </Route>
-          <Route exact path="/todos/new">
-            <CreateList />
-          </Route>
+        <Route exact path='/todo/new'>
+          <CreateList />
+        </Route>
           <Route exact path="/todos/:todoId/delete">
             <DeleteList />
           </Route>

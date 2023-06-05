@@ -58,7 +58,7 @@ export const getOneListThunk = (id) => async (dispatch) => {
 };
 
 export const addListThunk = (list) => async (dispatch) => {
-  const response = await fetch("/api/todos/", {
+  const response = await fetch("/api/todos", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
