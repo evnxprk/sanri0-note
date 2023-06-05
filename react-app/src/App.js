@@ -50,7 +50,7 @@ function App() {
           <Route exact path="/tasks/new">
             <CreateTask />
           </Route>
-          <Route exact path="/tasks/:taskId/edit">
+          <Route exact path="/tasks/:taskId">
             <EditTask />
           </Route>
           <Route exact path="/tasks/:taskId/delete">
@@ -59,13 +59,13 @@ function App() {
           <Route exact path="/tasks/">
             <Tasks />
           </Route>
-          <Route exact path="/tasks/:taskId">
+          {/* <Route exact path="/tasks/:taskId">
             <TaskDetails />
-          </Route>
+          </Route> */}
           <Route exact path="/todos">
             <List />
           </Route>
-          <Route exact path="/todos/:todoId/edit">
+          <Route exact path="/todos/:todoId">
             <EditLists />
           </Route>
           <Route exact path="/todos/new">
@@ -74,9 +74,9 @@ function App() {
           <Route exact path="/todos/:todoId/delete">
             <DeleteList />
           </Route>
-          <Route exact path="/todos/:todoId/">
+          {/* <Route exact path="/todos/:todoId/">
             <ListDetails />
-          </Route>
+          </Route> */}
           <Route exact path="/login">
             <LoginFormPage />
           </Route>
@@ -89,7 +89,7 @@ function App() {
           <Route exact path="/notes/new">
             <CreateNote />
           </Route>
-          <Route exact path="/notes/:noteId/edit">
+          <Route exact path="/notes/:noteId">
             <EditNote />
           </Route>
           <Route exact path="/notes/:noteId/delete">
@@ -104,15 +104,15 @@ function App() {
           <Route exact path="/notebooks/new">
             <CreateNotebook />
           </Route>
-          <Route exact path="/notebooks/:notebookId/edit">
+          <Route exact path="/notebooks/:notebookId">
             <EditNotebook />
           </Route>
-          <Route exact path="/notes/:noteId">
+          {/* <Route exact path="/notes/:noteId">
             <NoteDetails />
           </Route>
           <Route exact path="/notebooks/:notebookId">
             <NotebookDetails />
-          </Route>
+          </Route> */}
         </Switch>
       )}
     </>

@@ -5,6 +5,8 @@ import { useHistory, useParams } from "react-router-dom";
 import { useModal } from "../../../context/Modal";
 import Modal from "../../Modal";
 import { deleteTaskThunk, editTaskThunk, getOneTaskThunk } from "../../../store/task";
+import badz from '../../../images/pompom.gif'
+import './edit.css'
 
 export default function EditTasks() {
   const myTask = useSelector((state) => state.taskReducer.singleTask);
@@ -60,7 +62,7 @@ export default function EditTasks() {
           }
         });
       setDescription("");
-      history.push("/tasks");
+      history.push("/");
     }
   };
 
@@ -89,7 +91,17 @@ export default function EditTasks() {
   return (
     <div className="editor-main-container">
       <div className="edit-task-main-box">
-        <h1 className="edit-task-description">{myTask.description}</h1>
+        <h3
+          className="edit-task-description"
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          Task that need to be done:
+          {myTask.description}
+        </h3>
         <div className="form-errors">
           {errors.length > 0 && (
             <ul>
@@ -99,6 +111,18 @@ export default function EditTasks() {
             </ul>
           )}
         </div>
+        <h2
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          {" "}
+          Edit Task{" "}
+          <img style={{ width: "40px", marginLeft: "10px",background:'transparent'
+         }} src={badz}></img>
+        </h2>
         <form onSubmit={handleSubmit}>
           <label>Description</label>
           <textarea

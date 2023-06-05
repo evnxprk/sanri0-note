@@ -2,13 +2,16 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { getAllTasksThunk } from "../../../store/task";
-import "../tasks.css"; // Import the CSS file for Tasks component
+import "./tasks.css"; // Import the CSS file for Tasks component
 
 export default function Tasks() {
   const dispatch = useDispatch();
   const history = useHistory();
   const getAllTasks = useSelector((state) => state.taskReducer);
   const tasks = Object.values(getAllTasks.allTasks);
+  const completedUpdated = useSelector(
+    (state) => state.taskReducer.completedUpdated
+  ); // New state variable
 
   useEffect(() => {
     dispatch(getAllTasksThunk());
@@ -27,7 +30,9 @@ export default function Tasks() {
       {tasks.map((task) => (
         <div
           key={task.id}
-          className="task-box"
+          className={`task-box ${task.completed ? "completed" : ""} ${
+            completedUpdated && task.completed ? "completed-updated" : ""
+          }`}
           onClick={() => handleTaskClick(task.id)}
         >
           {task.description}

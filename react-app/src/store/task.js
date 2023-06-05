@@ -74,18 +74,37 @@ export const addTaskThunk = (task) => async (dispatch) => {
 };
 
 
-export const editTaskThunk = (task, id) => async (dispatch) => {
-  const res = await fetch(`/api/tasks/${id}`, {
+// export const editTaskThunk = (task, id) => async (dispatch) => {
+//   const res = await fetch(`/api/tasks/${id}`, {
+//     method: "PUT",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify(task),
+//   });
+//   if (res.ok) {
+//     const data = await res.json();
+//     dispatch(editTask(data));
+//     // return data;
+//   }
+// };
+
+
+export const editTaskThunk = (taskId, updatedTask) => async (dispatch) => {
+  const res = await fetch(`/api/tasks/${taskId}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(task),
+    body: JSON.stringify(updatedTask),
   });
   if (res.ok) {
     const data = await res.json();
-    dispatch(editTask(data));
-    // return data;
+    const toggledTask = {
+      ...data,
+      completed: !data.completed, // Toggle the completed property
+    };
+    dispatch(editTask(toggledTask));
   }
 };
 

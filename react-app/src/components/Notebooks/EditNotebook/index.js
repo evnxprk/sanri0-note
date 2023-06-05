@@ -7,12 +7,14 @@ import { useModal } from "../../../context/Modal";
 import Modal from "../../Modal";
 import "./editNotebook.css";
 import { getNotesByNotebookIdThunk } from "../../../store/note";
+import frog from '../../../images/frog.gif'
 
 export default function EditNotebook() {
   const dispatch = useDispatch();
   const history = useHistory();
   const { notebookId } = useParams();
   const notebook = useSelector((state) => state.notebookReducer.singleNotebook);
+  console.log('notebook: ', notebook)
   const [name, setName] = useState("");
   const [errors, setErrors] = useState([]);
   const sessionUser = useSelector((state) => state.session.user);
@@ -22,16 +24,16 @@ export default function EditNotebook() {
   const notesAttached = Object.values(notesAttachedSel.allNotes);
   // console.log("hi", notesAttached);
 
+  useEffect(() => {
+    if (notebook?.name) {
+      setName(notebook?.name);
+    }
+  }, [notebook]);
 
   useEffect(() => {
     dispatch(getNotesByNotebookIdThunk(notebookId));
   }, [dispatch]);
 
-  useEffect(() => {
-    if (notebook.name) {
-      setName(notebook.name);
-    }
-  }, [notebook]);
 
   useEffect(() => {
     const errors = [];
@@ -116,8 +118,16 @@ export default function EditNotebook() {
           <div
             style={{ fontSize: "24px", textAlign: "center", marginTop: "10px" }}
           >
-            <img style={{ width: "100px", marginLeft: "20px" }} />
             Edit Notebook
+            <img
+              style={{
+                width: "40px",
+                marginLeft: "8px",
+                // display: 'flex',
+                alignItems:'center'
+              }}
+              src={frog}
+            ></img>
           </div>
 
           <form className="edit-form" onSubmit={handleSubmit}>

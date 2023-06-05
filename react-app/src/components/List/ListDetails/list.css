@@ -1,0 +1,9 @@
+.list-title {
+    color: rgb(238, 165, 179);
+    display: flex;
+    text-align: center;
+}
+
+.list-desc {
+    color: rgb(225, 163, 233);
+}

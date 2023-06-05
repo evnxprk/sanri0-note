@@ -17,7 +17,7 @@
 }
 
 .task-box {
-  background-image: url('../../images/_.jpeg');
+  background-image: url('../../../images/_.jpeg');
    background-position: center;
   background-size: cover; 
   border: 4px solid rgb(164, 193, 243);
@@ -84,5 +84,8 @@
   color: #000;
 }
 
+.completed {
+  text-decoration: line-through;
+}
 
 

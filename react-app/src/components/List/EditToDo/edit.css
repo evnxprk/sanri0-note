@@ -1,0 +1,26 @@
+.list-details {
+    /* border-bottom: 2px rgb(234, 132, 132) solid; */
+    border: 2px rgb(234, 132, 132) solid;
+    border-radius: 8px;
+}
+
+.edit-list-title {
+    color: rgb(232, 161, 172);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.edit-list-description {
+    color: rgb(227, 151, 164);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.list-form {
+    border: 1px solid black;
+    border-radius:8px;
+}

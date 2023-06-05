@@ -8,6 +8,8 @@ import {
   editListThunk,
   getOneListThunk,
 } from "../../../store/list";
+import './edit.css'
+import cinni from '../../../images/cinicookiegif.gif'
 
 export default function EditLists() {
   const myList = useSelector((state) => state.listReducer.singleList);
@@ -100,8 +102,22 @@ export default function EditLists() {
   return (
     <div className="editor-main-container">
       <div className="edit-list-main-box">
-        <h1 className="edit-list-title">{myList.title}</h1>
-        <h1 className="edit-list-description">{myList.description}</h1>
+        <div className="list-details">
+          <h4 className="edit-list-title">Title: {myList.title}</h4>
+          <h4 className="edit-list-description">
+            Description: {myList.description}
+          </h4>
+        </div>
+        <h2
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          {" "}
+          Edit List <img style={{ width: "40px", marginLeft:"10px" }} src={cinni}></img>
+        </h2>
         <div className="form-errors">
           {errors.length > 0 && (
             <ul>
@@ -111,7 +127,7 @@ export default function EditLists() {
             </ul>
           )}
         </div>
-        <form onSubmit={handleSubmit}>
+        <form className= 'list-form'onSubmit={handleSubmit}>
           <label>Title</label>
           <textarea
             type="text"
@@ -120,7 +136,7 @@ export default function EditLists() {
             placeholder="title"
             required
           />
-          <label>Description</label>
+          <label style={{marginTop: '12px'}}>Description</label>
           <textarea
             type="text"
             value={description}

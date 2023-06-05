@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { deleteListThunk } from "../../../store/list";
+import './list.css'
 
 export default function ListDetails() {
   const dispatch = useDispatch();
@@ -30,10 +31,14 @@ export default function ListDetails() {
 
   return (
     <div>
-      <h1>{list.title}</h1>
-      <h4>{list.description}</h4>
-      <button onClick={handleEditList}>Edit</button>
-      <button onClick={handleDeleteList}>Delete</button>
+      <h1 className="list-title">{list.title}</h1>
+      <h4 className="list-desc"> {list.description}</h4>
+      <button onClick={handleEditList} className="list-edit">
+        Edit
+      </button>
+      <button onClick={handleDeleteList} className="list-delete">
+        Delete
+      </button>
     </div>
   );
 }
