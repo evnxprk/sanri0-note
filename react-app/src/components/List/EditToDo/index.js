@@ -100,8 +100,8 @@ export default function EditLists() {
   if (!Object.values(myList).length) return null;
 
   return (
-    <div className="editor-main-container">
-      <div className="edit-list-main-box">
+    <div className="editor-main-container" git>
+      <div className="edit-list-main-box" >
         <div className="list-details">
           <h4 className="edit-list-title">Title: {myList.title}</h4>
           <h4 className="edit-list-description">

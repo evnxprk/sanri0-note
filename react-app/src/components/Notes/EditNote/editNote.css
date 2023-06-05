@@ -62,8 +62,14 @@ button[type="submit"] {
 }
 
 .edit-note-title {
-  text-decoration: underline;
+ color: pink;
 }
+
+.note-description {
+  height: 150px; /* Adjust the height value as desired */
+  /* resize: vertical; Allows vertical resizing */
+}
+
 
 .select-notebook-dropdown {
   display: flex;

@@ -9,8 +9,7 @@ import { removeNoteThunk } from "../../../store/note";
 import Modal from "../../Modal";
 import { clearSingleNoteThunk } from "../../../store/note";
 import "./editNote.css";
-import Quill from "quill";
-import "quill/dist/quill.snow.css";
+import melody from '../../../images/melody.gif'
 
 export default function EditNote() {
   const myNote = useSelector((state) => state.notesReducer.singleNote);
@@ -164,6 +163,16 @@ const handleSubmit = async (e) => {
     <div className="editor-main-container">
       <div className="edit-note-main-box">
         <h1 className="edit-note-title">{myNote.title}</h1>
+        <h2 className="edit-note">
+          Edit Note{" "}
+          <img
+            style={{
+              width: "40px",
+              marginLeft: "8px",
+            }}
+            src={melody}
+          ></img>{" "}
+        </h2>
         <div className="form-errors">
           {errors.length > 0 && (
             <ul>
@@ -213,7 +222,9 @@ const handleSubmit = async (e) => {
             onChange={(e) => setDescription(e.target.value)}
             placeholder="description"
             required
+            className="note-description" // Add the class here
           />
+
           <button
             type="submit"
             // value={myNoteNotebook.name}

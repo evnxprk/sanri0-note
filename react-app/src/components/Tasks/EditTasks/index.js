@@ -90,7 +90,8 @@ export default function EditTasks() {
 
   return (
     <div className="editor-main-container">
-      <div className="edit-task-main-box">
+      <div className="edit-task-main-box" style={{border: '2px solid rgb(239, 205, 205)',
+  borderRadius: '16px'}}>
         <h3
           className="edit-task-description"
           style={{
