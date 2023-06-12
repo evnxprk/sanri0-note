@@ -1,20 +1,20 @@
 import { editNotebookThunk } from "../../../store/notebook";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams, Link } from "react-router-dom";
 import { deleteNotebookThunk } from "../../../store/notebook";
 import { useModal } from "../../../context/Modal";
 import Modal from "../../Modal";
 import "./editNotebook.css";
 import { getNotesByNotebookIdThunk } from "../../../store/note";
-import frog from '../../../images/frog.gif'
+import frog from "../../../images/frog.gif";
 
 export default function EditNotebook() {
   const dispatch = useDispatch();
   const history = useHistory();
   const { notebookId } = useParams();
   const notebook = useSelector((state) => state.notebookReducer.singleNotebook);
-  console.log('notebook: ', notebook)
+  console.log("notebook: ", notebook);
   const [name, setName] = useState("");
   const [errors, setErrors] = useState([]);
   const sessionUser = useSelector((state) => state.session.user);
@@ -33,7 +33,6 @@ export default function EditNotebook() {
   useEffect(() => {
     dispatch(getNotesByNotebookIdThunk(notebookId));
   }, [dispatch]);
-
 
   useEffect(() => {
     const errors = [];
@@ -124,7 +123,7 @@ export default function EditNotebook() {
                 width: "40px",
                 marginLeft: "8px",
                 // display: 'flex',
-                alignItems:'center'
+                alignItems: "center",
               }}
               src={frog}
             ></img>
@@ -176,7 +175,7 @@ export default function EditNotebook() {
           Notes Attached
           {notesAttached.map((note) => (
             <li style={{ fontWeight: "100", fontSize: "15px" }}>
-              {note.title}
+              <Link to={`/notes/${note.id}`}>{note.title}</Link>
             </li>
           ))}
         </ul>
@@ -184,4 +183,3 @@ export default function EditNotebook() {
     </>
   );
 }
-
