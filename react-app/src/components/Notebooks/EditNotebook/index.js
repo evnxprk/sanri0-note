@@ -174,7 +174,7 @@ export default function EditNotebook() {
         >
           Notes Attached
           {notesAttached.map((note) => (
-            <li style={{ fontWeight: "100", fontSize: "15px" }}>
+            <li style={{ fontWeight: "100", fontSize: "15px", color: 'black'}}>
               <Link to={`/notes/${note.id}`}>{note.title}</Link>
             </li>
           ))}
