@@ -5,7 +5,7 @@ import ProfileButton from "../Navigation/ProfileButton";
 import { Link, NavLink } from "react-router-dom";
 import pochogif from "../../images/pochacco.gif";
 import pomgif from "../../images/pompom.gif";
-import notepage from "../../images/Cinnamoroll.jpg";
+import header from "../../images/pochacco.jpg";
 import "./Splashpage.css";
 
 export default function SplashPage() {
@@ -18,23 +18,17 @@ export default function SplashPage() {
 
   return (
     <div className="splash-page-container">
-      <div className="splash-nav">
-        <ProfileButton user={sessionUser} />
-      </div>
+      
 
-      <div className="splash-content">
-        <div className="notepage-photo">
-          <img id="note-logo" src={notepage} alt="Sanrio Note logo" />
-        </div>
-
-        <div className="description">
-          <h1 className="title">Welcome to Sanrio Note</h1>
-          <p className="subtitle">
+      <div className="splash-header">
+        <div className="header-content">
+          <img id="note-logo" src={header} alt="Sanrio Note logo" />
+          <h1 className="header-title">Welcome to Sanrio Note</h1>
+          <p className="header-subtitle">
             Keep track of your notes and notebooks. Create a single note, or
             create multiple. The options are endless when it comes to organizing
             your thoughts.
           </p>
-
           <div className="cta-buttons">
             <Link to="/signup">
               <button className="sign-up-button">Sign Up For Free</button>
@@ -47,10 +41,8 @@ export default function SplashPage() {
       </div>
 
       <div className="features">
-        <h2 className="features-title">Features</h2>
-
         <div className="feature">
-          <img src={notepage} alt="Notebook icon" className="feature-icon" />
+          <img src={header} alt="Notebook icon" className="feature-icon" />
           <h3 className="feature-title">Notebooks</h3>
           <p className="feature-description">
             Organize your notes into notebooks, and keep them all in one place.
@@ -58,7 +50,7 @@ export default function SplashPage() {
         </div>
 
         <div className="feature">
-          <img src={notepage} alt="Note icon" className="feature-icon" />
+          <img src={header} alt="Note icon" className="feature-icon" />
           <h3 className="feature-title">Notes</h3>
           <p className="feature-description">
             Create notes with ease, and customize them to fit your needs.
@@ -66,7 +58,7 @@ export default function SplashPage() {
         </div>
 
         <div className="feature">
-          <img src={notepage} alt="Calendar icon" className="feature-icon" />
+          <img src={header} alt="Calendar icon" className="feature-icon" />
           <h3 className="feature-title">Reminders</h3>
           <p className="feature-description">
             Set reminders for your notes, and never forget an important task
@@ -74,13 +66,9 @@ export default function SplashPage() {
           </p>
         </div>
       </div>
- 
 
       <div className="pricing">
-        {/* <h2 className="pricing-title">Pricing</h2> */}
-
         <div className="plan">
-          {/* <h3 className="plan-title">The best part of all this is that it's free!</h3> */}
           <p className="plan-description">
             Get started with Sanrio Note for free, and enjoy basic features like
             notes and notebooks.
@@ -126,16 +114,9 @@ export default function SplashPage() {
         </div>
 
         <div className="legal">
-          {/* <NavLink to="/terms" className="legal-link">
-            Terms of Service
-          </NavLink>
-          <NavLink to="/privacy" className="legal-link">
-            Privacy Policy
-          </NavLink> */}
           <span className="legal-text">© 2023 Sanrio Note</span>
         </div>
       </div>
     </div>
   );
 }
-

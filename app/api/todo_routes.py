@@ -3,86 +3,101 @@ from flask_login import login_required, current_user
 from app.models import User, db, Task, Todo
 from app.forms import TodoForm
 
+
 def validation_errors_to_error_messages(validation_errors):
     """
-    Simple function that turns the WTForms validation errors into a simple list
+    Convert WTForms validation errors to a simple list of error messages
     """
-    errorMessages = []
-    for field in validation_errors:
-        for error in validation_errors[field]:
-            errorMessages.append(f'{field} : {error}')
-    return errorMessages
+    error_messages = []
+    for field, errors in validation_errors.items():
+        for error in errors:
+            error_messages.append(f'{field} : {error}')
+    return error_messages
+
 
 todo_routes = Blueprint('todos', __name__)
 
-#Get All Todo
+# Get all todos
+
+
 @todo_routes.route('/', methods=['GET'])
 @login_required
-
 def get_all_todo():
-    todo = Todo.query.filter(Todo.writer_id == current_user.id).all()
-    return [todos.to_dict() for todos in todo]
-    # return jsonify(todo_dict)
+    todos = Todo.query.filter(Todo.writer_id == current_user.id).all()
+    return jsonify([todo.to_dict() for todo in todos])
 
-#Get One Todo
+# Get single todo by ID
+
+
 @todo_routes.route('/<int:id>', methods=['GET'])
 @login_required
-
 def get_one_todo(id):
     todo = Todo.query.get(id)
-    if todo is None: 
+    if todo is None:
         return jsonify({'error': 'Todo not found'}), 404
     return jsonify(todo.to_dict())
+
+# Create a todo
 
 
 @todo_routes.route('/', methods=['POST'])
 @login_required
 def create_todo():
     form = TodoForm()
-    form['csrf_token'].data = request.cookies['csrf_token']
+    form.csrf_token.data = request.cookies['csrf_token']
+
     if form.validate_on_submit():
-        print("Form data:", form.data)
-        writer_id = int(form.data['writer_id'])
-        todo = Todo(
-            title=form.data['title'],
-            writer_id= form.data['writer_id']
-        )
-        db.session.add(todo)
-        db.session.commit()
-        return todo.to_dict(), 201
-    return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+        try:
+            todo = Todo(
+                title=form.title.data,
+                description=form.description.data,
+                writer_id=current_user.id  # Ensure the writer_id is set to the current user
+            )
+            db.session.add(todo)
+            db.session.commit()
+            return jsonify(todo.to_dict()), 201
+        except Exception as e:
+            db.session.rollback()
+            return jsonify({'error': str(e)}), 500
+    return jsonify({'errors': validation_errors_to_error_messages(form.errors)}), 400
+
+# Edit a todo
 
 
-#Edit Todo
-
-@todo_routes.route('/<int:id>',methods=['PUT'])
+@todo_routes.route('/<int:id>', methods=['PUT'])
 @login_required
 def edit_todo(id):
-    todo= Todo.query.get(id)
+    todo = Todo.query.get(id)
     if todo is None:
         return jsonify({'error': 'Todo not found'}), 404
+
     form = TodoForm()
-    form['csrf_token'].data = request.cookies['csrf_token']
+    form.csrf_token.data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        todo.title = form.data['title']
-        todo.description = form.data['description']
+        try:
+            todo.title = form.title.data
+            todo.description = form.description.data
 
-        db.session.commit()
-        todo_dict = todo.to_dict()
-        return todo_dict
-    return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+            db.session.commit()
+            return jsonify(todo.to_dict())
+        except Exception as e:
+            db.session.rollback()
+            return jsonify({'error': str(e)}), 500
+    return jsonify({'errors': validation_errors_to_error_messages(form.errors)}), 400
 
-#Delete Todo
+# Delete a todo
 
-@todo_routes.route('/<int:id>/delete', methods=["DELETE"])
+
+@todo_routes.route('/<int:id>/delete', methods=['DELETE'])
 @login_required
 def delete_todo(id):
     todo = Todo.query.get(id)
     if todo is None:
-        return jsonify({'error': "Todo Not Found"}), 404
-    db.session.delete(todo)
-    db.session.commit()
-    return jsonify({"message": "Todo Successfully Deleted"}), 200
-
-
-
+        return jsonify({'error': 'Todo not found'}), 404
+    try:
+        db.session.delete(todo)
+        db.session.commit()
+        return jsonify({"message": "Todo successfully deleted"}), 200
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': str(e)}), 500

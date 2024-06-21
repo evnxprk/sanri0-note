@@ -1,37 +1,95 @@
-.profile-dropdown {
-  position: absolute;
-}
-
-.hidden {
-  display: none;
- 
-}
-
-.profile-button {
-  display: flex;
-
-}
-
-.melody-logo {
-border: radius 10em;
-width: 75px;
-height: 60px
-}
-
-.navbar {
-  /* border: 2px solid black */
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-.navbar > div {
-  font-style:italic;
-  padding-top: 20px;
-}
+/* Navigation.css */
 
 .nav-link {
   text-decoration: none;
   color: rgb(246, 120, 141);
   font-size: 30px;
+  cursor: pointer;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between; /* Ensure items are spaced evenly */
+  align-items: center;
+  padding: 10px 20px; /* Padding for spacing */
+  background-color: #fff; /* Optional: Background color for navbar */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Box shadow for navbar */
+}
+
+.melody-logo {
+  width: 75px;
+  height: 60px;
+  border-radius: 10em; /* Rounded border */
+  cursor: pointer;
+}
+
+.splash-nav {
+  display: flex;
+  align-items: center;
+}
+
+/* Adjust ProfileButton dropdown styles */
+.profile-dropdown {
+  position: absolute;
+  top: 50px; /* Adjust as needed */
+  right: 0;
+  border: 1px solid #ccc;
+  box-shadow: 2px 2px 5px #ccc;
+  padding: 0.5rem;
+  z-index: 1;
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(206, 206, 206);
+}
+
+.hidden {
+  display: none;
+}
+
+/* ProfileButton styles */
+.profile-button {
+  display: flex;
+  align-items: center;
+}
+
+/* Optional: Style adjustments for dropdown appearance */
+.profile-dropdown li {
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+}
+
+.profile-dropdown li:hover {
+  color: white;
+  background-color: #007bff;
+}
+
+.profile-dropdown button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.profile-dropdown button:hover {
+  color: white;
+}
+
+.profile-dropdown::before {
+  content: "";
+  position: absolute;
+  top: -7px;
+  right: 10px;
+  border-style: solid;
+  border-width: 0 7px 7px 7px;
+  border-color: transparent transparent #ccc transparent;
+}
+
+.profile-dropdown::after {
+  content: "";
+  position: absolute;
+  top: -6px;
+  right: 10px;
+  border-style: solid;
+  border-width: 0 6px 6px 6px;
+  border-color: transparent transparent white transparent;
 }

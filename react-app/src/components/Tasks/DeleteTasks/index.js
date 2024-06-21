@@ -1,21 +1,30 @@
+// DeleteTask.js
+
 import React from "react";
 import { useDispatch } from "react-redux";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useModal } from "../../../context/Modal";
-import { deleteTaskThunk, getAllTasksThunk } from "../../../store/task";
+import { deleteTaskThunk } from "../../../store/task";
+import { useHistory } from "react-router-dom";
 
 export default function DeleteTask() {
   const dispatch = useDispatch();
   const { closeModal } = useModal();
-  const history = useHistory();
   const { taskId } = useParams();
+  const history = useHistory()
 
-  const handleDelete = async () => {
-    await dispatch(deleteTaskThunk(taskId));
-    await dispatch(getAllTasksThunk());
-    closeModal();
-    history.push("/tasks");
-  };
+const handleConfirmDelete = () => {
+  dispatch(deleteTaskThunk(taskId))
+    .then(() => {
+      history.push("/");
+      closeModal();
+    })
+    .catch((error) => {
+      console.error("Error deleting task:", error);
+      // Handle error as needed
+    });
+};
+
 
   const handleCancel = () => {
     closeModal();
@@ -25,7 +34,7 @@ export default function DeleteTask() {
     <>
       <h1>Are you sure you want to delete this task?</h1>
       <button
-        onClick={handleDelete}
+        onClick={handleConfirmDelete}
         style={{ backgroundColor: "red", color: "white" }}
       >
         Yes

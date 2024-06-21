@@ -1,58 +1,54 @@
-
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
-import { useModal } from "../../../context/Modal";
-import Modal from "../../Modal";
-import { deleteTaskThunk, editTaskThunk, getOneTaskThunk } from "../../../store/task";
-import badz from '../../../images/pompom.gif'
-import './edit.css'
+import {
+  deleteTaskThunk,
+  editTaskThunk,
+  getOneTaskThunk,
+} from "../../../store/task";
+import badz from "../../../images/pompom.gif";
+import "./edit.css";
 
 export default function EditTasks() {
-  const myTask = useSelector((state) => state.taskReducer.singleTask);
   const dispatch = useDispatch();
   const { taskId } = useParams();
   const history = useHistory();
-  const { closeModal, setModalContent, ModalContent } = useModal();
-  const [description, setDescription] = useState(myTask.description);
-  const [errors, setErrors] = useState([]);
   const sessionUser = useSelector((state) => state.session.user);
+  const [description, setDescription] = useState("");
+  const [completedUI, setCompletedUI] = useState(false);
+  const [errors, setErrors] = useState([]);
+  const myTask = useSelector((state) => state.taskReducer.singleTask);
 
   useEffect(() => {
-   
-    dispatch(getOneTaskThunk(taskId)).catch((err) => console.log(err));
-    setDescription(myTask.description);
-  }, [dispatch, taskId]);
-
-  useEffect(() => {
-    setDescription(myTask.description);
+    if (myTask) {
+      setDescription(myTask.description);
+      setCompletedUI(myTask.completed);
+    }
   }, [myTask]);
 
-  // useEffect(() => {
-  //   if (note) {
-  //     setTitle(note.title);
-  //     setDescription(note.description);
-  //   }
-  // }, [note]);
+  useEffect(() => {
+    dispatch(getOneTaskThunk(taskId)).catch((err) => console.log(err));
+  }, [dispatch, taskId]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const taskData = {
       description,
       to_do_id: sessionUser.id,
+      completed: completedUI,
     };
 
     const errors = [];
     if (description.length < 2 || description.length > 255) {
-      errors.push(
-        "Description must be longer than 2 and less than 255 characters."
-      );
+      errors.push("Description must be between 2 and 255 characters.");
     }
     setErrors(errors);
 
     if (errors.length === 0) {
-      await dispatch(editTaskThunk(taskData, taskId))
-        .then(() => closeModal())
+      await dispatch(editTaskThunk(taskId, taskData))
+        .then(() => {
+          history.push("/"); // Redirect to home page after save
+        })
         .catch(async (res) => {
           if (res && res.json) {
             const data = await res.json();
@@ -61,47 +57,40 @@ export default function EditTasks() {
             console.error("Invalid response format:", res);
           }
         });
-      setDescription("");
-      history.push("/");
     }
   };
 
-  const [taskToDelete, setTaskToDelete] = useState(null);
-
-  const handleConfirmDelete = (taskId) => {
+  const handleConfirmDelete = () => {
     dispatch(deleteTaskThunk(taskId))
       .then(() => {
-        setTaskToDelete(null);
-        history.push("/");
-        closeModal();
-        setModalContent(null);
+        history.push("/"); // Redirect to home page after successful delete
       })
-      .catch((err) => console.log(err));
+      .catch((error) => {
+        console.error("Error deleting task:", error);
+        // Handle error as needed
+      });
   };
 
-  const cancelFunc = () => {
-    setTaskToDelete(null);
-    closeModal();
+  const handleDeleteClick = () => {
+    if (window.confirm("Are you sure you want to delete this task?")) {
+      handleConfirmDelete();
+    }
   };
 
-  //* Editor Merge
+  const handleCheckboxChange = (e) => {
+    setCompletedUI(e.target.checked);
+    if (!e.target.checked) {
+      setDescription(myTask.description);
+    }
+  };
 
-  if (!Object.values(myTask).length) return null;
+  if (!myTask) return null;
 
   return (
     <div className="editor-main-container">
-      <div className="edit-task-main-box" style={{border: '2px solid rgb(239, 205, 205)',
-  borderRadius: '16px'}}>
-        <h3
-          className="edit-task-description"
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          Task that need to be done: 
-          {myTask.description}
+      <div className="edit-task-main-box">
+        <h3 className="edit-task-description">
+          Current Task: {myTask.description}
         </h3>
         <div className="form-errors">
           {errors.length > 0 && (
@@ -112,17 +101,16 @@ export default function EditTasks() {
             </ul>
           )}
         </div>
-        <h2
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          {" "}
-          Edit Task{" "}
-          <img style={{ width: "40px", marginLeft: "10px",background:'transparent'
-         }} src={badz}></img>
+        <h2>
+          <img
+            style={{
+              width: "60px",
+              marginLeft: "10px",
+              background: "transparent",
+            }}
+            src={badz}
+            alt="badge"
+          />
         </h2>
         <form onSubmit={handleSubmit}>
           <label>Description</label>
@@ -130,35 +118,24 @@ export default function EditTasks() {
             type="text"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            placeholder="description"
+            placeholder="Description"
             required
           />
+          <label>
+            <input
+              type="checkbox"
+              checked={completedUI}
+              onChange={handleCheckboxChange}
+            />{" "}
+            Completed
+          </label>
           <button className="edit-submit-button" type="submit">
             Save Changes
           </button>
-
-          <button
-            className="task-delete-button"
-            onClick={(e) => {
-              e.preventDefault();
-              setModalContent(
-                <div>
-                  <p>Are you sure you want to delete this task?</p>
-                  <button onClick={() => handleConfirmDelete(taskId)}>
-                    Yes
-                  </button>
-                  <button onClick={() => cancelFunc()}>No</button>
-                </div>
-              );
-            }}
-          >
+          <button className="task-delete-button" onClick={handleDeleteClick}>
             Delete Task
           </button>
         </form>
-        <Modal
-          ModalContent={ModalContent}
-          handleConfirmDelete={handleConfirmDelete}
-        />
       </div>
     </div>
   );

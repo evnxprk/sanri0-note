@@ -1,11 +1,10 @@
-const GET_ALL_TASKS = "tasks/GET_ALL_TASKS";
-const GET_ONE_TASK = "tasks/GET_ONE_TASK";
-const CREATE_TASK = "tasks/CREATE_TASK";
-const EDIT_TASK = "tasks/EDIT_TASK";
-const DELETE_TASK = "tasks/DELETE_TASK";
+const GET_ALL_TASKS = "/tasks/GET_ALL_TASKS";
+const GET_ONE_TASK = "/tasks/GET_ONE_TASK";
+const CREATE_TASK = "/tasks/CREATE_TASK";
+const EDIT_TASK= "/tasks/EDIT_TASK";
+const DELETE_TASK = "/tasks/DELETE_TASK";
 
 // action creators
-
 const getAllTasks = (tasks) => ({
   type: GET_ALL_TASKS,
   payload: tasks,
@@ -19,7 +18,6 @@ const getOneTask = (task) => ({
 const createTasks = (task) => ({
   type: CREATE_TASK,
   payload: task,
-  
 });
 
 const editTask = (task) => ({
@@ -33,108 +31,108 @@ const deleteTask = (taskId) => ({
 });
 
 // thunks
-
 export const getAllTasksThunk = () => async (dispatch) => {
-  const res = await fetch(`/api/tasks/`);
-  if (res.ok) {
+  try {
+    const res = await fetch(`/api/tasks/`);
+    if (!res.ok) {
+      throw new Error("Failed to fetch tasks");
+    }
     const data = await res.json();
     dispatch(getAllTasks(data));
-    console.log('this got hit whoo')
     return data;
-  } else {
-    console.error("Failed to fetch tasks");
+  } catch (error) {
+    console.error("Error fetching tasks:", error);
     return [];
   }
 };
 
 export const getOneTaskThunk = (id) => async (dispatch) => {
-  const response = await fetch(`/api/tasks/${id}`);
-
-  if (response.ok) {
-    const data = await response.json();
+  try {
+    const res = await fetch(`/api/tasks/${id}`);
+    if (!res.ok) {
+      throw new Error("Failed to fetch task");
+    }
+    const data = await res.json();
     dispatch(getOneTask(data));
     return data;
+  } catch (error) {
+    console.error(`Error fetching task ${id}:`, error);
   }
 };
 
 export const addTaskThunk = (task) => async (dispatch) => {
-  const response = await fetch("/api/tasks/", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(task),
-  });
-
-  if (response.ok) {
-    const data = await response.json();
+  try {
+    const res = await fetch("/api/tasks/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(task),
+    });
+    if (!res.ok) {
+      throw new Error("Failed to create task");
+    }
+    const data = await res.json();
     dispatch(createTasks(data));
     return data;
+  } catch (error) {
+    console.error("Error creating task:", error);
   }
 };
 
-
-// export const editTaskThunk = (task, id) => async (dispatch) => {
-//   const res = await fetch(`/api/tasks/${id}`, {
-//     method: "PUT",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify(task),
-//   });
-//   if (res.ok) {
-//     const data = await res.json();
-//     dispatch(editTask(data));
-//     // return data;
-//   }
-// };
-
-
 export const editTaskThunk = (taskId, updatedTask) => async (dispatch) => {
-  const res = await fetch(`/api/tasks/${taskId}`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(updatedTask),
-  });
-  if (res.ok) {
+  try {
+    const res = await fetch(`/api/tasks/${taskId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedTask),
+    });
+    if (!res.ok) {
+      throw new Error("Failed to update task");
+    }
     const data = await res.json();
-    const toggledTask = {
-      ...data,
-      completed: !data.completed, // Toggle the completed property
-    };
-    dispatch(editTask(toggledTask));
+    dispatch(editTask(data));
+    return data;
+  } catch (error) {
+    console.error(`Error updating task ${taskId}:`, error);
+    throw error;
   }
 };
 
 export const deleteTaskThunk = (id) => async (dispatch) => {
-  const res = await fetch(`/api/tasks/${id}/delete`, {
-    method: "DELETE",
-  });
-  if (res.ok) {
-    const data = await res.json();
+  try {
+    const res = await fetch(`/api/tasks/${id}/delete`, {
+      method: "DELETE",
+    });
+    if (!res.ok) {
+      throw new Error("Failed to delete task");
+    }
     dispatch(deleteTask(id));
+    return true; // Return true or any relevant data upon successful delete
+  } catch (error) {
+    console.error(`Error deleting task ${id}:`, error);
+    throw error;
   }
 };
-
-//reducer 
-
 const initialState = {
-  allTasks: {}, // Initialize allTasks as an empty object
+  allTasks: {},
   singleTask: {},
 };
 
 const taskReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_ALL_TASKS:
-      const newTasks = {};
-      action.payload.forEach((task) => {
-        newTasks[task.id] = task;
-      });
       return {
         ...state,
-        allTasks: newTasks,
+        allTasks: action.payload.reduce(
+          (acc, task) => ({
+            ...acc,
+            [task.id]: task,
+          }),
+          {}
+        ),
       };
     case GET_ONE_TASK:
       return {
@@ -142,29 +140,27 @@ const taskReducer = (state = initialState, action) => {
         singleTask: action.payload,
       };
     case CREATE_TASK:
-      const newTask = action.payload;
       return {
         ...state,
         allTasks: {
           ...state.allTasks,
-          [newTask.id]: newTask,
+          [action.payload.id]: action.payload,
         },
       };
     case EDIT_TASK:
-      const updatedTask = action.payload;
       return {
         ...state,
         allTasks: {
           ...state.allTasks,
-          [updatedTask.id]: updatedTask,
+          [action.payload.id]: action.payload,
         },
       };
     case DELETE_TASK:
-      const updatedTasks = { ...state.allTasks };
-      delete updatedTasks[action.payload];
+      const { [action.payload]: deletedTask, ...remainingTasks } =
+        state.allTasks;
       return {
         ...state,
-        allTasks: updatedTasks,
+        allTasks: remainingTasks,
       };
     default:
       return state;

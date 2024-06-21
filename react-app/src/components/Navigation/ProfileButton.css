@@ -1,7 +1,7 @@
 .profile-dropdown {
   position: absolute;
-  top: 150px;
-  right: 1000px;
+  top: 60px; /* Adjust the top position to position it below the profile button */
+  right: 20px; /* Adjust the right position to control the horizontal alignment */
   border: 1px solid #ccc;
   box-shadow: 2px 2px 5px #ccc;
   padding: 0.5rem;
@@ -9,14 +9,7 @@
   width: 200px;
   display: flex;
   flex-direction: column;
-  background-color: green;
-
-}
-
-#note-logo {
-  width:20px;
-  height: auto;
-
+  background-color: rgb(206, 206, 206);
 }
 
 .profile-dropdown.hidden {

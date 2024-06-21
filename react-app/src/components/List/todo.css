@@ -27,6 +27,7 @@
   height: 160px;
   display: flex;
   justify-content: center;
+  text-align: center;
   align-items: center; /* Added align-items to center the image vertically */
   flex-wrap: wrap;
   box-sizing: border-box;

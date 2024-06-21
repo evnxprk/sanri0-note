@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { logout } from "../../store/session";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
 import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
-import badz from '../../images/badz.png'
+import './ProfileButton.css'
 
 
 function ProfileButton({ user }) {
@@ -41,8 +43,10 @@ function ProfileButton({ user }) {
 
   return (
     <>
-      <button style={{ borderRadius: "8px", display:'flex', alignItems:"center", cursor:"pointer"}} onClick={openMenu}> Login
-        <img style={{width:'30px', height:'20px',}} src={badz} />
+      <button
+        className="loginButton" onClick={openMenu}
+      >
+        <FontAwesomeIcon icon={faBars} />
       </button>
       <ul className={ulClassName} ref={ulRef}>
         {user ? (

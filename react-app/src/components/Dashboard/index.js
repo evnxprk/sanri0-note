@@ -52,7 +52,7 @@ export default function Dashboard() {
             <div
               style={{ fontWeight: "bold", color: "hotPink", fontSize: "18px" }}
             >
-              Welcome {sessionUser.username}!
+              Welcome {sessionUser.first_name}!
             </div>
           )}
           <NavLink to="/notes/new" className="create-note-button">

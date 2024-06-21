@@ -3,6 +3,7 @@ const GET_ONE_LIST = "todos/GET_ONE_LIST";
 const CREATE_LIST = "todos/CREATE_LIST";
 const EDIT_LIST = "todos/EDIT_LIST";
 const DELETE_LIST = "todos/DELETE_LIST";
+const UPDATE_TASKS_FOR_LIST = "todos/UPDATE_TASKS_FOR_LIST";
 
 // action creators
 
@@ -58,7 +59,8 @@ export const getOneListThunk = (id) => async (dispatch) => {
 };
 
 export const addListThunk = (list) => async (dispatch) => {
-  const response = await fetch("/api/todos", {
+  const response = await fetch(`/api/todos/`,
+  {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -74,14 +76,14 @@ export const addListThunk = (list) => async (dispatch) => {
 };
 
 export const editListThunk = (listData, id) => async (dispatch) => {
-  const { title } = listData; // Extract the title from listData
+  const { title } = listData; 
 
   const response = await fetch(`/api/todos/${id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(listData), // Pass the updated title in the request body
+    body: JSON.stringify(listData), 
   });
 
   if (response.ok) {
@@ -92,7 +94,26 @@ export const editListThunk = (listData, id) => async (dispatch) => {
   }
 };
 
+export const getTasksForListThunk = (listId) => async (dispatch) => {
+  try {
+    const res = await fetch(`/api/lists/${listId}/tasks`);
+    if (res.ok) {
+      const data = await res.json();
+     
+      dispatch(updateTasksForList(listId, data));
+      return data;
+    } else {
+      console.error("Failed to fetch tasks for list", listId);
+    }
+  } catch (error) {
+    console.error("Error fetching tasks:", error);
+  }
+};
 
+const updateTasksForList = (listId, tasks) => ({
+  type: UPDATE_TASKS_FOR_LIST,
+  payload: { listId, tasks },
+});
 
 
 
@@ -109,26 +130,32 @@ export const deleteListThunk = (id) => async (dispatch) => {
 //reducer
 
 const initialState = {
-  allList: {}, 
+  allList: {},
   singleList: {},
 };
+
 
 const listReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_ALL_LIST:
-      const allList = {};
+      const allLists = {};
       action.payload.forEach((list) => {
-        allList[list.id] = list;
+        allLists[list.id] = list;
       });
       return {
         ...state,
-        allList: allList,
+        allList: allLists,
       };
     case GET_ONE_LIST:
       return {
         ...state,
         singleList: action.payload,
+        tasksByListId: {
+          ...state.tasksByListId,
+          [action.payload.id]: action.payload.tasks || [], 
+        },
       };
+
     case CREATE_LIST:
       const newlist = action.payload;
       return {
@@ -139,12 +166,11 @@ const listReducer = (state = initialState, action) => {
         },
       };
     case EDIT_LIST:
-      const updatedList = action.payload;
       return {
         ...state,
         allList: {
           ...state.allList,
-          [updatedList.id]: updatedList,
+          [action.payload.id]: action.payload,
         },
       };
     case DELETE_LIST:

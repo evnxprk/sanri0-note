@@ -1,131 +1,77 @@
+/* Splashpage.css */
 
-
-.profile-button {
-  display: flex;
-  align-items: center;
-  background-color: #fff;
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-  height: 40px;
-  width: 40px;
-  justify-content: center;
-  transition: background-color 0.3s;
-}
-
-.profile-button:hover {
-  background-color: #f3f3f3;
-}
-
-.profile-dropdown {
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  list-style: none;
-  padding: 10px;
-  position: absolute;
-  right: 50px;
-  /* bottom: 640px; */
-  top: 140px;
-  width: 200px;
-  z-index: 1;
-}
-
-.profile-dropdown.hidden {
-  display: none;
-}
-
-.profile-dropdown li {
-  margin-bottom: 10px;
-}
-
-.profile-dropdown button {
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  color: #333;
-  cursor: pointer;
-  display: block;
-  font-size: 14px;
-  margin-top: 10px;
-  padding: 5px 10px;
-  transition: background-color 0.3s;
-  width: 100%;
-}
-
-.profile-dropdown button:hover {
-  background-color: #f3f3f3;
-}
-
-.profile-dropdown a {
-  color: #333;
-  display: block;
-  font-size: 14px;
-  margin-top: 10px;
-  text-decoration: none;
-  transition: color 0.3s;
-}
-
-.profile-dropdown a:hover {
-  color: #0077c0;
-}
-
-/* Set global font and color styles */
-body {
+/* Base styles */
+.splash-page-container {
   font-family: 'Segoe UI', sans-serif;
   color: #333;
   background-color: #fff;
+  padding: 2rem;
 }
-
-.splash-page-container {
-  /* max-width: 1200px; */
-  /* margin-left: 0 auto; */
-  padding: 50px;
-}
-
 
 .splash-nav {
   display: flex;
   justify-content: flex-end;
+  margin-bottom: 1rem;
+}
+
+.notepage-photo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.header-content {
+  text-align: center;
 }
 
 #note-logo {
-  border-radius: 50%;
-  width: 300px;
-  height: 300px;
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+.description {
+  margin-bottom: 2rem;
+}
 
 .title {
   font-size: 3rem;
   font-weight: bold;
   margin-bottom: 1rem;
+  text-align: center;
+  color: #333; /* Ensure text color is readable */
 }
 
 .subtitle {
   font-size: 1.5rem;
+  line-height: 1.6;
   margin-bottom: 2rem;
+  text-align: center;
+  color: #555; /* Adjust text color for better contrast */
 }
-
 
 .cta-buttons {
   display: flex;
-  align-items: center;
+  justify-content: center;
   margin-top: 2rem;
 }
 
+.sign-up-button,
+.login-link {
+  font-size: 1.5rem;
+  border-radius: 0.5rem;
+  padding: 1rem 2rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
 .sign-up-button {
-  font-size: 2rem;
   background-color: #1abc9c;
   border: none;
   color: #fff;
-  border-radius: 0.5rem;
-  height: 4rem;
-  padding: 0 2rem;
-  cursor: pointer;
   margin-right: 1rem;
-  transition: background-color 0.3s;
 }
 
 .sign-up-button:hover {
@@ -135,19 +81,18 @@ body {
 .login-link {
   color: #1abc9c;
   text-decoration: none;
-  font-size: 1.5rem;
   transition: color 0.3s;
-  
 }
 
 .login-link:hover {
   color: #148f77;
 }
 
-
+/* Features section */
 .features {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   margin-top: 4rem;
 }
 
@@ -155,7 +100,6 @@ body {
   font-size: 2.5rem;
   font-weight: bold;
   margin-bottom: 2rem;
-  width: 100%;
   text-align: center;
 }
 
@@ -166,22 +110,13 @@ body {
   border: 1px solid #ddd;
   border-radius: 0.5rem;
   transition: box-shadow 0.3s;
+  background-color: #fff;
 }
 
 .feature:hover {
   background-color: #f5f5f5;
   box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
 }
-
-.feature:hover .feature-title {
-  color: #1abc9c;
-}
-
-.feature:hover .feature-icon {
-  filter: brightness(0.5);
-}
-
-
 
 .feature-icon {
   width: 5rem;
@@ -193,24 +128,20 @@ body {
   font-size: 1.5rem;
   font-weight: bold;
   margin-bottom: 1rem;
+  text-align: center;
 }
 
 .feature-description {
   font-size: 1.25rem;
-  line-height: 1.5;
+  line-height: 1.6;
+  text-align: center;
 }
 
-
+/* Pricing section */
 .pricing {
   display: flex;
   justify-content: center;
   margin-top: 4rem;
-}
-
-.pricing-title {
-  font-size: 2.5rem;
-  font-weight: bold;
-  margin-bottom: 2rem;
 }
 
 .plan {
@@ -218,6 +149,7 @@ body {
   border: 1px solid #ddd;
   border-radius: 0.5rem;
   transition: box-shadow 0.3s;
+  background-color: #fff;
 }
 
 .plan:hover {
@@ -226,7 +158,9 @@ body {
 
 .plan-description {
   font-size: 1.5rem;
+  line-height: 1.6;
   margin-bottom: 1rem;
+  text-align: center;
 }
 
 .plan-button {
@@ -235,20 +169,18 @@ body {
   border: none;
   color: #fff;
   border-radius: 0.5rem;
-  height: 3rem;
-  padding: 0 1.5rem;
+  padding: 1rem 2rem;
   cursor: pointer;
   transition: background-color 0.3s;
 }
-
 
 .plan-button:hover {
   background-color: #16a085;
 }
 
+/* Footer section */
 .footer {
   display: flex;
-  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   padding: 2rem;
@@ -259,6 +191,7 @@ body {
   font-size: 1.5rem;
   font-weight: bold;
   margin-bottom: 1rem;
+  text-align: center;
 }
 
 .social-media-title {
@@ -271,7 +204,8 @@ body {
   align-items: center;
 }
 
-.github-button, .linkedin-button {
+.github-button,
+.linkedin-button {
   display: flex;
   align-items: center;
   background-color: #fff;
@@ -283,18 +217,31 @@ body {
   transition: background-color 0.3s;
 }
 
-.github-button:hover, .linkedin-button:hover {
+.github-button:hover,
+.linkedin-button:hover {
   background-color: #f3f3f3;
 }
 
-.github-button img, .linkedin-button img {
+.github-button img,
+.linkedin-button img {
   width: 2rem;
   height: 2rem;
-  margin-left: 1rem;
+  margin-left: 0.5rem; /* Adjust margin as needed */
+}
+
+.legal {
+  text-align: center;
+  margin-top: 2rem;
 }
 
 .legal-text {
-  font-size: 1.25rem;
+  font-size: 1rem;
+  color: #777;
 }
 
-
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .feature {
+    flex-basis: 100%;
+  }
+}

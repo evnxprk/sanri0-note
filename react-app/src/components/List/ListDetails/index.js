@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { deleteListThunk } from "../../../store/list";
-import './list.css'
+import "./list.css"; // Assuming you have other styles in list.css
 
 export default function ListDetails() {
   const dispatch = useDispatch();
@@ -30,9 +30,9 @@ export default function ListDetails() {
   }
 
   return (
-    <div>
+    <div className="list-details-container">
       <h1 className="list-title">{list.title}</h1>
-      <h4 className="list-desc"> {list.description}</h4>
+      <h4 className="list-desc">{list.description}</h4>
       <button onClick={handleEditList} className="list-edit">
         Edit
       </button>

@@ -18,7 +18,7 @@ import SplashPage from "./components/SplashPage";
 import NoteDetails from "./components/Notes/NoteDetails";
 import CreateTask from "./components/Tasks/AddTasks";
 import Tasks from "./components/Tasks/AllTasks";
-import EditTask from "./components/Tasks/EditTasks";
+import EditTasks from "./components/Tasks/EditTasks";
 import DeleteTask from "./components/Tasks/DeleteTasks";
 import List from "./components/List/AllLists";
 import CreateList from "./components/List/CreateLists";
@@ -51,7 +51,7 @@ function App() {
             <CreateTask />
           </Route>
           <Route exact path="/tasks/:taskId">
-            <EditTask />
+            <EditTasks />
           </Route>
           <Route exact path="/tasks/:taskId/delete">
             <DeleteTask />
@@ -74,9 +74,6 @@ function App() {
           <Route exact path="/todos/:todoId/delete">
             <DeleteList />
           </Route>
-          {/* <Route exact path="/todos/:todoId/">
-            <ListDetails />
-          </Route> */}
           <Route exact path="/login">
             <LoginFormPage />
           </Route>

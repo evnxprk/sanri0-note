@@ -1,9 +1,11 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, IntegerField, BooleanField
+from wtforms import StringField, BooleanField, IntegerField
 from wtforms.validators import DataRequired, Length
-from app.models import User
+
 
 class TaskForm(FlaskForm):
-    description = StringField('Description', validators=[DataRequired(), Length(min=2,max=50000)])
-    to_do_id = IntegerField('Todo Id')
-    complete = BooleanField('is completed', validators=[])
+    description = StringField('description', validators=[
+                              DataRequired(), Length(max=255)])
+    completed = BooleanField('completed')  # Add completed field
+    # Ensure to_do_id field is present
+    to_do_id = IntegerField('to_do_id', validators=[DataRequired()])
